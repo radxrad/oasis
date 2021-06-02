@@ -37,10 +37,10 @@ jobs:
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           push: true
-          tags: radxrad/oasis_backend:latest
+          tags: latest
           context: ./backend
-          dockerfile: ./frontend/Dockerfile.dev
+          dockerfile: Dockerfile.dev
           registry: docker.io
-          image: tiangolo/uvicorn-gunicorn-fastapi:python3.6
+          image: radxrad/oasis_backend
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

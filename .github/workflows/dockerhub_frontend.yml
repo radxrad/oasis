@@ -37,10 +37,10 @@ jobs:
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           push: true
-          tags: radxrad/oasis_frontend:latest
+          tags: latest
           context: ./frontend
-          dockerfile: ./frontend/Dockerfile.dev
+          dockerfile: Dockerfile.dev
           registry: docker.io
-          image: node:lts
+          image: radxrad/oasis_frontend
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
