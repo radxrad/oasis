@@ -1,3 +1,7 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.6
+RUN pip install -r requirements.txt
+RUN pip install -r requirements.dev.txt
+RUN python init_db.py
+
 WORKDIR /app
 COPY . /app/
