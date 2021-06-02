@@ -3,5 +3,5 @@ FROM node:lts
 RUN mkdir /app
 WORKDIR /app
 ADD . /app/
-
-RUN npm run build
+RUN npm install --global yarn
+RUN yarn install
