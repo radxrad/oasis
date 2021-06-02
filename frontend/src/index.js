@@ -23,6 +23,7 @@ import history from "./history";
 import store from "store/configureStore";
 import * as serviceWorker from "./serviceWorker";
 import Wrapper from "components/Wrapper";
+import Micropub from "routes/Micropub"
 import ReactGA from "react-ga";
 
 const TRACKINGID = "UA-179246573-1"; // Replace with your Google Analytics tracking ID
@@ -44,6 +45,7 @@ ReactDOM.render(
         <Wrapper draggableMapRoutes={[paths.dashboard]}>
           <Switch>
             <Route exact path={paths.home} component={Home} />
+            <Route  path={paths.micropub} component={Micropub} />
             <Route path={paths.signIn} component={SignIn} />
             <Route path={paths.onboard} component={Onboard} />
             <Route path={paths.alert} component={Alert} />

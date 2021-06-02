@@ -13,6 +13,7 @@ const paths = {
   healthMeasurements: "/measurements",
   myStory: "/mystory",
   storyHistory: "/storyhistory",
+  micropub:"/micropub",
 };
 
 export const getConfirmFlow = (state, sickness) => {
