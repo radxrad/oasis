@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - name: Create Node Environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install
+#      - name: Create Node Environment
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '14'
+#      - run: npm install
       #- run: npm install -g  yarn
       #- run: yarn install
       #- run: yarn build
@@ -39,5 +39,6 @@ jobs:
           push: true
           tags: radxrad/oasis_backend:latest
           context: ./backend
+          dockerfile: Dockerfile.dev
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
