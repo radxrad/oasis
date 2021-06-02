@@ -7,7 +7,7 @@ on:
 # https://github.com/docker/build-push-action
 defaults:
   run:
-    working-directory: ./frontend
+    working-directory: ./backend
 jobs:
   deploy:
     name: Dockerize NodeJS Server
@@ -38,6 +38,6 @@ jobs:
         with:
           push: true
           tags: radxrad/oasis_backend:latest
-          context: ./server
+          context: ./backend
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

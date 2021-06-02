@@ -38,6 +38,6 @@ jobs:
         with:
           push: true
           tags: radxrad/oasis_frontend:latest
-          context: ./server
+          context: ./frontend
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
