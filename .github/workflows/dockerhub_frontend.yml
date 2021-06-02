@@ -40,6 +40,7 @@ jobs:
           tags: radxrad/oasis_frontend:latest
           context: ./frontend
           dockerfile: ./frontend/Dockerfile.dev
+          registry: docker.io
           image: node:lts
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
