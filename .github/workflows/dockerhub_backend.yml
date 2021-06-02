@@ -40,5 +40,6 @@ jobs:
           tags: radxrad/oasis_backend:latest
           context: ./backend
           dockerfile: ./frontend/Dockerfile.dev
+          image: tiangolo/uvicorn-gunicorn-fastapi:python3.6
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
