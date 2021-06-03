@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: latest
           context: ./backend
-          dockerfile: Dockerfile.dev
+          dockerfile: ./backend/Dockerfile.dev
           registry: docker.io
           image: radxrad/oasis_backend
       - name: Image digest

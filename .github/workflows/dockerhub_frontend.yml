@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: latest
           context: ./frontend
-          dockerfile: Dockerfile.dev
+          dockerfile: ./frontend/Dockerfile.dev
           registry: docker.io
           image: radxrad/oasis_frontend
       - name: Image digest
