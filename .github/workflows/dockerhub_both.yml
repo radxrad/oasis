@@ -33,18 +33,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push frontend
-          id: docker_build
-          uses: mr-smithers-excellent/docker-build-push@v5
-          with:
-            push: true
-            tags: latest
-            #context: ./backend
-            dockerfile: Dockerfile
-            registry: docker.io
-            image: radxrad/oasis_backend_prod
-            target: backend
-      - name: Build and push backend
-        id: docker_build
+        id: docker_build2
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           push: true
@@ -52,7 +41,18 @@ jobs:
           #context: ./backend
           dockerfile: Dockerfile
           registry: docker.io
-          image: radxrad/oasis_backend_prod
+          image: radxrad/oasis_backend
           target: frontend
+      - name: Build and push backend
+        id: docker_build2
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          push: true
+          tags: latest
+          #context: ./backend
+          dockerfile: Dockerfile
+          registry: docker.io
+          image: radxrad/oasis_backend
+          target: backend
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
