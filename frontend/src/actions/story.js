@@ -18,14 +18,6 @@ import {
   SET_MY_STORY,
   SUBMIT_MY_STORY,
 } from "./types";
-import { fields } from "../routes/CriticalQuestions/fields";
-
-const mandatoryFields = [fields.STATE, fields.COUNTRY];
-
-const isValidStory = (dto) => invalidFields(dto.story).length === 0;
-
-const invalidFields = (dto) =>
-  mandatoryFields.filter((field) => !(field.key in dto && dto[field.key]));
 
 export const setStory = (story) => async (dispatch) => {
   dispatch({
@@ -35,15 +27,12 @@ export const setStory = (story) => async (dispatch) => {
 };
 
 export const submitStory = (dto, update = false) => async (dispatch) => {
-  if (!isValidStory(dto) && !update) {
+  if (!update) {
     return dispatch({
       type: INVALID_STORY,
       payload: {
         status: {
           type: ERROR,
-          detail: `Please complete the following fields: ${invalidFields(dto)
-            .map((field) => field.label)
-            .join(", ")}`,
         },
       },
     });

@@ -1,23 +1,22 @@
 html, #root, body {
-  height: 100%;
   margin: 0;
 }
 
 :root {
-  --primary: #EA2027;
-  --red: #EA2027;
-  --purple: #9206FF;
+  --blue-100: #0559FD;
+  --blue-80: #499FF4;
+  --blue-60: #C3D8FF;
+  --gray-80: #717171;
+  --gray-60: #9E9E9E;
+  --gray-20: #E1E1E1;
+  --gray-5: #F5F5F5;
+  --bluegray: #768298;
 }
 
 body {
-  background-color: black;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-image: url(/static/background.png);
+  background-color: white;
   height: 100%;
   font-family: 'Roboto', sans-serif;
-  color: white !important;
 }
 
 a, a:link, a:visited, a:hover, a:active {
@@ -110,4 +109,248 @@ a, a:link, a:visited, a:hover, a:active {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.custom-nav {
+  box-shadow: 0px 2px 10px 0px #7C7C7C40;
+  height: 50px;
+  background-color: white;
+}
+
+.button--blue {
+  color: white;
+  background-color: var(--blue-100);
+}
+
+.button {
+  height: 40px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  border: none;
+}
+
+.button__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.button--large {
+  width: 172px;
+}
+
+.button--small {
+  width: 116px;
+}
+
+.button--cancel {
+  color: var(--gray-80);
+  background-color: var(--gray-20);
+}
+
+.button--white {
+  background-color: white;
+  color: var(--blue-100);
+}
+
+.dropdown {
+  background-color: var(--gray-20);
+  border: 0.5px solid var(--gray-60);
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 20px;
+  height: 110px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.dropdown__container {
+  width: 110px;
+  height: 72px;
+  border-radius: 10px;
+  background-color: var(--gray-20);
+  color: var(--gray-80);
+  align-items: center;
+}
+
+.dropdown__selector {
+  width: 100px;
+  height: 16px;
+  background: #F5F5F5;
+  border-radius: 10px;
+  color: var(--gray-80);
+}
+
+.dropdown__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdown__selector--active {
+  color: var(--blue-100);
+}
+
+.tag {
+  width: max-content;
+  height: 20px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--blue-100);
+  background-color: var(--blue-60);
+}
+
+.tag__icon {
+  width: 13.6px;
+  height: 13.6px;
+}
+
+.heading {
+  color: var(--bluegray)
+}
+
+.home .signup__container {
+  width: 210px;
+  height: 266px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.home .signup__header {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  color: var(--blue-100);
+}
+
+.home .signup__textbox {
+  background: #F9F9F9;
+  width: 163px;
+  Height: 27px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 10px;
+  color: var(--gray-80);
+  font-size: 14px;
+}
+
+.home .signup__textbox::placeholder {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: var(--gray-60);
+}
+
+.home .headline--black {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  color: #000000;
+}
+
+.home .headline--blue {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0559FD;
+}
+
+.headlines {
+  max-width: 408px;
+  height: 193px;
+  margin-right: 2rem;
+}
+
+.home {
+  background: url(/background-light.png);
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home .header {
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+}
+
+.home .header .col {
+  align-items: center;
+}
+
+.navbar__brand {
+  position: absolute;
+  left: 2.15%;
+  right: 92.78%;
+  top: 17.31%;
+  bottom: 13.46%;
+  font-family: Abel;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 36px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.navbar__signin {
+  position: absolute;
+  left: 91.94%;
+  right: 0%;
+  top: 11.54%;
+  bottom: 11.54%;
+}
+
+.home .preview__subtitle {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: var(--blue-80);
+  margin-bottom: 30px;
+}
+
+.home .preview .card {
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px 0px #7C7C7C40;
+  border: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--gray-80);
+}
+
+.home .preview {
+  padding: 5rem 10% 0rem 10%;
 }

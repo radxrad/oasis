@@ -1,265 +1,74 @@
-import {
-  TextField,
-  Fab,
-  MenuItem,
-  Grid,
-  Button,
-  IconButton,
-} from "@material-ui/core";
-import classNames from "classnames";
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import SimpleMap from "components/SimpleMap";
-import paths from "routes/paths";
-import styles from "./styles.module.css";
-import { setStory, setMyStory } from "actions/story";
-import { fields, initialFieldsState } from "./fields";
-import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
-import { getGeocoding } from "utils";
-import { sicknessStatus, testStatus } from "routes/types";
+import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import React from "react";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 12,
-  },
-}));
-export default function Home(props, { draggableMapRoutes = [] }) {
-  const dispatch = useDispatch();
-  const classes = useStyles();
-
-  const [myStory, updateMyStory] = useState("");
-  const [draggableMap, setDraggableMap] = useState(false);
-  const [formValues, setFormValues] = useState(initialFieldsState());
-  const [errorMsg, setErrorMsg] = useState({
-    display: "none",
-    requiredFields: null,
-  });
-
-  let location = useLocation();
-
-  useEffect(() => {
-    let shouldDragMap = draggableMapRoutes.includes(location.pathname);
-    if (shouldDragMap !== draggableMap) {
-      setDraggableMap(draggableMapRoutes.includes(location.pathname));
-    }
-  }, [location, draggableMap, setDraggableMap, draggableMapRoutes]);
-
-  const handleChange = (event) => {
-    updateMyStory(event.target.value);
-  };
-
-  const handleSubmit = (event, route) => {
-    let tempList = [];
-    Object.keys(formValues).forEach((key) => {
-      if (formValues[key] === null && key !== "city") tempList.push(key);
-    });
-    if (tempList.length > 0) {
-      setErrorMsg({
-        display: "block",
-        required: tempList
-          .join(", ")
-          .replace("sicknessStatus", "are you sick?")
-          .replace("testedStatus", "have you been tested for COVID-19?"),
-      });
-    } else {
-      getGeocoding(
-        formValues[fields.CITY.key],
-        formValues[fields.STATE.key],
-        formValues[fields.COUNTRY.key]
-      ).then((coordinates) => {
-        const { ...story } = formValues;
-        if (coordinates) {
-          story.latitude = coordinates[1]; // coordinates = [lng, lat]
-          story.longitude = coordinates[0];
-        }
-        dispatch(setStory(story));
-        dispatch(setMyStory(myStory));
-        props.history.push(route, { from: "shareBtn" });
-      });
-    }
-  };
-
-  const fetchUserLocation = async () => {
-    let tempCity,
-      tempState,
-      tempCountry = "";
-    const response = await fetch(`https://freegeoip.app/json/`);
-
-    if (response.status >= 200 && response.status < 300) {
-      const jsonResponse = await response.json();
-      tempCity = jsonResponse.city;
-      tempState = jsonResponse.region_name;
-      tempCountry = jsonResponse.country_name;
-    } else {
-      alert("Cannot locate your city.");
-    }
-
-    setFormValues({
-      ...formValues,
-      city: tempCity,
-      state: tempState,
-      country: tempCountry,
-    });
-  };
-
-  const handleFormChange = (field) => (event) => {
-    const key = field.key;
-    setFormValues({ ...formValues, [key]: event.target.value });
-  };
-
-  const locations = () => (
-    <Grid
-      container
-      spacing={1}
-      className={classNames(classes.container, styles.container)}
-    >
-      <Grid item xs={3}>
-        <TextField
-          required
-          label={fields.CITY.label}
-          value={formValues[fields.CITY.key]}
-          onChange={handleFormChange(fields.CITY)}
-          variant="outlined"
-          InputLabelProps={{
-            shrink: !formValues[fields.CITY.key] ? false : true,
-          }}
-        />
-      </Grid>
-      <Grid item xs={5}>
-        <TextField
-          required
-          label={fields.STATE.label}
-          value={formValues[fields.STATE.key]}
-          onChange={handleFormChange(fields.STATE)}
-          variant="outlined"
-          InputLabelProps={{
-            shrink: !formValues[fields.STATE.key] ? false : true,
-          }}
-        />
-      </Grid>
-      <Grid item xs={3}>
-        <TextField
-          required
-          label={fields.COUNTRY.label}
-          value={formValues[fields.COUNTRY.key]}
-          onChange={handleFormChange(fields.COUNTRY)}
-          variant="outlined"
-          InputLabelProps={{
-            shrink: !formValues[fields.COUNTRY.key] ? false : true,
-          }}
-        />
-      </Grid>
-      <Grid item xs={1}>
-        <IconButton
-          title="Locate Your City"
-          style={{ color: "#ffffff" }}
-          onClick={fetchUserLocation}
-        >
-          <PersonPinCircleIcon fontSize="large" />
-        </IconButton>
-      </Grid>
-    </Grid>
-  );
-
-  const status = () => (
-    <Grid
-      container
-      spacing={1}
-      className={classNames(classes.container, styles.container)}
-    >
-      <Grid container item xs={4}>
-        <TextField
-          label={fields.SICKNESSSTATUS.label + " *"}
-          select
-          value={formValues[fields.SICKNESSSTATUS.key]}
-          onChange={handleFormChange(fields.SICKNESSSTATUS)}
-          variant="outlined"
-        >
-          <MenuItem key="sick" value={sicknessStatus.SICK}>
-            Yes, I am sick
-          </MenuItem>
-          <MenuItem key="not sick" value={sicknessStatus.NOT_SICK}>
-            No, I am not sick
-          </MenuItem>
-          <MenuItem key="recovered" value={sicknessStatus.RECOVERED}>
-            No, I have recovered
-          </MenuItem>
-        </TextField>
-      </Grid>
-
-      <Grid container item xs={8}>
-        <TextField
-          label={fields.TESTEDSTATUS.label + " *"}
-          select
-          value={formValues[fields.TESTEDSTATUS.key]}
-          onChange={handleFormChange(fields.TESTEDSTATUS)}
-          variant="outlined"
-        >
-          <MenuItem key="positive" value={testStatus.POSITIVE}>
-            Yes, tested positive
-          </MenuItem>
-          <MenuItem key="negative" value={testStatus.NEGATIVE}>
-            Yes, tested negative
-          </MenuItem>
-          <MenuItem key="not tested" value={testStatus.NOT_TESTED}>
-            No, I have not tested
-          </MenuItem>
-        </TextField>
-      </Grid>
-      <div style={{ display: errorMsg.display }} className={styles.errorMsg}>
-        Please complete the following fields: {errorMsg.required}
-      </div>
-    </Grid>
-  );
-
+export default function Home() {
+  const text =
+    "Squirty cheese queso emmental. Goat cheese triangles hard cheese camembert de normandie fondue hard cheese macaroni cheese croque monsieur. Airedale ricotta chalk and cheese camembert de normandie everyone loves parmesan bocconcini when the cheese comes out everybody's happy. Cut the cheese cheese slices squirty cheese boursin fromage stilton macaroni cheese cheese on toast. Roquefort.Lancashire monterey jack pepper jack. St. agur blue cheese port-salut gouda cheesy grin lancashire port-salut camembert de normandie cut the cheese. Cream cheese emmental rubber cheese lancashire rubber cheese mozzarella bocconcini cheeseburger. ";
   return (
-    <>
-      <div className={classNames("home", styles.home)}>
-        <h1 className="title">Share your pandemic story!</h1>
-        <p>
-          COVID-19 has affected everyone. Sick or healthy, we've all had a
-          pandemic experience. Whether illness, isolation or innovation, put
-          your story on the map, see how you compare to others, share new
-          insights, join your planet!
-        </p>
-        <div>
-          <TextField
-            placeholder="Type your story here!"
-            multiline
-            rowsMax={3}
-            value={myStory}
-            onChange={handleChange}
-            className={classNames("textarea", styles.textarea)}
-            variant="outlined"
-          />
-        </div>
-        {locations()}
-        {status()}
-        <div className={classNames("btnGroup", styles.btnGroup)}>
-          <Fab
-            style={{ background: "#9206FF", color: "white" }}
-            aria-label="add"
-            size="medium"
-            onClick={(e) => handleSubmit(e, paths.signIn)}
-            variant="extended"
-          >
-            SHARE MY STORY
-          </Fab>
-          <Button
-            aria-label="skip"
-            size="medium"
-            onClick={() => props.history.push(paths.signIn)}
-            style={{ color: "#ffffff80", fontSize: 10 }}
-          >
-            SKIP AND CONTINUE
-          </Button>
-        </div>
-      </div>
+    <div className="home">
+      <Container>
+        <Row className="header">
+          <div className="headlines">
+            <div className="headline--black mb-4">
+              <b>Get</b> and <b>Share</b> rapid science micropubs for COVID-19
+            </div>
+            <div className="headline--blue mb-2">
+              <b>Get</b> answers on the latest research from other experts in
+              the field.
+            </div>
+            <div className="headline--blue">
+              <b>Share</b> your research with the world through
+              micro-publications.
+            </div>
+          </div>
+          <Form className="signup__container">
+            <div className="signup__header">Join OASIS</div>
+            <Form.Control
+              type="test"
+              className="signup__textbox"
+              placeholder="First Name"
+            />
+            <Form.Control
+              type="test"
+              className="signup__textbox"
+              placeholder="Last name"
+            />
+            <Form.Control
+              type="email"
+              className="signup__textbox"
+              placeholder="Email"
+            />
+            <Form.Control
+              type="password"
+              className="signup__textbox"
+              placeholder="Password"
+            />
+            <Button className="button button--small" type="submit">
+              Sign Up
+            </Button>
+          </Form>
+        </Row>
 
-      <div className={classNames("background", styles.background)} />
-      <SimpleMap draggable={draggableMap} />
-    </>
+        <Row className="preview">
+          <div className="preview__subtitle">What is a MICROPUB?</div>
+          <Card>
+            <Card.Body>
+              <Card.Text>{text}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Row>
+        <Row className="preview">
+          <div className="preview__subtitle">
+            Featured QUESTIONS AND MICROPUBS
+          </div>
+        </Row>
+
+        <Row className="preview">
+          <div className="preview__subtitle">
+            Questions Inspired by Stories from the pandemic
+          </div>
+        </Row>
+      </Container>
+    </div>
   );
 }
