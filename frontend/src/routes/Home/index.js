@@ -1,9 +1,26 @@
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import React from "react";
+import MicroPub from "components/MicroPub";
 
 export default function Home() {
   const text =
-    "Squirty cheese queso emmental. Goat cheese triangles hard cheese camembert de normandie fondue hard cheese macaroni cheese croque monsieur. Airedale ricotta chalk and cheese camembert de normandie everyone loves parmesan bocconcini when the cheese comes out everybody's happy. Cut the cheese cheese slices squirty cheese boursin fromage stilton macaroni cheese cheese on toast. Roquefort.Lancashire monterey jack pepper jack. St. agur blue cheese port-salut gouda cheesy grin lancashire port-salut camembert de normandie cut the cheese. Cream cheese emmental rubber cheese lancashire rubber cheese mozzarella bocconcini cheeseburger. ";
+    "A micropub is a new way to rapidly share emerging science for single, validated results that include novel findings, negative and/or reproduced results, new methods, standards, common data elements or procedures.";
+  const exampleMicroPub = {
+    img: "https://dummyimage.com/145x190/000/fff.png",
+    title: "Which vaccine, according to research is the safest?",
+    text:
+      "Cheese and biscuits cauliflower cheese cream cheese. Monterey jack fromage frais stilton everyone loves edam jarlsberg monterey jack st. agur blue cheese. Cheesy grin swiss cheesecake say cheese cheese triangles paneer smelly cheese stinking bishop. Blue castello halloumi emmental...",
+    id: -1,
+    authors: [
+      {
+        name: "John Appleseed",
+        id: -1,
+        img: "http://placekitten.com/200/300",
+        link: "#",
+      },
+    ],
+  };
+
   return (
     <div className="home">
       <Container>
@@ -58,8 +75,22 @@ export default function Home() {
           </Card>
         </Row>
         <Row className="preview">
-          <div className="preview__subtitle">
-            Featured QUESTIONS AND MICROPUBS
+          <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>
+          <div className="mp-list">
+            <MicroPub
+              img={exampleMicroPub.img}
+              authors={exampleMicroPub.authors}
+              title={exampleMicroPub.title}
+              text={exampleMicroPub.text}
+              id={exampleMicroPub.id}
+            ></MicroPub>
+            <MicroPub
+              img={exampleMicroPub.img}
+              authors={exampleMicroPub.authors}
+              title={exampleMicroPub.title}
+              text={exampleMicroPub.text}
+              id={exampleMicroPub.id}
+            ></MicroPub>
           </div>
         </Row>
 
