@@ -1,25 +1,32 @@
 import React from "react";
 import { Button, Col, ListGroup, Row, Container, Card } from "react-bootstrap";
-
+import { MdQuestionAnswer } from "react-icons/md";
+import { BsFillPlusSquareFill } from "react-icons/bs";
 export default function ResearcherProfile() {
+  const user = { name: "User", id: -1, img: "http://placekitten.com/60/60" };
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h1>Welcome back, User </h1>
-          <Button>Share Your Research</Button>
-          <Button>Ask a Question </Button>
-        </Col>
-        <Col>
-          <h1>Your Highlights</h1>
+    <Container className="userpage">
+      <Col>
+        <div className="welcome heading">
+          <img src={user.img} className="avatar--lg"></img>
+          Welcome, {user.name}
+        </div>
+        <Button className="btn--blue btn--large">
+          <BsFillPlusSquareFill />
+          Create a Micropub
+        </Button>
+        <Button className="btn--blue btn--large">
+          <MdQuestionAnswer />
+          Ask a Question
+        </Button>
+        <div className="block">
+          <p className="heading">My Micropubs</p>
           <ListGroup>
             <ListGroup.Item>Cras justo odio</ListGroup.Item>
             <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
           </ListGroup>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </div>
+        <div>
           <h1>LATEST QUESTIONS</h1>
 
           <Card>
@@ -44,40 +51,39 @@ export default function ResearcherProfile() {
               <Button variant="primary">Go somewhere</Button>
             </Card.Body>
           </Card>
-        </Col>
-
-        <Col>
-          <h1>LATEST RESEARCH</h1>
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                Card Subtitle
-              </Card.Subtitle>
-              <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </Card.Text>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
-            </Card.Body>
-          </Card>
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                Card Subtitle
-              </Card.Subtitle>
-              <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </Card.Text>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+        </div>
+      </Col>
+      <Col>
+        <h1 className="heading">My Feeds</h1>
+        <Card style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              Card Subtitle
+            </Card.Subtitle>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+            <Card.Link href="#">Card Link</Card.Link>
+            <Card.Link href="#">Another Link</Card.Link>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              Card Subtitle
+            </Card.Subtitle>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+            <Card.Link href="#">Card Link</Card.Link>
+            <Card.Link href="#">Another Link</Card.Link>
+          </Card.Body>
+        </Card>
+      </Col>
     </Container>
   );
 }

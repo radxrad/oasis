@@ -33,12 +33,12 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Router history={history}>
-        <Navbar className="custom-nav" fixed="top">
+        <Navbar className="custom-nav" sticky="top">
           <Navbar.Brand className="navbar__brand" href="#">
             OASIS
           </Navbar.Brand>
           <Button
-            className="button button--small button--white navbar__signin"
+            className="btn--small btn--white navbar__signin"
             variant="primary"
           >
             Sign In

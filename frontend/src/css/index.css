@@ -122,7 +122,7 @@ a, a:link, a:visited, a:hover, a:active {
   background-color: var(--blue-100);
 }
 
-.button {
+.btn {
   height: 40px;
   border-radius: 10px;
   text-align: center;
@@ -134,25 +134,26 @@ a, a:link, a:visited, a:hover, a:active {
   border: none;
 }
 
-.button__icon {
-  width: 20px;
-  height: 20px;
+.btn svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
 }
 
-.button--large {
+.btn--large {
   width: 172px;
 }
 
-.button--small {
+.btn--small {
   width: 116px;
 }
 
-.button--cancel {
+.btn--cancel {
   color: var(--gray-80);
   background-color: var(--gray-20);
 }
 
-.button--white {
+.btn--white {
   background-color: white;
   color: var(--blue-100);
 }
@@ -300,7 +301,7 @@ a, a:link, a:visited, a:hover, a:active {
 .home .header {
   align-items: center;
   justify-content: center;
-  margin-top: 8rem;
+  margin-top: 5rem;
   height: 400px;
   background-image: url(/greens.jpeg);
   background-position: center;
@@ -409,6 +410,12 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 50%;
 }
 
+.avatar--lg {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
 .micropub .authors .card-link {
   font-family: Inter;
   font-size: 12px;
@@ -429,4 +436,17 @@ a, a:link, a:visited, a:hover, a:active {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.userpage .welcome {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 32px;
+  height: 60px;
+  margin:1rem 0;
+}
+
+.welcome .avatar--lg {
+  margin-right: 10px;
 }

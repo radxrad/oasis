@@ -15,7 +15,7 @@ export default function Home() {
       {
         name: "John Appleseed",
         id: -1,
-        img: "http://placekitten.com/200/300",
+        img: "http://placekitten.com/20/20",
         link: "#",
       },
     ],
@@ -60,7 +60,7 @@ export default function Home() {
               className="signup__textbox"
               placeholder="Password"
             />
-            <Button className="button button--small" type="submit">
+            <Button className="btn--small" type="submit">
               Sign Up
             </Button>
           </Form>
