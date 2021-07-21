@@ -11,13 +11,13 @@ import paths from "routes/paths";
 import SignIn from "routes/SignIn";
 import SignUp from "routes/SignUp";
 import StoryHistory from "routes/StoryHistory";
-import ResearcherProfile from "routes/ResearcherProfile";
+import User from "routes/User";
 import history from "./history";
 import store from "store/configureStore";
 import * as serviceWorker from "./serviceWorker";
 import Micropub from "routes/Micropub";
 import ReactGA from "react-ga";
-import { Navbar, Button, Form, FormControl } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import PublicProfile from "routes/PublicProfile";
 
 const TRACKINGID = "UA-179246573-1"; // Replace with your Google Analytics tracking ID
@@ -34,15 +34,14 @@ ReactDOM.render(
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Router history={history}>
         <Navbar className="custom-nav" sticky="top">
-          <Navbar.Brand className="navbar__brand" href="#">
+          <Navbar.Brand className="navbar__brand" href="./">
             OASIS
           </Navbar.Brand>
-          <Button
-            className="btn--small btn--white navbar__signin"
-            variant="primary"
-          >
-            Sign In
-          </Button>
+          <Nav>
+            <Nav.Link className="navbar__signin" href="./signin">
+              Sign In
+            </Nav.Link>
+          </Nav>
         </Navbar>
 
         <Switch>
@@ -50,7 +49,7 @@ ReactDOM.render(
           <Route path={paths.micropub} component={Micropub} />
           <Route path={paths.signIn} component={SignIn} />
           <Route path={paths.signUp} component={SignUp} />
-          <Route path={paths.researcher} component={ResearcherProfile} />
+          <Route path={paths.user} component={User} />
           <Route path={paths.myStory} component={MyStory} />
           <Route path={paths.public} component={PublicProfile} />
           <Route path={paths.storyHistory} component={StoryHistory} />

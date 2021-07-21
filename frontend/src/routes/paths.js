@@ -9,7 +9,7 @@ const paths = {
   storyHistory: "/storyhistory",
   micropub: "/micropub",
   public: "/public",
-  researcher: "/researcher",
+  user: "/user",
 };
 
 export const getConfirmFlow = (state, sickness) => {

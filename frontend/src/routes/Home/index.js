@@ -1,4 +1,4 @@
-import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Form, Container, Row, Card } from "react-bootstrap";
 import React from "react";
 import MicroPub from "components/MicroPub";
 
@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <div className="home">
+    <div className="home light-bg">
       <Container>
         <Row className="header">
           <div className="headlines">
