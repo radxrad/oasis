@@ -18,7 +18,7 @@ html, #root, body {
 body {
   background-color: white;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 a, a:link, a:visited, a:hover, a:active {
@@ -128,8 +128,6 @@ a, a:link, a:visited, a:hover, a:active {
   height: 40px;
   border-radius: 10px;
   text-align: center;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 600;
   font-size: 12px;
   line-height: 12px;
@@ -167,8 +165,6 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
   width: 20px;
   height: 110px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 10px;
 }
@@ -202,8 +198,6 @@ a, a:link, a:visited, a:hover, a:active {
 .tag {
   width: max-content;
   height: 20px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -233,8 +227,6 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .signup__header {
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   text-align: center;
@@ -245,8 +237,6 @@ a, a:link, a:visited, a:hover, a:active {
   background: #F9F9F9;
   width: 163px;
   Height: 27px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 600;
   line-height: 10px;
   color: var(--gray-80);
@@ -254,8 +244,6 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .signup__textbox::placeholder {
-  font-family: Inter;
-  font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 10px;
@@ -263,18 +251,14 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .home .headline--black {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 26px;
   line-height: 30px;
   color: #000000;
 }
 
 .home .headline--blue {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 20px;
   line-height: 24px;
   color: #0559FD;
@@ -287,6 +271,10 @@ a, a:link, a:visited, a:hover, a:active {
   background: #FFFFFF;
   border-radius: 10px;
   padding: 40px;
+}
+
+.headlines b {
+  font-weight: 600;
 }
 
 .light-bg {
@@ -347,16 +335,12 @@ a, a:link, a:visited, a:hover, a:active {
   right: 0%;
   top: 11.54%;
   bottom: 11.54%;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
   color: var(--blue-100) !important
 }
 
 .home .preview__subtitle {
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 26px;
   text-transform: uppercase;
@@ -369,8 +353,6 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
   box-shadow: 0px 2px 10px 0px #7C7C7C40;
   border: none;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 400;
   font-size: 20px;
   color: var(--gray-80);
@@ -401,8 +383,6 @@ a, a:link, a:visited, a:hover, a:active {
 
 .micropub .card-title {
   width: 310px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: bold;
   font-size: 18px;
 }
@@ -410,8 +390,6 @@ a, a:link, a:visited, a:hover, a:active {
 .micropub .card-text {
   width: 310px;
   height: 140px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 24px;
@@ -430,8 +408,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 50%;
 }
 
-.micropub .authors .card-link, .question .asker {
-  font-family: Inter;
+.micropub .authors .card-link, .question .asker, .reading .authors a {
   font-size: 12px;
   color: var(--gray-80);
   width: max-content;
@@ -442,7 +419,7 @@ a, a:link, a:visited, a:hover, a:active {
   justify-content: space-between;
 }
 
-.micropub .authors .avatar--sm, .question .asker .avatar--sm {
+.avatar--sm {
   margin-right: 5px;
 }
 
@@ -476,8 +453,6 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .signin .form-check-label {
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 10px;
   color: #717171;
@@ -517,8 +492,6 @@ a, a:link, a:visited, a:hover, a:active {
   align-items: center;
   padding: 30px;
   border-radius: 10px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 20px;
@@ -540,8 +513,6 @@ a, a:link, a:visited, a:hover, a:active {
   flex-direction: row;
   align-content: center;
   width: 500px;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 1rem;
@@ -581,8 +552,6 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
   flex-direction: column;
   justify-content: center;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 20px;
   color: #FFFFFF;
@@ -592,8 +561,6 @@ a, a:link, a:visited, a:hover, a:active {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-family: Inter;
-  font-style: normal;
   font-weight: 500;
   font-size: 15px;
   align-items: center;
@@ -606,9 +573,76 @@ a, a:link, a:visited, a:hover, a:active {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid var(--blue-80);
-  margin-left:20px
+  margin-left: 20px
 }
 
 .question {
   margin: 10px 0;
+}
+
+.reading {
+  display: flex;
+  justify-content: center;
+}
+
+.reading .sidebar {
+  width: 172px;
+  margin-top: 3rem;
+}
+
+.reading .sidebar button {
+  margin-top: 1rem;
+}
+
+.reading .sidebar .info {
+  width: 172px;
+  border-radius: 10px;
+  background-color: var(--gray-5);
+  padding: 20px 12px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.reading .sidebar .info>div {
+  margin: 10px
+}
+
+.reading .sidebar .time {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #717171;
+}
+
+.reading .sidebar__icon {
+  margin-left: 2px;
+}
+
+.reading .body {
+  width: 600px;
+  padding: 3rem 2rem;
+}
+
+.reading .body .heading {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  color: #768298;
+}
+
+.reading .body img {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reading .sidebar .stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.reading .sidebar .stars svg {
+  margin-bottom: 2px;
+  margin-right: 3px;
 }

@@ -1,7 +1,5 @@
 import React from "react";
 import { BsBook, BsQuestionCircle, BsCardText } from "react-icons/bs";
-import { Container } from "react-bootstrap";
-import { classNames } from "classnames";
 
 export default function index(props) {
   const iconMapping = {
@@ -13,8 +11,8 @@ export default function index(props) {
   const title = props.title;
 
   return (
-    <Container className={`listitem__${type} listitem`}>
+    <a className={`listitem__${type} listitem`} href="/reading">
       {iconMapping[type]} {title}
-    </Container>
+    </a>
   );
 }

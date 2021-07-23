@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, ListGroup, Row, Container, Card } from "react-bootstrap";
+import { Button, Col, ListGroup, Row, Container } from "react-bootstrap";
 import { MdQuestionAnswer } from "react-icons/md";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import ListItem from "components/ListItem";

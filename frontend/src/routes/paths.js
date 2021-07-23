@@ -10,6 +10,7 @@ const paths = {
   micropub: "/micropub",
   public: "/public",
   user: "/user",
+  reading: "/reading",
 };
 
 export const getConfirmFlow = (state, sickness) => {

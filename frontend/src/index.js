@@ -12,6 +12,7 @@ import SignIn from "routes/SignIn";
 import SignUp from "routes/SignUp";
 import StoryHistory from "routes/StoryHistory";
 import User from "routes/User";
+import Reading from "routes/Reading";
 import history from "./history";
 import store from "store/configureStore";
 import * as serviceWorker from "./serviceWorker";
@@ -53,6 +54,7 @@ ReactDOM.render(
           <Route path={paths.myStory} component={MyStory} />
           <Route path={paths.public} component={PublicProfile} />
           <Route path={paths.storyHistory} component={StoryHistory} />
+          <Route path={paths.reading} component={Reading} />
         </Switch>
       </Router>
     </MuiPickersUtilsProvider>

@@ -67,7 +67,7 @@ export default function Home() {
         </Row>
 
         <Row className="preview">
-          <div className="preview__subtitle">What is a MICROPUB?</div>
+          <div className="preview__subtitle">What is a MICROPUB(LICATION)?</div>
           <Card>
             <Card.Body>
               <Card.Text>{text}</Card.Text>

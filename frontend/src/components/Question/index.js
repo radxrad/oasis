@@ -16,7 +16,7 @@ export default function MicroPub(props) {
       <div className="arrow-down"></div>
 
       <a href={asker.link} key={asker.id} className="asker">
-        <img src={asker.img} className="avatar--sm" />
+        <img src={asker.img} className="avatar--sm" alt="avatar" />
         {asker.name}
       </a>
     </Container>
