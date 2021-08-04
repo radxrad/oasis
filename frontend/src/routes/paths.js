@@ -11,6 +11,7 @@ const paths = {
   user: "/user",
   reading: "/reading",
   publish: "/publish",
+  test: "/test",
 };
 
 export const getConfirmFlow = (state, sickness) => {

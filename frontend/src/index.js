@@ -19,6 +19,7 @@ import Publish from "routes/Publish";
 import * as serviceWorker from "./serviceWorker";
 import ReactGA from "react-ga";
 import { Navbar, Nav } from "react-bootstrap";
+import Test from "routes/Test";
 
 const TRACKINGID = "UA-179246573-1"; // Replace with your Google Analytics tracking ID
 ReactGA.initialize(TRACKINGID);
@@ -53,6 +54,7 @@ ReactDOM.render(
           <Route path={paths.storyHistory} component={StoryHistory} />
           <Route path={paths.reading} component={Reading} />
           <Route path={paths.publish} component={Publish} />
+          <Route path={paths.test} component={Test} />
         </Switch>
       </Router>
     </MuiPickersUtilsProvider>

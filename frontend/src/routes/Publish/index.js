@@ -1,5 +1,4 @@
 import React from "react";
-// import Col,Container, useState,Row,Tab,Button,Container,DropdownButton,Dropdown,BiGlobe, MicropubCard
 import {
   Button,
   Col,
@@ -13,8 +12,8 @@ import {
 import { BiGlobe } from "react-icons/bi";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
-// import MicropubBody
 import MicropubBody from "components/MicropubBody";
+import history from "history.js";
 
 export default function Publish() {
   const exampleCard = text.micropubCard;
@@ -111,7 +110,11 @@ export default function Publish() {
               <Button className="btn--sm btn--blue" variant="primary">
                 Publish
               </Button>
-              <Button className="btn--sm btn--discard" variant="danger">
+              <Button
+                className="btn--sm btn--discard"
+                variant="danger"
+                onClick={() => history.push("/user")}
+              >
                 Discard
               </Button>
             </div>

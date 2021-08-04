@@ -6,9 +6,9 @@ export default function MicropubCard(props) {
   const asker = props.asker;
   return (
     <Container id={props.id} className="question">
-      <div className="question__body">
+      <div className="body">
         <p>{props.title}</p>
-        <div className="question__control">
+        <div className="control">
           {num > 1 ? `${num} answers` : `${num} answer`}
           <Button className="btn--white btn--lg">Answer Question</Button>
         </div>

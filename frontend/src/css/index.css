@@ -188,7 +188,7 @@ a, a:link, a:visited, a:hover, a:active {
   align-content: space-around;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 2px 10px 0 10px;
   line-height: 20px;
 }
 
@@ -196,7 +196,7 @@ a, a:link, a:visited, a:hover, a:active {
   width: 110px;
   height: 72px;
   border-radius: 10px;
-  background-color: var(--gray-20);
+  background-color: var(--gray-5);
   color: var(--gray-80);
   align-items: center;
 }
@@ -204,7 +204,7 @@ a, a:link, a:visited, a:hover, a:active {
 .dropdown__selector {
   width: 100px;
   height: 16px;
-  background: #F5F5F5;
+  background: var(--gray-5);
   border-radius: 10px;
   color: var(--gray-80);
 }
@@ -318,6 +318,7 @@ a, a:link, a:visited, a:hover, a:active {
   max-width: 1100px;
   margin: auto;
   padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .home .header {
@@ -451,6 +452,7 @@ a, a:link, a:visited, a:hover, a:active {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0;
 }
 
 .userpage .welcome {
@@ -567,7 +569,7 @@ a, a:link, a:visited, a:hover, a:active {
   justify-content: space-evenly;
 }
 
-.question__body {
+.question .body {
   display: flex;
   padding: 30px;
   width: 500px;
@@ -581,7 +583,7 @@ a, a:link, a:visited, a:hover, a:active {
   color: #FFFFFF;
 }
 
-.question__control {
+.question .control {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -730,12 +732,13 @@ a, a:link, a:visited, a:hover, a:active {
   line-height: 23px;
 }
 
-#publish .sidebar .search {
-  font-size: 13px;
-  color: var(--gray-80)
+.search {
+  font-size: 16px;
+  color: #717171;
+  display: flex;
 }
 
-#publish .search input {
+.search input {
   border: none;
   border-bottom: 1px solid var(--gray-80);
   margin-left: 10px;
@@ -768,4 +771,66 @@ a, a:link, a:visited, a:hover, a:active {
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 2px 10px 0px #7c7c7c40;
+}
+
+.modal-dialog {
+  max-width: 800px;
+}
+
+.addquestion {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.addquestion .form-control {
+  color: var(--gray-80);
+  background: var(--gray-5);
+  border: 0.5px solid var(--gray-60);
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.addquestion .subject {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.addquestion .description {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.addquestion .dropdown button {
+  margin-left: 10px;
+}
+
+.addquestion .heading {
+  font-weight: 500;
+  font-size: 32px;
+}
+
+.addquestion .inputs {
+  padding: 40px 80px 10px 80px;
+  flex: 1;
+}
+
+.addquestion .inputs>div, .addquestion .inputs>textarea, .addquestion .inputs>input {
+  margin-bottom: 30px;
+}
+
+.addquestion .controls {
+  height: 80px;
+  padding-right: 80px;
+  background: var(--gray-5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+}
+
+.addquestion .btn--cancel {
+  margin-right: 30px;
 }

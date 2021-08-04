@@ -2,6 +2,7 @@ import { Button, Form, Container, Row, Card } from "react-bootstrap";
 import React from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
+import history from "history.js";
 
 export default function Home() {
   const example = text.micropubCard;
@@ -45,7 +46,11 @@ export default function Home() {
               className="signup__textbox"
               placeholder="Password"
             />
-            <Button className="btn--md" type="submit">
+            <Button
+              className="btn--md"
+              type="submit"
+              onClick={() => history.push("/user")}
+            >
               Sign Up
             </Button>
           </Form>
@@ -78,12 +83,12 @@ export default function Home() {
             ></MicropubCard>
           </div>
         </Row>
-
+        {/* 
         <Row className="preview">
           <div className="preview__subtitle">
             Questions Inspired by Stories from the pandemic
           </div>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );

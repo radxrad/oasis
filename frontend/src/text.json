@@ -31,5 +31,15 @@
         "publishTime": "July 49, 2031",
         "data": [{ "name": "2021-06-18 data.png", "link": "#" }],
         "reviewNum": 0
+    },
+    "question": {
+        "title": "Which vaccine, according to research is the safest?",
+        "id": -1,
+        "asker": {
+          "name": "John Appleseed",
+          "id": -1,
+          "img": "http://placekitten.com/20/20",
+          "link": "#"
+        }
     }
 }
