@@ -7,10 +7,10 @@ const paths = {
   onboard: "/onboard",
   myStory: "/mystory",
   storyHistory: "/storyhistory",
-  micropub: "/micropub",
   public: "/public",
   user: "/user",
   reading: "/reading",
+  publish: "/publish",
 };
 
 export const getConfirmFlow = (state, sickness) => {

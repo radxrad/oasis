@@ -15,11 +15,10 @@ import User from "routes/User";
 import Reading from "routes/Reading";
 import history from "./history";
 import store from "store/configureStore";
+import Publish from "routes/Publish";
 import * as serviceWorker from "./serviceWorker";
-import Micropub from "routes/Micropub";
 import ReactGA from "react-ga";
 import { Navbar, Nav } from "react-bootstrap";
-import PublicProfile from "routes/PublicProfile";
 
 const TRACKINGID = "UA-179246573-1"; // Replace with your Google Analytics tracking ID
 ReactGA.initialize(TRACKINGID);
@@ -47,14 +46,13 @@ ReactDOM.render(
 
         <Switch>
           <Route exact path={paths.home} component={Home} />
-          <Route path={paths.micropub} component={Micropub} />
           <Route path={paths.signIn} component={SignIn} />
           <Route path={paths.signUp} component={SignUp} />
           <Route path={paths.user} component={User} />
           <Route path={paths.myStory} component={MyStory} />
-          <Route path={paths.public} component={PublicProfile} />
           <Route path={paths.storyHistory} component={StoryHistory} />
           <Route path={paths.reading} component={Reading} />
+          <Route path={paths.publish} component={Publish} />
         </Switch>
       </Router>
     </MuiPickersUtilsProvider>

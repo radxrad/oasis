@@ -29,7 +29,7 @@ export default function index() {
           <div className="block">
             <div className="heading">
               My Micropubs{" "}
-              <Button className="btn--blue btn--large">
+              <Button className="btn--blue btn--lg">
                 <BsFillPlusSquareFill />
                 Create a Micropub
               </Button>
@@ -53,7 +53,7 @@ export default function index() {
           <div className="block">
             <div className="heading">
               My Question & Answers
-              <Button className="btn--blue btn--large">
+              <Button className="btn--blue btn--lg">
                 <MdQuestionAnswer />
                 Ask a Question
               </Button>
@@ -78,7 +78,7 @@ export default function index() {
           <div className="block">
             <div className="heading">
               My Feeds
-              <Button className="btn--white btn--large">
+              <Button className="btn--white btn--lg">
                 <MdQuestionAnswer />
                 Browse Open Questions
               </Button>

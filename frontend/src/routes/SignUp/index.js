@@ -31,7 +31,7 @@ export default function index() {
           placeholder="Password"
         />
         <Button
-          className="btn--small"
+          className="btn--md"
           type="submit"
           onClick={() => handleSignUp()}
         >

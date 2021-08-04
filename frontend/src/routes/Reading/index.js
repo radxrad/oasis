@@ -1,34 +1,18 @@
 import React from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { MdQuestionAnswer, MdRateReview } from "react-icons/md";
 import { BsCloudDownload, BsStar } from "react-icons/bs";
-
+import MicropubBody from "components/MicropubBody";
+import text from "text.json";
 export default function index() {
-  const example = {
-    img: "https://dummyimage.com/520x200/000/F5F5F5.png",
-    title: "Which vaccine, according to research is the safest?",
-    text:
-      "Cheese and biscuits cauliflower cheese cream cheese. Monterey jack fromage frais stilton everyone loves edam jarlsberg monterey jack st. agur blue cheese. Cheesy grin swiss cheesecake say cheese cheese triangles paneer smelly cheese stinking bishop. Blue castello halloumi emmental...",
-    id: -1,
-    authors: [
-      {
-        name: "John Appleseed",
-        id: -1,
-        img: "http://placekitten.com/20/20",
-        link: "#",
-      },
-    ],
-    publishTime: "July 49, 2031",
-    data: [{ name: "2021-06-18 data.png", link: "#" }],
-    reviewNum: 0,
-  };
+  const example = text.micropub;
   return (
     <Container className="reading">
-      <div className="body">
-        <div className="heading">{example.title}</div>
-        <img src={example.img} alt="figure"></img>
-        <div className="text">{example.text}</div>
-      </div>
+      <MicropubBody
+        title={example.title}
+        img={example.img}
+        text={example.text}
+      />
       <div className="sidebar">
         <div className="info">
           <div className="publish-time">
@@ -41,7 +25,11 @@ export default function index() {
               {example.authors
                 ? example.authors.map((author) => (
                     <a href={author.link} key={author.id}>
-                      <img src={author.img} className="avatar--sm" />
+                      <img
+                        src={author.img}
+                        className="avatar--sm"
+                        alt="avatar"
+                      />
                       {author.name}
                     </a>
                   ))
@@ -70,11 +58,11 @@ export default function index() {
           </div>
           <Button className="btn--white">View Related Questions</Button>
         </div>
-        <Button className="btn--blue btn--large">
+        <Button className="btn--blue btn--lg">
           <MdQuestionAnswer />
           Ask a Question
         </Button>
-        <Button className="btn--blue btn--large">
+        <Button className="btn--blue btn--lg">
           <MdRateReview />
           Write a Review
         </Button>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container } from "react-bootstrap";
 
-export default function MicroPub(props) {
+export default function MicropubCard(props) {
   const num = props.ansNum;
   const asker = props.asker;
   return (
@@ -10,7 +10,7 @@ export default function MicroPub(props) {
         <p>{props.title}</p>
         <div className="question__control">
           {num > 1 ? `${num} answers` : `${num} answer`}
-          <Button className="btn--white btn--large">Answer Question</Button>
+          <Button className="btn--white btn--lg">Answer Question</Button>
         </div>
       </div>
       <div className="arrow-down"></div>

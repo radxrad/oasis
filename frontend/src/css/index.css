@@ -119,9 +119,14 @@ a, a:link, a:visited, a:hover, a:active {
   background-color: white;
 }
 
-.button--blue {
+.btn--blue {
   color: white;
   background-color: var(--blue-100);
+}
+
+.btn--lightblue {
+  color: var(--blue-100);
+  background-color: var(--blue-60);
 }
 
 .btn {
@@ -140,12 +145,16 @@ a, a:link, a:visited, a:hover, a:active {
   margin-right: 5px;
 }
 
-.btn--large {
+.btn--lg {
   width: 172px;
 }
 
-.btn--small {
+.btn--md {
   width: 116px;
+}
+
+.btn--sm {
+  width: 76px;
 }
 
 .btn--cancel {
@@ -153,23 +162,37 @@ a, a:link, a:visited, a:hover, a:active {
   background-color: var(--gray-20);
 }
 
+.btn--discard {
+  color: red;
+  background-color: white;
+  border: 1px solid red;
+}
+
 .btn--white {
   background-color: white;
   color: var(--blue-100);
 }
 
-.dropdown {
-  background-color: var(--gray-20);
+.dropdown button {
+  background-color: #EFEFEF;
   border: 0.5px solid var(--gray-60);
   box-sizing: border-box;
   border-radius: 10px;
-  width: 20px;
-  height: 110px;
+  height: 20px;
+  width: 110px;
   font-weight: 500;
+  padding: 0;
   font-size: 10px;
+  color: var(--gray-80);
+  display: flex;
+  align-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  line-height: 20px;
 }
 
-.dropdown__container {
+.dropdown-menu {
   width: 110px;
   height: 72px;
   border-radius: 10px;
@@ -186,9 +209,10 @@ a, a:link, a:visited, a:hover, a:active {
   color: var(--gray-80);
 }
 
-.dropdown__icon {
-  width: 20px;
-  height: 20px;
+.dropdown svg {
+  width: 12px;
+  height: 12px;
+  margin-bottom: 2px;
 }
 
 .dropdown__selector--active {
@@ -287,7 +311,7 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .max-window {
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
 }
 
 .home .container {
@@ -348,7 +372,7 @@ a, a:link, a:visited, a:hover, a:active {
   margin-bottom: 30px;
 }
 
-.home .preview .card {
+.preview .card {
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 2px 10px 0px #7C7C7C40;
@@ -619,19 +643,19 @@ a, a:link, a:visited, a:hover, a:active {
   margin-left: 2px;
 }
 
-.reading .body {
+.body {
   width: 600px;
   padding: 3rem 2rem;
 }
 
-.reading .body .heading {
+.body .heading {
   font-weight: 500;
   font-size: 36px;
   line-height: 42px;
   color: #768298;
 }
 
-.reading .body img {
+.body img {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -645,4 +669,103 @@ a, a:link, a:visited, a:hover, a:active {
 .reading .sidebar .stars svg {
   margin-bottom: 2px;
   margin-right: 3px;
+}
+
+#publish {
+  background-color: var(--gray-5);
+}
+
+#publish>div {
+  margin: 0;
+  height: 100%;
+}
+
+#publish .tabs {
+  max-width: 330px;
+  border-right: 1px solid var(--gray-60);
+  padding: 20px 0;
+}
+
+#publish .sidebar {
+  max-width: 330px;
+  border-left: 1px solid var(--gray-60);
+  padding: 25px 15px;
+}
+
+#publish .sidebar>div {
+  background-color: white;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 10px;
+}
+
+#publish .tabs a {
+  border: none;
+  width: 275px;
+  height: 50px;
+  background-color: var(--gray-5);
+  border-radius: 0px 10px 10px 0px;
+  line-height: 36px;
+  color: var(--gray-80)
+}
+
+#publish .tabs a.active {
+  background-color: var(--blue-100);
+  color: white;
+}
+
+#publish .tabs .heading {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 26px;
+}
+
+#publish .btn.active {
+  background-color: inherit;
+}
+
+#publish .sidebar .label {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 23px;
+}
+
+#publish .sidebar .search {
+  font-size: 13px;
+  color: var(--gray-80)
+}
+
+#publish .search input {
+  border: none;
+  border-bottom: 1px solid var(--gray-80);
+  margin-left: 10px;
+  font-size: 10px;
+  vertical-align: text-bottom;
+}
+
+#publish .sidebar .controls {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#publish .preview .label {
+  font-size: 18px;
+  margin: 3rem auto;
+  font-weight: 600;
+  color: #323232;
+  text-align: center;
+}
+
+#publish .preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 3rem;
+}
+
+#publish .body {
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px 0px #7c7c7c40;
 }

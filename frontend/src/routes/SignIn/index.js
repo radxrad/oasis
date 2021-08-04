@@ -25,7 +25,7 @@ export default function index() {
           <Form.Check type="checkbox" label="Remember me" />
         </Form.Group>
         <Button
-          className="btn--small"
+          className="btn--md"
           type="submit"
           onClick={() => handleSignIn()}
         >

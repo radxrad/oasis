@@ -1,25 +1,10 @@
 import { Button, Form, Container, Row, Card } from "react-bootstrap";
 import React from "react";
-import MicroPub from "components/MicroPub";
+import MicropubCard from "components/MicropubCard";
+import text from "text.json";
 
 export default function Home() {
-  const text =
-    "A micropub is a new way to rapidly share emerging science for single, validated results that include novel findings, negative and/or reproduced results, new methods, standards, common data elements or procedures.";
-  const exampleMicroPub = {
-    img: "https://dummyimage.com/145x190/000/fff.png",
-    title: "Which vaccine, according to research is the safest?",
-    text:
-      "Cheese and biscuits cauliflower cheese cream cheese. Monterey jack fromage frais stilton everyone loves edam jarlsberg monterey jack st. agur blue cheese. Cheesy grin swiss cheesecake say cheese cheese triangles paneer smelly cheese stinking bishop. Blue castello halloumi emmental...",
-    id: -1,
-    authors: [
-      {
-        name: "John Appleseed",
-        id: -1,
-        img: "http://placekitten.com/20/20",
-        link: "#",
-      },
-    ],
-  };
+  const example = text.micropubCard;
 
   return (
     <div className="home light-bg">
@@ -60,7 +45,7 @@ export default function Home() {
               className="signup__textbox"
               placeholder="Password"
             />
-            <Button className="btn--small" type="submit">
+            <Button className="btn--md" type="submit">
               Sign Up
             </Button>
           </Form>
@@ -70,27 +55,27 @@ export default function Home() {
           <div className="preview__subtitle">What is a MICROPUB(LICATION)?</div>
           <Card>
             <Card.Body>
-              <Card.Text>{text}</Card.Text>
+              <Card.Text>{text.intro}</Card.Text>
             </Card.Body>
           </Card>
         </Row>
         <Row className="preview">
           <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>
           <div className="mp-list">
-            <MicroPub
-              img={exampleMicroPub.img}
-              authors={exampleMicroPub.authors}
-              title={exampleMicroPub.title}
-              text={exampleMicroPub.text}
-              id={exampleMicroPub.id}
-            ></MicroPub>
-            <MicroPub
-              img={exampleMicroPub.img}
-              authors={exampleMicroPub.authors}
-              title={exampleMicroPub.title}
-              text={exampleMicroPub.text}
-              id={exampleMicroPub.id}
-            ></MicroPub>
+            <MicropubCard
+              img={example.img}
+              authors={example.authors}
+              title={example.title}
+              text={example.text}
+              id={example.id}
+            ></MicropubCard>
+            <MicropubCard
+              img={example.img}
+              authors={example.authors}
+              title={example.title}
+              text={example.text}
+              id={example.id}
+            ></MicropubCard>
           </div>
         </Row>
 
