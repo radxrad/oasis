@@ -1,4 +1,4 @@
-name: Dockerize  Stack
+name: Deploy to gh-page
 on:
   push:
     branches:
@@ -7,10 +7,10 @@ on:
 # https://github.com/docker/build-push-action
 defaults:
   run:
-    working-directory: .
+    working-directory: frontend
 jobs:
   deploy:
-    name: Dockerize Backend Server
+    name: deploy gh-pages using npm
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
