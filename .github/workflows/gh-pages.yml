@@ -8,6 +8,11 @@ on:
 defaults:
   run:
     working-directory: frontend
+    env:
+      user_name: 'github-actions[bot]'
+      user_email: 'github-actions[bot]@users.noreply.github.com'
+      github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+      repository: ${{ github.repository }}
 jobs:
   deploy:
     name: deploy gh-pages using npm
@@ -17,5 +22,8 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
-    - run:  npm install
-    - run:  npm run deploy
+    - run: npm install
+    - run:  |
+        git config --global user.name $user_name
+        git config --global user.email $user_email
+        npm run deploy
