@@ -1,7 +1,0 @@
-.DS_Store
-.vscode
-__pycache__/
-*.py[cod]
-*/build
-backend/covid-19-data/
-node_modules

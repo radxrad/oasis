@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/oasis/static/css/main.c8d53b0b.chunk.css",
+    "main.js": "/oasis/static/js/main.0c56908f.chunk.js",
+    "main.js.map": "/oasis/static/js/main.0c56908f.chunk.js.map",
+    "runtime-main.js": "/oasis/static/js/runtime-main.796855b0.js",
+    "runtime-main.js.map": "/oasis/static/js/runtime-main.796855b0.js.map",
+    "static/js/2.dc469d13.chunk.js": "/oasis/static/js/2.dc469d13.chunk.js",
+    "static/js/2.dc469d13.chunk.js.map": "/oasis/static/js/2.dc469d13.chunk.js.map",
+    "index.html": "/oasis/index.html",
+    "precache-manifest.953b71988a8fbaf2ed40052d5d4ca899.js": "/oasis/precache-manifest.953b71988a8fbaf2ed40052d5d4ca899.js",
+    "service-worker.js": "/oasis/service-worker.js",
+    "static/css/main.c8d53b0b.chunk.css.map": "/oasis/static/css/main.c8d53b0b.chunk.css.map",
+    "static/js/2.dc469d13.chunk.js.LICENSE.txt": "/oasis/static/js/2.dc469d13.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.796855b0.js",
+    "static/js/2.dc469d13.chunk.js",
+    "static/css/main.c8d53b0b.chunk.css",
+    "static/js/main.0c56908f.chunk.js"
+  ]
+}
