@@ -1,0 +1,20 @@
+name: Dockerize  Stack
+on:
+  push:
+    branches:
+      - stella_ui_dev
+# https://github.com/marketplace/actions/publish-docker
+# https://github.com/docker/build-push-action
+defaults:
+  run:
+    working-directory: .
+jobs:
+  deploy:
+    name: Dockerize Backend Server
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run:  npm run deploy
