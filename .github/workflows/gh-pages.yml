@@ -20,11 +20,11 @@ jobs:
         node-version: '14'
     - run: npm install
     - run:  |
-        git config --global user.name $user_name
-        git config --global user.email $user_email
+        git config --global user.name 'valentinedwv'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         npm run deploy
       env:
         user_name: 'valentinedwv'
         user_email: 'github-actions[bot]@users.noreply.github.com'
-        github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
