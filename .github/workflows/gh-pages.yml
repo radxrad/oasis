@@ -10,7 +10,7 @@ defaults:
     working-directory: frontend
 
 jobs:
-  deploy:
+  build:
     name: deploy gh-pages using npm
     runs-on: ubuntu-latest
     steps:
@@ -18,13 +18,20 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
-    - run: npm install
-    - run:  |
-        git config --global user.name 'valentinedwv'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        npm run deploy
-      env:
-        user_name: 'valentinedwv'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        repository: ${{ github.repository }}
+    - name: install
+      run: npm install
+    - name: build deploy
+      run: npm run deploy
+  deploy:
+    name: Deploy to gh-pages
+    steps:
+    - name: github pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+    env:
+      user_name: 'valentinedwv'
+      user_email: 'github-actions[bot]@users.noreply.github.com'
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+      repository: ${{ github.repository }}
