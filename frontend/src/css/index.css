@@ -682,7 +682,7 @@ a, a:link, a:visited, a:hover, a:active {
   height: 100%;
 }
 
-#publish .tabs {
+#publish .tab__nav {
   max-width: 330px;
   border-right: 1px solid var(--gray-60);
   padding: 20px 0;
@@ -701,7 +701,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
 }
 
-#publish .tabs a {
+#publish .tab__nav a {
   border: none;
   width: 275px;
   height: 50px;
@@ -711,12 +711,12 @@ a, a:link, a:visited, a:hover, a:active {
   color: var(--gray-80)
 }
 
-#publish .tabs a.active {
+#publish .tab__nav a.active {
   background-color: var(--blue-100);
   color: white;
 }
 
-#publish .tabs .heading {
+#publish .tab__nav .heading {
   text-align: center;
   padding: 2rem 0;
   font-size: 26px;
@@ -733,7 +733,7 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .search {
-  font-size: 16px;
+  font-size: 13px;
   color: #717171;
   display: flex;
 }
@@ -833,4 +833,97 @@ a, a:link, a:visited, a:hover, a:active {
 
 .addquestion .btn--cancel {
   margin-right: 30px;
+}
+
+.dropzone>div {
+  width: 480px;
+  height: 300px;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  color: #0559FD;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.dropzone .upload {
+  background: #0559FD;
+  border-radius: 10px;
+  width: 180px;
+  height: 20px;
+  font-weight: 500;
+  font-size: 11px;
+  color: white;
+  padding: 2px 5px;
+}
+
+.dropzone svg {
+  width: 50px;
+  height: 50px;
+  color: #0559FD;
+  margin-bottom: 10px;
+}
+
+.dropzone .label {
+  font-size: 24px;
+  color: var(--blue-100)
+}
+
+.dropzone input {
+  display: none;
+}
+
+.dropzone .req {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 8px;
+}
+
+.quill {
+  padding: 0;
+  width: 600px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  margin: 0;
+}
+
+.quill .ql-toolbar {
+  border: none !important;
+  background: var(--gray-20);
+  border-radius: 10px 10px 0 0;
+}
+
+.quill .ql-container {
+  border: none !important;
+  border-radius: (0 0 10px 10px) !important;
+  height: 70vh;
+}
+
+#publish .tab__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:2rem;
+  padding-bottom: 2rem;
+}
+
+#publish .abstract input {
+  width: 600px;
+  height: 120px;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 25px;
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--gray-80);
+  margin-bottom: 2rem;
+}
+
+#publish .abstract input::placeholder {
+  font-weight: 600;
+  font-size: 24px;
+  color: #9E9E9E;
 }

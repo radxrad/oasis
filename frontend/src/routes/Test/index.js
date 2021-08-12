@@ -1,10 +1,10 @@
 import React from "react";
-import AddQuestion from "components/AddQuestion";
+import Test from "components/Test";
 
 export default function index() {
   return (
     <div>
-      <AddQuestion />
+      <Test></Test>
     </div>
   );
 }

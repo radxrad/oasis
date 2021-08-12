@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Col,
@@ -14,13 +14,53 @@ import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 import MicropubBody from "components/MicropubBody";
 import history from "history.js";
+import Dropzone from "react-dropzone";
+import { AiFillPicture } from "react-icons/ai";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function Publish() {
+  const [value, setValue] = useState("");
+
   const exampleCard = text.micropubCard;
   const exampleBody = text.micropub;
-  const abstract = <div>abstract</div>;
-  const resources = <div>resources</div>;
-  const body = <div>body</div>;
+
+  const abstract = (
+    <div className="abstract">
+      <input
+        type="textarea"
+        placeholder="What question would you like to answer?..."
+      />
+      <ReactQuill value={value} onChange={setValue} />
+    </div>
+  );
+
+  const resources = (
+    <div>
+      <Dropzone
+        onDrop={(acceptedFiles) => console.log(acceptedFiles)}
+        maxSize={10000000}
+        multiple
+        accept=".jpg, .png, .pdf, .csv, .tsv, .xlsx"
+      >
+        {({ getRootProps, getInputProps }) => (
+          <section className="dropzone">
+            <input {...getInputProps()} />
+            <div {...getRootProps()}>
+              <AiFillPicture />
+              <p className="label">Drag Resources Here</p>
+              <p className="upload">Or select from your computer...</p>
+              <div className="req">
+                <p>.jpg .png .pdf .csv .tsv .xlsx</p>
+                <p>max file size: 10MB</p>
+              </div>
+            </div>
+          </section>
+        )}
+      </Dropzone>
+    </div>
+  );
+  const body = <ReactQuill value={value} onChange={setValue} />;
 
   const preview = (
     <div className="preview">
@@ -45,7 +85,7 @@ export default function Publish() {
     <div id="publish">
       <Tab.Container defaultActiveKey="#abstract">
         <Row className="max-window">
-          <Col className="tabs">
+          <Col className="tab__nav">
             <h2 className="heading">Create a Micropub</h2>
             <ListGroup defaultActiveKey="#abstract">
               <ListGroup.Item action href="#abstract">
@@ -62,7 +102,7 @@ export default function Publish() {
               </ListGroup.Item>
             </ListGroup>
           </Col>
-          <Col>
+          <Col className="tab__content">
             <Tab.Content>
               <Tab.Pane eventKey="#abstract">{abstract}</Tab.Pane>
               <Tab.Pane eventKey="#resources">{resources}</Tab.Pane>
