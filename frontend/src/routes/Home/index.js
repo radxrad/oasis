@@ -5,7 +5,7 @@ import text from "text.json";
 import history from "history.js";
 
 export default function Home() {
-  const example = text.micropubCard;
+  const example = text.micropub;
 
   return (
     <div className="home light-bg">
@@ -69,17 +69,17 @@ export default function Home() {
           <div className="mp-list">
             <MicropubCard
               img={example.img}
-              authors={example.authors}
+              authorIds={example.authorIds}
               title={example.title}
-              text={example.text}
-              id={example.id}
+              abstract={example.abstract}
+              uid={example.uid}
             ></MicropubCard>
             <MicropubCard
               img={example.img}
-              authors={example.authors}
+              authorIds={example.authorIds}
               title={example.title}
-              text={example.text}
-              id={example.id}
+              abstract={example.abstract}
+              uid={example.uid}
             ></MicropubCard>
           </div>
         </Row>

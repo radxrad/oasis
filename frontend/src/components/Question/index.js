@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Container } from "react-bootstrap";
 
-export default function MicropubCard(props) {
+export default function Question(props) {
   const num = props.ansNum;
-  const asker = props.asker;
+  const asker = props.askerIds;
   return (
     <Container id={props.id} className="question">
       <div className="body">

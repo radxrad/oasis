@@ -21,7 +21,7 @@ export default function Reading() {
       <MicropubBody
         title={example.title}
         img={example.img}
-        text={example.text}
+        body={example.body}
       />
       <div className="sidebar">
         <div className="info">
@@ -32,8 +32,8 @@ export default function Reading() {
           <div className="authors">
             <div className="label">Author(s):</div>
             <div className="list">
-              {example.authors
-                ? example.authors.map((author) => (
+              {example.authorIds
+                ? example.authorIds.map((author) => (
                     <a href={author.link} key={author.id}>
                       <img
                         src={author.img}

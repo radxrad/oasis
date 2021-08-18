@@ -22,8 +22,7 @@ import "react-quill/dist/quill.snow.css";
 export default function Publish() {
   const [value, setValue] = useState("");
 
-  const exampleCard = text.micropubCard;
-  const exampleBody = text.micropub;
+  const example = text.micropub;
 
   const abstract = (
     <div className="abstract">
@@ -66,17 +65,16 @@ export default function Publish() {
     <div className="preview">
       <div className="label">Card Preview</div>
       <MicropubCard
-        img={exampleCard.img}
-        authors={exampleCard.authors}
-        title={exampleCard.title}
-        text={exampleCard.text}
-        id={exampleCard.id}
+        img={example.img}
+        authorIds={example.authorIds}
+        title={example.title}
+        abstract={example.abstract}
       ></MicropubCard>
       <div className="label">Micropub Preview</div>
       <MicropubBody
-        title={exampleBody.title}
-        img={exampleBody.img}
-        text={exampleBody.text}
+        title={example.title}
+        img={example.img}
+        body={example.body}
       />
     </div>
   );

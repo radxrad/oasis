@@ -1,45 +1,32 @@
 {
     "intro": "A micropub is a new way to rapidly share emerging science for single, validated results that include novel findings, negative and/or reproduced results, new methods, standards, common data elements or procedures.",
-    "micropubCard": {
-        "img": "https://dummyimage.com/145x190/000/fff.png",
-        "title": "Which vaccine, according to research is the safest?",
-        "text": "Cheese and biscuits cauliflower cheese cream cheese. Monterey jack fromage frais stilton everyone loves edam jarlsberg monterey jack st. agur blue cheese. Cheesy grin swiss cheesecake say cheese cheese triangles paneer smelly cheese stinking bishop. Blue castello halloumi emmental...",
-        "id": -1,
-        "authors": [
-            {
-                "name": "John Appleseed",
-                "id": -1,
-                "img": "http://placekitten.com/20/20",
-                "link": "#"
-            }
-        ]
-    },
+
     "micropub": {
         "img": "https://dummyimage.com/520x200/000/F5F5F5.png",
         "title": "Which vaccine, according to research is the safest?",
-        "text":
-            "Cheese and biscuits cauliflower cheese cream cheese. Monterey jack fromage frais stilton everyone loves edam jarlsberg monterey jack st. agur blue cheese. Cheesy grin swiss cheesecake say cheese cheese triangles paneer smelly cheese stinking bishop. Blue castello halloumi emmental...",
-        "id": -1,
-        "authors": [
-            {
-                "name": "John Appleseed",
-                "id": -1,
-                "img": "http://placekitten.com/20/20",
-                "link": "#"
-            }
-        ],
-        "publishTime": "July 49, 2031",
-        "data": [{ "name": "2021-06-18 data.png", "link": "#" }],
+        "abstract": "Cheese and biscuits cauliflower cheese cream cheese. Monterey jack fromage frais stilton everyone loves edam jarlsberg monterey jack st. agur blue cheese. Cheesy grin swiss cheesecake say cheese cheese triangles paneer smelly cheese stinking bishop. Blue castello halloumi emmental...",
+        "uid": 1,
+        "authorIds":[1],
+        "publishTime": 1609430400,
+        "dataIds": [1],
         "reviewNum": 0
     },
     "question": {
         "title": "Which vaccine, according to research is the safest?",
-        "id": -1,
-        "asker": {
-          "name": "John Appleseed",
-          "id": -1,
-          "img": "http://placekitten.com/20/20",
-          "link": "#"
-        }
+        "uid": 1,
+        "askerIds": [1]
+    },
+    "user": {
+        "odcid": 1,
+        "uid": 1,
+        "username": "",
+        "password": "",
+        "email": "",
+        "avatar":""
+    },
+    "resources":{
+        "uid":1,
+        "filename":"",
+        "link":"#"
     }
 }
