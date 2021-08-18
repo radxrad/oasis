@@ -24,6 +24,7 @@ jobs:
         run: npm run deploy
   deploy:
     name: Deploy to gh-pages
+    runs-on: ubuntu-latest
     steps:
       - name: github pages
         uses: peaceiris/actions-gh-pages@v3
