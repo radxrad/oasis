@@ -91,25 +91,25 @@ export default function User() {
               <Question
                 asker={exampleQuestion.asker}
                 title={exampleQuestion.title}
-                id={exampleQuestion.id}
+                uid={exampleQuestion.uid}
                 ansNum={0}
               />
               <Question
                 asker={exampleQuestion.asker}
                 title={exampleQuestion.title}
-                id={exampleQuestion.id}
+                uid={exampleQuestion.uid}
                 ansNum={0}
               />
               <Question
                 asker={exampleQuestion.asker}
                 title={exampleQuestion.title}
-                id={exampleQuestion.id}
+                uid={exampleQuestion.uid}
                 ansNum={0}
               />
               <Question
                 asker={exampleQuestion.asker}
                 title={exampleQuestion.title}
-                id={exampleQuestion.id}
+                uid={exampleQuestion.uid}
                 ansNum={0}
               />
             </ListGroup>

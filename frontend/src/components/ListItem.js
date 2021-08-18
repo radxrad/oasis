@@ -11,7 +11,7 @@ export default function ListItem(props) {
   const title = props.title;
 
   return (
-    <a className={`listitem__${type} listitem`} href="/reading">
+    <a className={`listitem__${type} listitem`} href="/read">
       {iconMapping[type]} {title}
     </a>
   );

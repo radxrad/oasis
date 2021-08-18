@@ -61,6 +61,13 @@ export default function Publish() {
   );
   const body = <ReactQuill value={value} onChange={setValue} />;
 
+  const reference = (
+    <ReactQuill
+      placeholder="(Recommend Using Harvard Referencing Style)"
+      onChange={setValue}
+    />
+  );
+
   const preview = (
     <div className="preview">
       <div className="label">Card Preview</div>
@@ -95,6 +102,9 @@ export default function Publish() {
               <ListGroup.Item action href="#body">
                 Body
               </ListGroup.Item>
+              <ListGroup.Item action href="#reference">
+                Reference
+              </ListGroup.Item>
               <ListGroup.Item action href="#preview">
                 Preview
               </ListGroup.Item>
@@ -105,6 +115,7 @@ export default function Publish() {
               <Tab.Pane eventKey="#abstract">{abstract}</Tab.Pane>
               <Tab.Pane eventKey="#resources">{resources}</Tab.Pane>
               <Tab.Pane eventKey="#body">{body}</Tab.Pane>
+              <Tab.Pane eventKey="#reference">{reference}</Tab.Pane>
               <Tab.Pane eventKey="#preview">{preview}</Tab.Pane>
             </Tab.Content>
           </Col>

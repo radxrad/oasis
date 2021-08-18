@@ -433,7 +433,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 50%;
 }
 
-.micropub .authors .card-link, .question .asker, .reading .authors a {
+.micropub .authors .card-link, .question .asker, .read .authors a {
   font-size: 12px;
   color: var(--gray-80);
   width: max-content;
@@ -606,21 +606,21 @@ a, a:link, a:visited, a:hover, a:active {
   margin: 10px 0;
 }
 
-.reading {
+.read {
   display: flex;
   justify-content: center;
 }
 
-.reading .sidebar {
+.read .sidebar {
   width: 172px;
   margin-top: 3rem;
 }
 
-.reading .sidebar button {
+.read .sidebar button {
   margin-top: 1rem;
 }
 
-.reading .sidebar .info {
+.read .sidebar .info {
   width: 172px;
   border-radius: 10px;
   background-color: var(--gray-5);
@@ -631,17 +631,17 @@ a, a:link, a:visited, a:hover, a:active {
   justify-content: space-evenly;
 }
 
-.reading .sidebar .info>div {
+.read .sidebar .info>div {
   margin: 10px
 }
 
-.reading .sidebar .time {
+.read .sidebar .time {
   font-weight: 500;
   font-size: 1rem;
   color: #717171;
 }
 
-.reading .sidebar__icon {
+.read .sidebar__icon {
   margin-left: 2px;
 }
 
@@ -662,13 +662,13 @@ a, a:link, a:visited, a:hover, a:active {
   margin-bottom: 1rem;
 }
 
-.reading .sidebar .stars {
+.read .sidebar .stars {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.reading .sidebar .stars svg {
+.read .sidebar .stars svg {
   margin-bottom: 2px;
   margin-right: 3px;
 }
@@ -679,7 +679,7 @@ a, a:link, a:visited, a:hover, a:active {
 
 #publish>div {
   margin: 0;
-  height: 100%;
+  height: calc(100vh - 50px);
 }
 
 #publish .tab__nav {
@@ -753,10 +753,14 @@ a, a:link, a:visited, a:hover, a:active {
 
 #publish .preview .label {
   font-size: 18px;
-  margin: 3rem auto;
+  margin: 0 auto 2rem auto;
   font-weight: 600;
   color: #323232;
   text-align: center;
+}
+
+#publish .preview .card {
+  margin-bottom: 2rem;
 }
 
 #publish .preview {
@@ -764,7 +768,6 @@ a, a:link, a:visited, a:hover, a:active {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 3rem;
 }
 
 #publish .body {
@@ -897,16 +900,21 @@ a, a:link, a:visited, a:hover, a:active {
 
 .quill .ql-container {
   border: none !important;
-  border-radius: (0 0 10px 10px) !important;
-  height: 70vh;
+  border-radius: 0 0 10px 10px !important;
+  height: calc(100vh - 92px - 4rem);
+}
+
+.abstract .quill .ql-container {
+  height: calc(100vh - 92px - 120px - 6rem);
 }
 
 #publish .tab__content {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-top:2rem;
+  padding-top: 2rem;
   padding-bottom: 2rem;
+  overflow: auto;
+  height: 100%;
 }
 
 #publish .abstract input {

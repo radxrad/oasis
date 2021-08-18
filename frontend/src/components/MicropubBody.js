@@ -5,7 +5,7 @@ export default function MicropubBody(props) {
     <div className="body">
       <div className="heading">{props.title}</div>
       <img src={props.img} alt="figure"></img>
-      <div className="text">{props.text}</div>
+      <div className="text">{props.body}</div>
     </div>
   );
 }

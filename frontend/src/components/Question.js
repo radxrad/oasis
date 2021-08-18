@@ -3,7 +3,7 @@ import { Button, Container } from "react-bootstrap";
 
 export default function Question(props) {
   const num = props.ansNum;
-  const asker = props.askerIds;
+  const asker = props.askerId;
   return (
     <Container id={props.id} className="question">
       <div className="body">
@@ -14,11 +14,11 @@ export default function Question(props) {
         </div>
       </div>
       <div className="arrow-down"></div>
-
+      {/* 
       <a href={asker.link} key={asker.id} className="asker">
         <img src={asker.img} className="avatar--sm" alt="avatar" />
         {asker.name}
-      </a>
+      </a> */}
     </Container>
   );
 }

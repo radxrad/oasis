@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Router, Switch } from "react-router-dom";
 import Home from "routes/Home";
-import paths from "routes/paths";
+import paths from "paths";
 import SignIn from "routes/SignIn";
 import SignUp from "routes/SignUp";
 import User from "routes/User";

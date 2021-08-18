@@ -5,16 +5,18 @@ import { BsCloudDownload, BsStar } from "react-icons/bs";
 import MicropubBody from "components/MicropubBody";
 import text from "text.json";
 import AddQuestion from "components/AddQuestion";
+import moment from "moment";
 
 export default function Read() {
   const example = text.micropub;
+  const time = moment.unix(example.publishTime).format("MM/DD/YYYY");
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <Container className="reading">
+    <Container className="read">
       <Modal show={show} onHide={handleClose}>
         <AddQuestion close={handleClose} />
       </Modal>
@@ -27,7 +29,7 @@ export default function Read() {
         <div className="info">
           <div className="publish-time">
             <div className="label">Published:</div>
-            <div className="time">{example.publishTime}</div>
+            <div className="time">{time}</div>
           </div>
           <div className="authors">
             <div className="label">Author(s):</div>

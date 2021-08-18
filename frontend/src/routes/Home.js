@@ -83,12 +83,6 @@ export default function Home() {
             ></MicropubCard>
           </div>
         </Row>
-        {/* 
-        <Row className="preview">
-          <div className="preview__subtitle">
-            Questions Inspired by Stories from the pandemic
-          </div>
-        </Row> */}
       </Container>
     </div>
   );
