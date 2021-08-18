@@ -14,18 +14,21 @@ jobs:
     name: deploy gh-pages using npm
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: install
-      run: npm install
-    - name: build deploy
-      run: npm run deploy
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: install
+        run: npm install
+      - name: build deploy
+        run: npm run deploy
+  deploy:
+    name: Deploy to gh-pages
+    steps:
+      - name: github pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
     env:
       user_name: 'valentinedwv'
