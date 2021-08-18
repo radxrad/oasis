@@ -1,7 +1,7 @@
 import React from "react";
 import { BsBook, BsQuestionCircle, BsCardText } from "react-icons/bs";
 
-export default function index(props) {
+export default function ListItem(props) {
   const iconMapping = {
     micropub: <BsBook />,
     question: <BsQuestionCircle />,

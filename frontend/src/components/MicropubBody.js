@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function index(props) {
+export default function MicropubBody(props) {
   return (
     <div className="body">
       <div className="heading">{props.title}</div>

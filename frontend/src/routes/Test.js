@@ -1,7 +1,6 @@
 import React from "react";
-import Test from "components/Test";
 
-export default function index() {
+export default function Test() {
   return (
     <div>
       <Test></Test>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-import history from "../../history";
+import history from "../history";
 
-export default function index() {
+export default function SignUp() {
   function handleSignUp() {
     history.push("/user");
   }

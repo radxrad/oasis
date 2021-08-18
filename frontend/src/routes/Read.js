@@ -6,7 +6,7 @@ import MicropubBody from "components/MicropubBody";
 import text from "text.json";
 import AddQuestion from "components/AddQuestion";
 
-export default function Reading() {
+export default function Read() {
   const example = text.micropub;
 
   const [show, setShow] = useState(false);

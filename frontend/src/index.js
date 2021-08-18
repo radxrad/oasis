@@ -1,4 +1,4 @@
-import "css/index.css";
+import "./css/index.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Router, Switch } from "react-router-dom";
@@ -7,7 +7,7 @@ import paths from "routes/paths";
 import SignIn from "routes/SignIn";
 import SignUp from "routes/SignUp";
 import User from "routes/User";
-import Reading from "routes/Reading";
+import Read from "routes/Read";
 import history from "./history";
 import Publish from "routes/Publish";
 import * as serviceWorker from "./serviceWorker";
@@ -32,7 +32,7 @@ ReactDOM.render(
       <Route path={paths.signIn} component={SignIn} />
       <Route path={paths.signUp} component={SignUp} />
       <Route path={paths.user} component={User} />
-      <Route path={paths.reading} component={Reading} />
+      <Route path={paths.read} component={Read} />
       <Route path={paths.publish} component={Publish} />
       <Route path={paths.test} component={Test} />
     </Switch>
