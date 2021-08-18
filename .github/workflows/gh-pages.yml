@@ -18,18 +18,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: install
+      - name: Install Packages
         run: npm install
-      - name: build deploy
-        run: npm run deploy
-  deploy:
-    name: Deploy to gh-pages
-    runs-on: ubuntu-latest
-    steps:
-      - name: github pages
+      - name: Build page
+        run: npm run build
+      - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build
     env:
       user_name: 'valentinedwv'
