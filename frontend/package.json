@@ -2,7 +2,7 @@
   "name": "oasis",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://radxrad.github.io/oasis",
+  "homepage": "/oasis/",
   "dependencies": {
     "moment": "^2.29.1",
     "react": "^16.13.1",
