@@ -1,5 +1,7 @@
 import { Button, Form, Container, Row, Card } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React from "react";
+
+//import { useEffect, useState } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 import history from "history.js";
@@ -8,23 +10,23 @@ import posts from "posts.json"
 export default function Home(apikey, apiusername) {
   const example = text.micropub;
 
-  const [ latestposts, setLatestposts ] = useState([])
-
-  useEffect(() => {
-    fetch('https://discourse.earth2.ucsd.edu/posts.json', {
-      method: 'GET',
-      headers: {
-
-        'Api-Key': "",
-        'Api-Username': 'system'
-      }
-    })
-        .then(response => response.json())
-        .then(data => {
-          data.latest_posts.forEach (post => setLatestposts(latestposts => [...latestposts, post]))
-
-        }).catch(err => console.log(err))
-  })
+  // const [ latestposts, setLatestposts ] = useState([])
+  //
+  // useEffect(() => {
+  //   fetch('https://discourse.earth2.ucsd.edu/posts.json', {
+  //     method: 'GET',
+  //     headers: {
+  //
+  //       'Api-Key': "",
+  //       'Api-Username': 'system'
+  //     }
+  //   })
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         data.latest_posts.forEach (post => setLatestposts(latestposts => [...latestposts, post]))
+  //
+  //       }).catch(err => console.log(err))
+  // })
 
   return (
     <div className="home light-bg">
