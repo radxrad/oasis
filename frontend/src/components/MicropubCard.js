@@ -4,13 +4,13 @@ import { Row, Col, Card } from "react-bootstrap";
 export default function MicropubCard(props) {
   return (
     <Card className="micropub">
-      <Row>
+      <div>
         <Card.Img src={props.figure} alt="img" />
-        <Col>
+        <div>
           <Card.Title>{props.title}</Card.Title>
           <Card.Text>{props.abstract}</Card.Text>
-        </Col>
-      </Row>
+        </div>
+      </div>
       <div className="authors">
         {/* {props.authors
           ? props.authors.map((author) => (

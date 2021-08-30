@@ -63,7 +63,12 @@ export default function CustomNavbar(props) {
           as={ButtonGroup}
           align={{ lg: "end" }}
           title={
-            <img src={props.user.profilePic} drop="down" variant="light" />
+            <img
+              src={props.user.profilePic}
+              drop="down"
+              variant="light"
+              alt="user avatar"
+            />
           }
         >
           <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>

@@ -347,6 +347,7 @@ a, a:link, a:visited, a:hover, a:active {
   font-family: Abel;
   font-weight: normal;
   font-size: 28px;
+  margin-right: 0;
 }
 
 .navbar__signin {
@@ -940,7 +941,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
   height: 36px;
   padding-left: 36px;
-  width: 350px;
+  width: 50vw;
   border: none;
 }
 
@@ -1004,4 +1005,56 @@ a, a:link, a:visited, a:hover, a:active {
 .show>.btn-primary.dropdown-toggle {
   background-color: transparent;
   color: var(--gray-80);
+}
+
+@media only screen and (max-width: 480px) {
+  .home .headlines {
+    margin-right: 0;
+    height: auto;
+    width: 90%;
+  }
+  .home .headline--black {
+    font-size: 22px;
+  }
+  .home .headline--blue {
+    font-size: 16px;
+  }
+  .home .preview {
+    padding: 15% 5% 0% 5%;
+  }
+  .home .preview__subtitle {
+    font-size: 22px;
+    margin-bottom: 1rem;
+  }
+  .home .preview .mp-list {
+    flex-wrap: wrap;
+  }
+  .home .container {
+    padding-top: 0;
+    padding-bottom: 2rem;
+  }
+  .signup__container {
+    display: none;
+  }
+  .preview .card {
+    height: auto;
+    padding: 2rem 1rem;
+  }
+  .preview .mp-list .card {
+    margin-bottom: 1.5rem;
+  }
+  .micropub .card-img {
+    height: 100px;
+    width: 100%;
+  }
+  .micropub .card-title {
+    margin-top: 1rem;
+  }
+  .micropub .card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: auto;
+  }
 }
