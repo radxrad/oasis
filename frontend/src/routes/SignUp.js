@@ -1,10 +1,33 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-import history from "../history";
+import axios from "axios";
 
 export default function SignUp() {
-  function handleSignUp() {
-    history.push("/user");
+  async function handleSignUp(e) {
+    e.preventDefault();
+
+    const options = {
+      method: "POST",
+      url: "https://stoplight.io/mocks/oasis/oasis/19253909/signup",
+      headers: { "Content-Type": "application/json", Prefer: "" },
+      data: {
+        firstName: "Alice",
+        lastName: "Smith",
+        email: "alice.smith@gmail.com",
+        password: "1234",
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        window.location.replace("/user");
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   }
   return (
     <div className="signup light-bg max-window">
@@ -33,7 +56,7 @@ export default function SignUp() {
         <Button
           className="btn--md"
           type="submit"
-          onClick={() => handleSignUp()}
+          onClick={(e) => handleSignUp(e)}
         >
           Sign Up
         </Button>

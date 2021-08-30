@@ -10,12 +10,15 @@
         "authorIds":null,
         "publishTime": 1609430400,
         "dataIds": null,
-        "reviewNum": 0
+        "reviewNum": 0,
+        "visibility":"public",
+        "keywords":null
     },
     "question": {
         "title": "Which vaccine, according to research is the safest?",
         "uid": 1,
-        "askerIds": null
+        "askerIds": null,
+        "description": "testing"
     },
     "user": {
         "odcid": 1,
@@ -23,7 +26,7 @@
         "username": "",
         "password": "",
         "email": "",
-        "avatar":""
+        "profilePic":""
     },
     "resources":{
         "uid":1,

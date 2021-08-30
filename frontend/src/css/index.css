@@ -335,23 +335,18 @@ a, a:link, a:visited, a:hover, a:active {
   align-items: center;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-content: center;
+}
+
 .navbar__brand {
-  position: absolute;
-  left: 2.15%;
-  right: 92.78%;
-  top: 17.31%;
-  bottom: 13.46%;
+  margin-left: 2.15%;
   font-family: Abel;
-  font-style: normal;
   font-weight: normal;
   font-size: 28px;
-  line-height: 36px;
-  /* identical to box height */
-  display: flex;
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-  color: #000000;
 }
 
 .navbar__signin {
@@ -934,4 +929,79 @@ a, a:link, a:visited, a:hover, a:active {
   font-weight: 600;
   font-size: 24px;
   color: #9E9E9E;
+}
+
+.searchbar {
+  position: relative;
+}
+
+.searchbar input, .searchbar input:focus {
+  background: rgba(142, 142, 147, 0.12);
+  border-radius: 10px;
+  height: 36px;
+  padding-left: 36px;
+  width: 350px;
+  border: none;
+}
+
+.searchbar input::placeholder {
+  font-size: 16px;
+  color: #8E8E93
+}
+
+.searchbar button, .searchbar button:focus, .searchbar button:active {
+  position: absolute;
+  top: 0;
+  border-radius: 10px;
+  height: 36px;
+  width: 36px;
+  background: none;
+  color: #8E8E93;
+  box-shadow: none !important;
+}
+
+.custom-nav .user-avatar img {
+  height: 30px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.custom-nav .user-avatar {
+  background: none;
+  box-shadow: none !important;
+  margin-right: 2.15%;
+}
+
+.custom-nav .user-avatar>button, .custom-nav .user-avatar>button:focus {
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: var(--gray-80);
+  display: flex;
+  align-items: center;
+  border: none;
+  height: auto;
+  width: auto;
+  padding: 0;
+}
+
+.custom-nav .user-avatar .dropdown-menu {
+  right: 0;
+  top: 30px;
+  font-size: 10px;
+  color: var(--gray-80);
+  background: white;
+  height: auto;
+  min-width: none;
+}
+
+.modal-dialog {
+  height: calc(100% - 56px);
+  display: flex;
+  align-items: center;
+}
+
+.show>.btn-primary.dropdown-toggle {
+  background-color: transparent;
+  color: var(--gray-80);
 }
