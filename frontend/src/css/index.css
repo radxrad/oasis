@@ -311,7 +311,7 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .max-window {
-  min-height: calc(100vh - 50px);
+  height: calc(100vh - 66px);
 }
 
 .home .container {
@@ -682,6 +682,7 @@ a, a:link, a:visited, a:hover, a:active {
   max-width: 330px;
   border-right: 1px solid var(--gray-60);
   padding: 20px 0;
+  display: flex;
 }
 
 #publish .sidebar {
@@ -905,7 +906,6 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 #publish .tab__content {
-  display: flex;
   align-items: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -1033,12 +1033,13 @@ a, a:link, a:visited, a:hover, a:active {
     padding-top: 0;
     padding-bottom: 2rem;
   }
-  .signup__container {
+  .home .signup__container {
     display: none;
   }
   .preview .card {
     height: auto;
     padding: 2rem 1rem;
+    width: 100%;
   }
   .preview .mp-list .card {
     margin-bottom: 1.5rem;
@@ -1056,5 +1057,163 @@ a, a:link, a:visited, a:hover, a:active {
     -webkit-box-orient: vertical;
     overflow: hidden;
     height: auto;
+  }
+  .navbar__signin {
+    margin-right: .5rem;
+    position: initial;
+  }
+  .userpage .welcome {
+    margin: 1rem;
+    font-size: 26px;
+  }
+  .avatar--lg {
+    width: 30px;
+    height: 30px;
+  }
+  .block {
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .block .heading {
+    width: 100%;
+    font-size: 20px;
+  }
+  .block .heading button {
+    width: auto;
+  }
+  .block .heading button svg {
+    margin-right: 0;
+  }
+  .block .heading button span {
+    display: none;
+  }
+  .block .list-group--small {
+    width: 100%;
+  }
+  .listitem {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    padding: 1rem;
+  }
+  .listitem svg {
+    min-width: 16px;
+  }
+  .block .list-group--large {
+    width: 100%;
+    height: 100%;
+  }
+  .question .body {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    font-size: 14px;
+  }
+  .question .control {
+    font-size: 12px;
+  }
+  .question .control button {
+    width: 100px;
+    height: 30px;
+  }
+  .question .control button span {
+    display: none;
+  }
+  .read {
+    flex-direction: column;
+  }
+  .body {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+  .body .heading {
+    font-size: 24px;
+    line-height: inherit;
+  }
+  .body img, .read .sidebar .info {
+    width: 100%;
+  }
+  .read .sidebar {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .read .sidebar .controls {
+    display: flex;
+    justify-content: space-between;
+  }
+  .addquestion .inputs>div, .addquestion .inputs>textarea, .addquestion .inputs>input {
+    margin-bottom: 1rem;
+  }
+  .addquestion .heading {
+    font-size: 24px;
+  }
+  .addquestion .controls {
+    padding-right: 0;
+    justify-content: space-evenly;
+  }
+  .addquestion .controls button {
+    width: 150px;
+  }
+  .addquestion .btn--cancel {
+    margin: 0
+  }
+  .addquestion .inputs {
+    padding: 2rem;
+  }
+  #publish .tab__nav {
+    max-width: 100%;
+    padding: 0;
+    height: 50px;
+    flex-direction: row;
+  }
+  #publish .tab__nav a {
+    width: 20vw;
+    font-size: 12px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0 0 10px 0;
+  }
+  #publish .tab__nav a span {
+    display: none;
+  }
+  #publish .tab__nav .heading {
+    display: none;
+  }
+  #publish .tab__nav .list-group {
+    flex-direction: row;
+  }
+  #publish .tab__content {
+    align-items: baseline;
+    padding: 1.5rem 1rem;
+    overflow: hidden;
+    height: auto;
+  }
+  #publish .abstract input {
+    width: 100%;
+    padding: 1rem;
+    height: auto;
+    font-size: 16px;
+  }
+  #publish .abstract input::placeholder {
+    font-size: 16px;
+  }
+  .quill {
+    width: 100%;
+  }
+  .dropzone>div {
+    width: 100%;
+  }
+  #publish>div {
+    overflow: auto;
+  }
+  #publish .sidebar {
+    max-width: 100%;
+    padding-top: 0
+  }
+  #publish .sidebar .controls {
+    background: none;
   }
 }

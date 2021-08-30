@@ -36,7 +36,7 @@ export default function User() {
                 onClick={() => history.push("/publish")}
               >
                 <BsFillPlusSquareFill />
-                Create a Micropub
+                <span>Create a Micropub</span>
               </Button>
             </div>
             <ListGroup className="list-group--small">
@@ -60,7 +60,7 @@ export default function User() {
               My Question & Answers
               <Button className="btn--blue btn--lg" onClick={handleShow}>
                 <MdQuestionAnswer close={handleClose} />
-                Ask a Question
+                <span>Ask a Question</span>
               </Button>
             </div>
             <ListGroup className="list-group--small">

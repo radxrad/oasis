@@ -71,7 +71,7 @@ export default function CustomNavbar(props) {
             />
           }
         >
-          <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+          <Dropdown.Item href="/user">My Page</Dropdown.Item>
           <Dropdown.Item href="/publish">Publish</Dropdown.Item>
           <Dropdown.Item onClick={handleShow}>Ask</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>

@@ -70,14 +70,16 @@ export default function Read() {
           </div>
           <Button className="btn--white">View Related Questions</Button>
         </div>
-        <Button className="btn--blue btn--lg" onClick={handleShow}>
-          <MdQuestionAnswer />
-          Ask a Question
-        </Button>
-        <Button className="btn--blue btn--lg">
-          <MdRateReview />
-          Write a Review
-        </Button>
+        <div className="controls">
+          <Button className="btn--blue btn--lg" onClick={handleShow}>
+            <MdQuestionAnswer />
+            Ask a Question
+          </Button>
+          <Button className="btn--blue btn--lg">
+            <MdRateReview />
+            Write a Review
+          </Button>
+        </div>
       </div>
     </Container>
   );

@@ -89,15 +89,15 @@ export default function Publish() {
   return (
     <div id="publish">
       <Tab.Container defaultActiveKey="#abstract">
-        <Row className="max-window">
-          <Col className="tab__nav">
+        <div className="max-window">
+          <div className="tab__nav">
             <h2 className="heading">Create a Micropub</h2>
             <ListGroup defaultActiveKey="#abstract">
               <ListGroup.Item action href="#abstract">
                 Abstract
               </ListGroup.Item>
               <ListGroup.Item action href="#resources">
-                Data and Resources
+                <span>Data and </span>Resources
               </ListGroup.Item>
               <ListGroup.Item action href="#body">
                 Body
@@ -109,8 +109,8 @@ export default function Publish() {
                 Preview
               </ListGroup.Item>
             </ListGroup>
-          </Col>
-          <Col className="tab__content">
+          </div>
+          <div className="tab__content">
             <Tab.Content>
               <Tab.Pane eventKey="#abstract">{abstract}</Tab.Pane>
               <Tab.Pane eventKey="#resources">{resources}</Tab.Pane>
@@ -118,8 +118,8 @@ export default function Publish() {
               <Tab.Pane eventKey="#reference">{reference}</Tab.Pane>
               <Tab.Pane eventKey="#preview">{preview}</Tab.Pane>
             </Tab.Content>
-          </Col>
-          <Col className="sidebar">
+          </div>
+          <div className="sidebar">
             <div className="list">
               <div className="label">Authors</div>
               <div className="search">
@@ -167,8 +167,8 @@ export default function Publish() {
                 Discard
               </Button>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Tab.Container>
     </div>
   );
