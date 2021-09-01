@@ -42,6 +42,7 @@ export default function SignIn() {
           />
           <Form.Check type="checkbox" label="Remember me" />
         </Form.Group>
+
         <Button
           className="btn--md"
           type="submit"
@@ -49,6 +50,7 @@ export default function SignIn() {
         >
           Sign In
         </Button>
+        <a href="/signup">New to OASIS? Sign up now</a>
       </Form>
     </div>
   );

@@ -53,6 +53,7 @@ export default function SignUp() {
           className="signup__textbox"
           placeholder="Password"
         />
+
         <Button
           className="btn--md"
           type="submit"
@@ -60,6 +61,7 @@ export default function SignUp() {
         >
           Sign Up
         </Button>
+        <a href="/signin">Already have an account? Sign in here</a>
       </Form>
     </div>
   );

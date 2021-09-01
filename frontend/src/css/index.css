@@ -250,6 +250,10 @@ a, a:link, a:visited, a:hover, a:active {
   align-items: center;
 }
 
+.signin .signup__container, .signup .signup__container {
+  box-shadow: 0px 2px 10px 0px #7c7c7c40;
+}
+
 .signup__header {
   font-weight: 500;
   font-size: 18px;
@@ -506,7 +510,7 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .signin .form-group {
-  height: 90px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1049,6 +1053,10 @@ a, a:link, a:visited, a:hover, a:active {
   color: var(--gray-80);
 }
 
+.signin a, .signup a {
+  font-size: 10px;
+}
+
 @media only screen and (max-width: 767px) {
   .home .headlines {
     margin-right: 0;
@@ -1271,8 +1279,7 @@ a, a:link, a:visited, a:hover, a:active {
   }
 }
 
-@media only screen and (min-device-width: 768px) 
-and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .home .signup__container {
     display: none;
   }
@@ -1339,7 +1346,7 @@ and (max-device-width: 1024px) {
   #publish .sidebar .controls {
     background: none;
   }
-  .modal-content{
+  .modal-content {
     width: 90%;
     margin: auto;
   }
