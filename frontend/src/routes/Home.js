@@ -1,4 +1,4 @@
-import { Button, Form, Container, Row, Card } from "react-bootstrap";
+import { Button, Form, Container, Row } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
@@ -102,11 +102,7 @@ export default function Home() {
 
         <Row className="preview">
           <div className="preview__subtitle">What is a MICROPUB(LICATION)?</div>
-          <Card>
-            <Card.Body>
-              <Card.Text>{text.intro}</Card.Text>
-            </Card.Body>
-          </Card>
+          <div className="definition">{text.intro}</div>
         </Row>
         <Row className="preview">
           <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>

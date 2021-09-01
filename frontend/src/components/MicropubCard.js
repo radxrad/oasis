@@ -1,10 +1,10 @@
 import React from "react";
-import { Row, Col, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function MicropubCard(props) {
   return (
     <Card className="micropub">
-      <div>
+      <div className="content">
         <Card.Img src={props.figure} alt="img" />
         <div>
           <Card.Title>{props.title}</Card.Title>
