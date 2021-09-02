@@ -1,4 +1,5 @@
 import { Button, Form, Container, Row, Card } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import React from "react";
 
 //import { useEffect, useState } from "react";
@@ -6,9 +7,56 @@ import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 import history from "history.js";
 import posts from "posts.json"
+import axios from "axios";
 
 export default function Home(apikey, apiusername) {
   const example = text.micropub;
+export default function Home() {
+  const [micropubs, setMicropubs] = useState([]);
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
+      headers: { "Content-Type": "application/json", Prefer: "" },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        setMicropubs(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
+
+  async function handleSignUp(e) {
+    e.preventDefault();
+
+    const options = {
+      method: "POST",
+      url: "https://stoplight.io/mocks/oasis/oasis/19253909/signup",
+      headers: { "Content-Type": "application/json", Prefer: "" },
+      data: {
+        firstName: "Alice",
+        lastName: "Smith",
+        email: "alice.smith@gmail.com",
+        password: "1234",
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        window.location.replace("/user");
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
 
   // const [ latestposts, setLatestposts ] = useState([])
   //
@@ -70,7 +118,7 @@ export default function Home(apikey, apiusername) {
             <Button
               className="btn--md"
               type="submit"
-              onClick={() => history.push("/user")}
+              onClick={(e) => handleSignUp(e)}
             >
               Sign Up
             </Button>
@@ -79,15 +127,23 @@ export default function Home(apikey, apiusername) {
 
         <Row className="preview">
           <div className="preview__subtitle">What is a MICROPUB(LICATION)?</div>
-          <Card>
-            <Card.Body>
-              <Card.Text>{text.intro}</Card.Text>
-            </Card.Body>
-          </Card>
+          <div className="definition">{text.intro}</div>
         </Row>
         <Row className="preview">
           <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>
           <div className="mp-list">
+            {micropubs
+              ? micropubs.map((item, i) => (
+                  <MicropubCard
+                    figure={item.figure}
+                    authorIds={item.authorNames}
+                    title={item.title}
+                    abstract={item.abstract}
+                    id={item.id}
+                    key={i}
+                  ></MicropubCard>
+                ))
+              : ""}
             <MicropubCard
               img={example.img}
               authorIds={example.authorIds}
