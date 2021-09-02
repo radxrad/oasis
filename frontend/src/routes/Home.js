@@ -1,16 +1,16 @@
-import { Button, Form, Container, Row, Card } from "react-bootstrap";
+import { Button, Form, Container, Row } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 
 
 //import { useEffect, useState } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
-import history from "history.js";
-import posts from "posts.json"
+//import history from "history.js";
+//import posts from "posts.json"
 import axios from "axios";
 
 export default function Home(apikey, apiusername) {
-  const example = text.micropub;
+  //const example = text.micropub;
   const [micropubs, setMicropubs] = useState([]);
   useEffect(() => {
     const options = {
