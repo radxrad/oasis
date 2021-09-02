@@ -1,6 +1,6 @@
 import { Button, Form, Container, Row, Card } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import React from "react";
+
 
 //import { useEffect, useState } from "react";
 import MicropubCard from "components/MicropubCard";
@@ -11,7 +11,6 @@ import axios from "axios";
 
 export default function Home(apikey, apiusername) {
   const example = text.micropub;
-export default function Home() {
   const [micropubs, setMicropubs] = useState([]);
   useEffect(() => {
     const options = {
@@ -144,24 +143,24 @@ export default function Home() {
                   ></MicropubCard>
                 ))
               : ""}
-            <MicropubCard
-              img={example.img}
-              authorIds={example.authorIds}
-              title={example.title}
-              abstract={example.abstract}
-              uid={example.uid}
-          ></MicropubCard>
+          {/*  <MicropubCard*/}
+          {/*    img={example.img}*/}
+          {/*    authorIds={example.authorIds}*/}
+          {/*    title={example.title}*/}
+          {/*    abstract={example.abstract}*/}
+          {/*    uid={example.uid}*/}
+          {/*></MicropubCard>*/}
 
-            {posts.latest_posts.slice(0,3).map(post =>
-                <MicropubCard
-                    img={example.img}
-                    authorIds={post.username}
-                    title={post.topic_html_title}
-                    abstract={post.raw}
-                    uid={post.id}
-                ></MicropubCard>
-            )
-            }
+          {/*  {posts.latest_posts.slice(0,3).map(post =>*/}
+          {/*      <MicropubCard*/}
+          {/*          img={example.img}*/}
+          {/*          authorIds={post.username}*/}
+          {/*          title={post.topic_html_title}*/}
+          {/*          abstract={post.raw}*/}
+          {/*          uid={post.id}*/}
+          {/*      ></MicropubCard>*/}
+          {/*  )*/}
+          {/*  }*/}
 
           </div>
         </Row>
