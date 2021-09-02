@@ -36,7 +36,7 @@ function App() {
           console.error(error);
         });
     }
-  }, []);
+  }, [auth]);
 
   return (
     <Router history={history}>
