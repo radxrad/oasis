@@ -18,7 +18,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 export default function Publish() {
-  const [value, setValue] = useState("");
+  const [abstractValue, setAbstractValue] = useState("");
+  const [bodyValue, setBodyValue] = useState("");
 
   const example = text.micropub;
 
@@ -28,12 +29,12 @@ export default function Publish() {
         type="textarea"
         placeholder="What question would you like to answer?..."
       />
-      <ReactQuill value={value} onChange={setValue} />
+      <ReactQuill value={abstractValue} onChange={setAbstractValue} />
     </div>
   );
 
   const resources = (
-    <div>
+    <div className="resources">
       <Dropzone
         onDrop={(acceptedFiles) => console.log(acceptedFiles)}
         maxSize={10000000}
@@ -57,13 +58,10 @@ export default function Publish() {
       </Dropzone>
     </div>
   );
-  const body = <ReactQuill value={value} onChange={setValue} />;
-
-  const reference = (
-    <ReactQuill
-      placeholder="(Recommend Using Harvard Referencing Style)"
-      onChange={setValue}
-    />
+  const body = (
+    <div>
+      <ReactQuill value={bodyValue} onChange={setBodyValue} />
+    </div>
   );
 
   const preview = (
@@ -100,9 +98,6 @@ export default function Publish() {
               <ListGroup.Item action href="#body">
                 Body
               </ListGroup.Item>
-              <ListGroup.Item action href="#reference">
-                Reference
-              </ListGroup.Item>
               <ListGroup.Item action href="#preview">
                 Preview
               </ListGroup.Item>
@@ -113,7 +108,6 @@ export default function Publish() {
               <Tab.Pane eventKey="#abstract">{abstract}</Tab.Pane>
               <Tab.Pane eventKey="#resources">{resources}</Tab.Pane>
               <Tab.Pane eventKey="#body">{body}</Tab.Pane>
-              <Tab.Pane eventKey="#reference">{reference}</Tab.Pane>
               <Tab.Pane eventKey="#preview">{preview}</Tab.Pane>
             </Tab.Content>
           </div>
