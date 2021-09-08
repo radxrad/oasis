@@ -1,22 +1,37 @@
 import React, { useState } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
 import { MdQuestionAnswer, MdRateReview } from "react-icons/md";
-import { BsCloudDownload, BsStar } from "react-icons/bs";
+import { BsCloudDownload, BsStar, BsStarFill } from "react-icons/bs";
 import MicropubBody from "components/MicropubBody";
 import text from "text.json";
 import AddQuestion from "components/AddQuestion";
+import { FaArrowUp } from "react-icons/fa";
+import { IoFlag, IoFlagOutline } from "react-icons/io5";
 import moment from "moment";
 
 export default function Read() {
   const example = text.micropub;
   const time = moment.unix(example.publishTime).format("MM/DD/YYYY");
+  const [upvoteNum, setUpvoteNum] = useState(0);
+  const [isUpvoted, setIsUpvoted] = useState(false);
+  const [isFlagged, setIsFlagged] = useState(false);
+  const [isStarred, setIsStarred] = useState(false);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleUpvote = () => {
+    if (isUpvoted) setUpvoteNum(upvoteNum - 1);
+    else {
+      setUpvoteNum(upvoteNum + 1);
+    }
+    setIsUpvoted(!isUpvoted);
+  };
+  const handleFlag = () => setIsFlagged(!isFlagged);
+  const handleStar = () => setIsStarred(!isStarred);
   return (
-    <Container className="read">
+    <Container id="read">
       <Modal show={show} onHide={handleClose}>
         <AddQuestion close={handleClose} />
       </Modal>
@@ -61,12 +76,17 @@ export default function Read() {
                 : ""}
             </div>
           </div>
-          <div className="reviews">
-            <div className="label">Reviews:</div>
-            <div className="stars">
-              <BsStar /> <BsStar /> <BsStar /> <BsStar /> <BsStar />(
-              {example.reviewNum})
-            </div>
+          <div className="controls">
+            <Button className={"upvote--" + isUpvoted} onClick={handleUpvote}>
+              <FaArrowUp />
+              {upvoteNum}
+            </Button>
+            <Button className="icon-btn" id="flag-btn" onClick={handleFlag}>
+              {isFlagged ? <IoFlag /> : <IoFlagOutline />}
+            </Button>
+            <Button className="icon-btn" id="star-btn" onClick={handleStar}>
+              {isStarred ? <BsStarFill /> : <BsStar />}
+            </Button>
           </div>
           <Button className="btn--white">View Related Questions</Button>
         </div>
