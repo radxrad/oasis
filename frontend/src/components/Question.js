@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 export default function Question(props) {
   const num = props.ansNum;
-  const asker = props.askerId;
+ // const asker = props.askerId;
   return (
     <div id={props.id} className="question">
       <div className="body">
@@ -16,7 +16,7 @@ export default function Question(props) {
         </div>
       </div>
       <div className="arrow-down"></div>
-      {/* 
+      {/*
       <a href={asker.link} key={asker.id} className="asker">
         <img src={asker.img} className="avatar--sm" alt="avatar" />
         {asker.name}

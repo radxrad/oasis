@@ -1,10 +1,16 @@
 import { Button, Form, Container, Row } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
+
+
+//import { useEffect, useState } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
+//import history from "history.js";
+//import posts from "posts.json"
 import axios from "axios";
 
-export default function Home() {
+export default function Home(apikey, apiusername) {
+  //const example = text.micropub;
   const [micropubs, setMicropubs] = useState([]);
   useEffect(() => {
     const options = {
@@ -50,6 +56,24 @@ export default function Home() {
         console.error(error);
       });
   }
+
+  // const [ latestposts, setLatestposts ] = useState([])
+  //
+  // useEffect(() => {
+  //   fetch('https://discourse.earth2.ucsd.edu/posts.json', {
+  //     method: 'GET',
+  //     headers: {
+  //
+  //       'Api-Key': "",
+  //       'Api-Username': 'system'
+  //     }
+  //   })
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         data.latest_posts.forEach (post => setLatestposts(latestposts => [...latestposts, post]))
+  //
+  //       }).catch(err => console.log(err))
+  // })
 
   return (
     <div className="home light-bg">
@@ -119,6 +143,25 @@ export default function Home() {
                   ></MicropubCard>
                 ))
               : ""}
+          {/*  <MicropubCard*/}
+          {/*    img={example.img}*/}
+          {/*    authorIds={example.authorIds}*/}
+          {/*    title={example.title}*/}
+          {/*    abstract={example.abstract}*/}
+          {/*    uid={example.uid}*/}
+          {/*></MicropubCard>*/}
+
+          {/*  {posts.latest_posts.slice(0,3).map(post =>*/}
+          {/*      <MicropubCard*/}
+          {/*          img={example.img}*/}
+          {/*          authorIds={post.username}*/}
+          {/*          title={post.topic_html_title}*/}
+          {/*          abstract={post.raw}*/}
+          {/*          uid={post.id}*/}
+          {/*      ></MicropubCard>*/}
+          {/*  )*/}
+          {/*  }*/}
+
           </div>
         </Row>
       </Container>
