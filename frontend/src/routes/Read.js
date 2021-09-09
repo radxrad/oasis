@@ -8,9 +8,11 @@ import AddQuestion from "components/AddQuestion";
 import { FaArrowUp } from "react-icons/fa";
 import { IoFlag, IoFlagOutline } from "react-icons/io5";
 import moment from "moment";
+import a_question from "discourse_json/post_20.json"
 
 export default function Read() {
   const example = text.micropub;
+  const post = a_question
   const time = moment.unix(example.publishTime).format("MM/DD/YYYY");
   const [upvoteNum, setUpvoteNum] = useState(0);
   const [isUpvoted, setIsUpvoted] = useState(false);
@@ -35,10 +37,15 @@ export default function Read() {
       <Modal show={show} onHide={handleClose}>
         <AddQuestion close={handleClose} />
       </Modal>
+      {/*<MicropubBody*/}
+      {/*  title={example.title}*/}
+      {/*  img={example.img}*/}
+      {/*  body={example.body}*/}
+      {/*/>*/}
       <MicropubBody
-        title={example.title}
-        img={example.img}
-        body={example.body}
+          title={post.title}
+          img={post.avatar_template}
+          body={post.raw}
       />
       <div className="sidebar">
         <div className="info">
