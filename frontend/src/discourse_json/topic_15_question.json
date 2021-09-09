@@ -1,0 +1,539 @@
+{
+  "post_stream": {
+    "posts": [
+      {
+        "id": 18,
+        "name": null,
+        "username": "valentinedwv",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/v/67e7ee/{size}.png",
+        "created_at": "2021-07-15T00:22:40.225Z",
+        "cooked": "\u003ch1\u003e\n\u003ca name=\"h1-heading-1\" class=\"anchor\" href=\"#h1-heading-1\"\u003e\u003c/a\u003eh1. heading\u003c/h1\u003e\n\u003ch1\u003e\n\u003ca name=\"h2-heading-2\" class=\"anchor\" href=\"#h2-heading-2\"\u003e\u003c/a\u003eh2. heading\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003elist\u003c/li\u003e\n\u003cli\u003elist 2\u003c/li\u003e\n\u003c/ul\u003e",
+        "post_number": 1,
+        "post_type": 1,
+        "updated_at": "2021-07-15T00:23:14.442Z",
+        "reply_count": 0,
+        "reply_to_post_number": null,
+        "quote_count": 0,
+        "incoming_link_count": 0,
+        "reads": 3,
+        "readers_count": 2,
+        "score": 0.6,
+        "yours": true,
+        "topic_id": 15,
+        "topic_slug": "example-2-question",
+        "display_username": null,
+        "primary_group_name": null,
+        "flair_name": null,
+        "flair_url": null,
+        "flair_bg_color": null,
+        "flair_color": null,
+        "version": 1,
+        "can_edit": true,
+        "can_delete": false,
+        "can_recover": false,
+        "can_wiki": true,
+        "read": true,
+        "user_title": null,
+        "bookmarked": false,
+        "actions_summary": [
+          {
+            "id": 3,
+            "can_act": true
+          },
+          {
+            "id": 4,
+            "can_act": true
+          },
+          {
+            "id": 8,
+            "can_act": true
+          },
+          {
+            "id": 7,
+            "can_act": true
+          }
+        ],
+        "moderator": false,
+        "admin": true,
+        "staff": true,
+        "user_id": 1,
+        "hidden": false,
+        "trust_level": 1,
+        "deleted_at": null,
+        "user_deleted": false,
+        "edit_reason": null,
+        "can_view_edit_history": true,
+        "wiki": false,
+        "notice": {
+          "type": "custom",
+          "raw": "test staff notice",
+          "cooked": "\u003cp\u003etest staff notice\u003c/p\u003e"
+        },
+        "reviewable_id": 0,
+        "reviewable_score_count": 0,
+        "reviewable_score_pending_count": 0,
+        "category_expert_approved_group": null,
+        "needs_category_expert_approval": null,
+        "can_manage_category_expert_posts": true,
+        "qa_vote_count": 0,
+        "qa_voted": [],
+        "qa_enabled": false,
+        "ratings": [],
+        "can_accept_answer": false,
+        "can_unaccept_answer": false,
+        "accepted_answer": false
+      },
+      {
+        "id": 19,
+        "name": "Eliah Aronoff Spencer ",
+        "username": "easpencer",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/e/71c47a/{size}.png",
+        "created_at": "2021-07-15T02:21:46.409Z",
+        "cooked": "\u003cp\u003eWhat is the risk of getting infected with a variant in vaccinated people?\u003c/p\u003e",
+        "post_number": 2,
+        "post_type": 1,
+        "updated_at": "2021-07-15T02:21:46.409Z",
+        "reply_count": 1,
+        "reply_to_post_number": null,
+        "quote_count": 0,
+        "incoming_link_count": 0,
+        "reads": 3,
+        "readers_count": 2,
+        "score": 50.6,
+        "yours": false,
+        "topic_id": 15,
+        "topic_slug": "example-2-question",
+        "display_username": "Eliah Aronoff Spencer ",
+        "primary_group_name": null,
+        "flair_name": null,
+        "flair_url": null,
+        "flair_bg_color": null,
+        "flair_color": null,
+        "version": 1,
+        "can_edit": true,
+        "can_delete": true,
+        "can_recover": false,
+        "can_wiki": true,
+        "read": true,
+        "user_title": null,
+        "bookmarked": true,
+        "bookmark_reminder_at": null,
+        "bookmark_id": 1,
+        "bookmark_reminder_type": "",
+        "bookmark_name": "",
+        "bookmark_auto_delete_preference": 0,
+        "actions_summary": [
+          {
+            "id": 2,
+            "count": 1,
+            "acted": true
+          },
+          {
+            "id": 3,
+            "can_act": true
+          },
+          {
+            "id": 4,
+            "can_act": true
+          },
+          {
+            "id": 8,
+            "can_act": true
+          },
+          {
+            "id": 6,
+            "can_act": true
+          },
+          {
+            "id": 7,
+            "can_act": true
+          }
+        ],
+        "moderator": true,
+        "admin": false,
+        "staff": true,
+        "user_id": 2,
+        "hidden": false,
+        "trust_level": 4,
+        "deleted_at": null,
+        "user_deleted": false,
+        "edit_reason": null,
+        "can_view_edit_history": true,
+        "wiki": false,
+        "notice": {
+          "type": "new_user"
+        },
+        "reviewable_id": 0,
+        "reviewable_score_count": 0,
+        "reviewable_score_pending_count": 0,
+        "category_expert_approved_group": null,
+        "needs_category_expert_approval": null,
+        "can_manage_category_expert_posts": true,
+        "qa_vote_count": 0,
+        "qa_voted": [],
+        "qa_enabled": false,
+        "ratings": [],
+        "can_accept_answer": false,
+        "can_unaccept_answer": false,
+        "accepted_answer": false
+      },
+      {
+        "id": 20,
+        "name": "Eliah Aronoff Spencer ",
+        "username": "easpencer",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/e/71c47a/{size}.png",
+        "created_at": "2021-07-15T02:22:29.372Z",
+        "cooked": "\u003cp\u003eHow well do diagnostic tests work with with new variants?\u003c/p\u003e",
+        "post_number": 3,
+        "post_type": 1,
+        "updated_at": "2021-07-15T02:22:29.372Z",
+        "reply_count": 0,
+        "reply_to_post_number": 2,
+        "quote_count": 0,
+        "incoming_link_count": 0,
+        "reads": 3,
+        "readers_count": 2,
+        "score": 45.6,
+        "yours": false,
+        "topic_id": 15,
+        "topic_slug": "example-2-question",
+        "display_username": "Eliah Aronoff Spencer ",
+        "primary_group_name": null,
+        "flair_name": null,
+        "flair_url": null,
+        "flair_bg_color": null,
+        "flair_color": null,
+        "version": 1,
+        "can_edit": true,
+        "can_delete": true,
+        "can_recover": false,
+        "can_wiki": true,
+        "read": true,
+        "user_title": null,
+        "reply_to_user": {
+          "username": "easpencer",
+          "avatar_template": "/letter_avatar_proxy/v4/letter/e/71c47a/{size}.png"
+        },
+        "bookmarked": false,
+        "actions_summary": [
+          {
+            "id": 2,
+            "count": 1,
+            "acted": true
+          },
+          {
+            "id": 3,
+            "can_act": true
+          },
+          {
+            "id": 4,
+            "can_act": true
+          },
+          {
+            "id": 8,
+            "can_act": true
+          },
+          {
+            "id": 6,
+            "can_act": true
+          },
+          {
+            "id": 7,
+            "can_act": true
+          }
+        ],
+        "moderator": true,
+        "admin": false,
+        "staff": true,
+        "user_id": 2,
+        "hidden": false,
+        "trust_level": 4,
+        "deleted_at": null,
+        "user_deleted": false,
+        "edit_reason": null,
+        "can_view_edit_history": true,
+        "wiki": false,
+        "reviewable_id": 0,
+        "reviewable_score_count": 0,
+        "reviewable_score_pending_count": 0,
+        "category_expert_approved_group": null,
+        "needs_category_expert_approval": null,
+        "can_manage_category_expert_posts": true,
+        "qa_vote_count": 0,
+        "qa_voted": [],
+        "qa_enabled": false,
+        "ratings": [],
+        "can_accept_answer": false,
+        "can_unaccept_answer": false,
+        "accepted_answer": false
+      }
+    ],
+    "stream": [
+      18,
+      19,
+      20
+    ]
+  },
+  "timeline_lookup": [
+    [
+      1,
+      56
+    ]
+  ],
+  "suggested_topics": [
+    {
+      "id": 7,
+      "title": "Welcome to Discourse",
+      "fancy_title": "Welcome to Discourse",
+      "slug": "welcome-to-discourse",
+      "posts_count": 1,
+      "reply_count": 0,
+      "highest_post_number": 1,
+      "image_url": null,
+      "created_at": "2021-07-14T21:02:11.702Z",
+      "last_posted_at": "2021-07-14T21:02:11.774Z",
+      "bumped": true,
+      "bumped_at": "2021-07-14T21:02:11.774Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": true,
+      "unpinned": null,
+      "excerpt": "The first paragraph of this pinned topic will be visible as a welcome message to all new visitors on your homepage. It’s important! \nEdit this into a brief description of your community: \n\nWho is it f\u0026hellip;",
+      "visible": true,
+      "closed": false,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "thumbnails": null,
+      "tags": [],
+      "like_count": 0,
+      "views": 1,
+      "category_id": 1,
+      "featured_link": null,
+      "has_accepted_answer": false,
+      "topic_post_id": 10,
+      "topic_post_liked": false,
+      "topic_post_can_like": true,
+      "topic_post_can_unlike": false,
+      "topic_post_bookmarked": false,
+      "topic_post_is_current_users": false,
+      "topic_post_number": 1,
+      "posters": [
+        {
+          "extras": "latest single",
+          "description": "Original Poster, Most Recent Poster",
+          "user": {
+            "id": -1,
+            "username": "system",
+            "name": "system",
+            "avatar_template": "/images/discourse-logo-sketch-small.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Example New Question",
+      "fancy_title": "Example New Question",
+      "slug": "example-new-question",
+      "posts_count": 1,
+      "reply_count": 0,
+      "highest_post_number": 1,
+      "image_url": null,
+      "created_at": "2021-07-15T00:21:00.306Z",
+      "last_posted_at": "2021-07-15T00:21:00.434Z",
+      "bumped": true,
+      "bumped_at": "2021-07-15T00:21:00.434Z",
+      "archetype": "regular",
+      "unseen": false,
+      "last_read_post_number": 1,
+      "unread": 0,
+      "new_posts": 0,
+      "unread_posts": 0,
+      "pinned": false,
+      "unpinned": null,
+      "excerpt": "A bold topic with a link",
+      "visible": true,
+      "closed": false,
+      "archived": false,
+      "notification_level": 3,
+      "bookmarked": false,
+      "liked": false,
+      "thumbnails": null,
+      "tags": [
+        "covid"
+      ],
+      "like_count": 0,
+      "views": 5,
+      "category_id": 1,
+      "featured_link": null,
+      "has_accepted_answer": false,
+      "topic_post_id": 17,
+      "topic_post_liked": false,
+      "topic_post_can_like": false,
+      "topic_post_can_unlike": false,
+      "topic_post_bookmarked": false,
+      "topic_post_is_current_users": true,
+      "topic_post_number": 1,
+      "posters": [
+        {
+          "extras": "latest single",
+          "description": "Original Poster, Most Recent Poster",
+          "user": {
+            "id": 1,
+            "username": "valentinedwv",
+            "name": null,
+            "avatar_template": "/letter_avatar_proxy/v4/letter/v/67e7ee/{size}.png"
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [],
+  "id": 15,
+  "title": "Example 2 question",
+  "fancy_title": "Example 2 question",
+  "posts_count": 3,
+  "created_at": "2021-07-15T00:22:40.119Z",
+  "views": 8,
+  "reply_count": 1,
+  "like_count": 2,
+  "last_posted_at": "2021-07-15T02:22:29.372Z",
+  "visible": true,
+  "closed": false,
+  "archived": false,
+  "has_summary": false,
+  "archetype": "regular",
+  "slug": "example-2-question",
+  "category_id": 1,
+  "word_count": 30,
+  "deleted_at": null,
+  "user_id": 1,
+  "featured_link": null,
+  "pinned_globally": false,
+  "pinned_at": null,
+  "pinned_until": null,
+  "image_url": null,
+  "slow_mode_seconds": 0,
+  "draft": null,
+  "draft_key": "topic_15",
+  "draft_sequence": 4,
+  "posted": true,
+  "unpinned": null,
+  "pinned": false,
+  "current_post_number": 1,
+  "highest_post_number": 3,
+  "last_read_post_number": 3,
+  "last_read_post_id": 20,
+  "deleted_by": null,
+  "has_deleted": false,
+  "actions_summary": [
+    {
+      "id": 4,
+      "count": 0,
+      "hidden": false,
+      "can_act": true
+    },
+    {
+      "id": 8,
+      "count": 0,
+      "hidden": false,
+      "can_act": true
+    },
+    {
+      "id": 7,
+      "count": 0,
+      "hidden": false,
+      "can_act": true
+    }
+  ],
+  "chunk_size": 20,
+  "bookmarked": true,
+  "bookmarked_posts": [
+    {
+      "post_id": 19,
+      "reminder_at": null
+    }
+  ],
+  "topic_timer": null,
+  "message_bus_last_id": 0,
+  "participant_count": 2,
+  "queued_posts_count": 0,
+  "show_read_indicator": false,
+  "thumbnails": null,
+  "slow_mode_enabled_until": null,
+  "is_category_expert_question": null,
+  "qa_enabled": false,
+  "qa_votes": [],
+  "qa_can_vote": true,
+  "first_answer_id": 19,
+  "ratings": [],
+  "show_ratings": false,
+  "user_chosen_thumbnail_url": null,
+  "details": {
+    "can_edit": true,
+    "notification_level": 3,
+    "notifications_reason_id": 1,
+    "can_move_posts": true,
+    "can_delete": true,
+    "can_remove_allowed_users": true,
+    "can_invite_to": true,
+    "can_invite_via_email": true,
+    "can_create_post": true,
+    "can_reply_as_new_topic": true,
+    "can_flag_topic": true,
+    "can_convert_topic": true,
+    "can_review_topic": true,
+    "can_close_topic": true,
+    "can_archive_topic": true,
+    "can_split_merge_topic": true,
+    "can_edit_staff_notes": true,
+    "can_toggle_topic_visibility": true,
+    "can_pin_unpin_topic": true,
+    "can_moderate_category": true,
+    "can_remove_self_id": 1,
+    "participants": [
+      {
+        "id": 2,
+        "username": "easpencer",
+        "name": "Eliah Aronoff Spencer ",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/e/71c47a/{size}.png",
+        "post_count": 2,
+        "primary_group_name": null,
+        "flair_name": null,
+        "flair_url": null,
+        "flair_color": null,
+        "flair_bg_color": null,
+        "moderator": true,
+        "trust_level": 4
+      },
+      {
+        "id": 1,
+        "username": "valentinedwv",
+        "name": null,
+        "avatar_template": "/letter_avatar_proxy/v4/letter/v/67e7ee/{size}.png",
+        "post_count": 1,
+        "primary_group_name": null,
+        "flair_name": null,
+        "flair_url": null,
+        "flair_color": null,
+        "flair_bg_color": null,
+        "admin": true,
+        "trust_level": 1
+      }
+    ],
+    "created_by": {
+      "id": 1,
+      "username": "valentinedwv",
+      "name": null,
+      "avatar_template": "/letter_avatar_proxy/v4/letter/v/67e7ee/{size}.png"
+    },
+    "last_poster": {
+      "id": 2,
+      "username": "easpencer",
+      "name": "Eliah Aronoff Spencer ",
+      "avatar_template": "/letter_avatar_proxy/v4/letter/e/71c47a/{size}.png"
+    }
+  },
+  "pending_posts": []
+}
