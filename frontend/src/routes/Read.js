@@ -1,107 +1,52 @@
 import React, { useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Container, Button, Modal } from "react-bootstrap";
 import { MdQuestionAnswer, MdRateReview } from "react-icons/md";
 import { BsCloudDownload, BsStar, BsStarFill } from "react-icons/bs";
-import { GoArrowDown, GoArrowUp } from "react-icons/go";
 import MicropubBody from "components/MicropubBody";
 import text from "text.json";
 import AddQuestion from "components/AddQuestion";
+import { FaArrowUp } from "react-icons/fa";
+import { IoFlag, IoFlagOutline } from "react-icons/io5";
 import moment from "moment";
-import a_question from "discourse_json/post_20.json";
-
-import VisibilitySelector from "components/VisibilitySelector";
-import StarRating from "../components/StarRating";
+import a_question from "discourse_json/post_20.json"
 
 export default function Read() {
   const example = text.micropub;
-  const post = a_question;
+  const post = a_question
   const time = moment.unix(example.publishTime).format("MM/DD/YYYY");
-  const [voteType, setVoteType] = useState(null);
-  const [voteNum, setVoteNum] = useState(0);
+  const [upvoteNum, setUpvoteNum] = useState(0);
+  const [isUpvoted, setIsUpvoted] = useState(false);
+  const [isFlagged, setIsFlagged] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
-  const [reviewRating, setReviewRating] = useState(0);
-  const [reviewRatingHover, setReviewRatingHover] = useState(0);
 
-  const [visibility, setVisibility] = useState(null);
-  const [showQuestion, setShowQuestion] = useState(false);
-  const [reviews, setReviews] = useState([
-    { user: "Aa", text: "testing", rating: 3 },
-  ]);
-  const handleStar = () => setIsStarred(!isStarred);
-  const handleSelect = (e) => setVisibility(e);
+  const [show, setShow] = useState(false);
 
-  const handleVoteClick = (type) => {
-    if (voteType === null) {
-      setVoteNum(type === true ? voteNum + 1 : voteNum - 1);
-      setVoteType(type);
-    } else if (type === voteType) {
-      setVoteType(null);
-      setVoteNum(type === true ? voteNum - 1 : voteNum + 1);
-    } else {
-      setVoteType(type);
-      setVoteNum(type === true ? voteNum + 2 : voteNum - 2);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleUpvote = () => {
+    if (isUpvoted) setUpvoteNum(upvoteNum - 1);
+    else {
+      setUpvoteNum(upvoteNum + 1);
     }
+    setIsUpvoted(!isUpvoted);
   };
-
-  const writeReview = (
-    <Form className="write-review">
-      <Form.Group style={{ flex: "1 0" }}>
-        <Form.Control
-          as="textarea"
-          placeholder="Write a review..."
-          className="review"
-        />
-      </Form.Group>
-      <Form.Group className="controls">
-        <div className="selectors">
-          <StarRating
-            rating={reviewRating}
-            setRating={setReviewRating}
-            hover={reviewRatingHover}
-            setHover={setReviewRatingHover}
-            readonly={false}
-          />
-          <VisibilitySelector
-            visibility={visibility}
-            handleSelect={handleSelect}
-          />
-        </div>
-
-        <Button className="btn--md">
-          <MdRateReview />
-          Post Review
-        </Button>
-      </Form.Group>
-    </Form>
-  );
-
+  const handleFlag = () => setIsFlagged(!isFlagged);
+  const handleStar = () => setIsStarred(!isStarred);
   return (
-    <div id="read" className="max-window">
-      <Modal show={showQuestion} onHide={() => setShowQuestion(false)}>
-        <AddQuestion close={() => setShowQuestion(false)} />
+    <Container id="read">
+      <Modal show={show} onHide={handleClose}>
+        <AddQuestion close={handleClose} />
       </Modal>
-      <div>
-        <MicropubBody
-          title={post.topic_slug}
+      {/*<MicropubBody*/}
+      {/*  title={example.title}*/}
+      {/*  img={example.img}*/}
+      {/*  body={example.body}*/}
+      {/*/>*/}
+      <MicropubBody
+          title={post.title}
           img={post.avatar_template}
           body={post.raw}
-        />
-        {writeReview}
-        <div className="review__wrapper">
-          {reviews
-            ? reviews.map((item, i) => (
-                <div id={i} key={i} className="review__item">
-                  <div className="header">
-                    {item.user}{" "}
-                    <StarRating readonly={true} rating={item.rating} />{" "}
-                  </div>
-                  {item.text}
-                </div>
-              ))
-            : ""}
-        </div>
-      </div>
-
+      />
       <div className="sidebar">
         <div className="info">
           <div className="publish-time">
@@ -138,48 +83,31 @@ export default function Read() {
                 : ""}
             </div>
           </div>
-          <Button className="btn--white view-related-btn">
-            View Related Questions
-          </Button>
-        </div>
-        <div className="controls">
-          <div className="icon-group">
-            <div id="vote-btn" className={"vote--" + voteType}>
-              <GoArrowUp
-                id="upvote-btn"
-                onClick={() => handleVoteClick(true)}
-              />
-              {voteNum}
-              <GoArrowDown
-                id="downvote-btn"
-                onClick={() => handleVoteClick(false)}
-              />
-            </div>
-
+          <div className="controls">
+            <Button className={"upvote--" + isUpvoted} onClick={handleUpvote}>
+              <FaArrowUp />
+              {upvoteNum}
+            </Button>
+            <Button className="icon-btn" id="flag-btn" onClick={handleFlag}>
+              {isFlagged ? <IoFlag /> : <IoFlagOutline />}
+            </Button>
             <Button className="icon-btn" id="star-btn" onClick={handleStar}>
-              {isStarred ? (
-                <BsStarFill className="star-btn--filled" />
-              ) : (
-                <BsStar />
-              )}
+              {isStarred ? <BsStarFill /> : <BsStar />}
             </Button>
           </div>
-          <Button
-            className="btn--blue btn--md"
-            onClick={() => setShowQuestion(true)}
-          >
+          <Button className="btn--white">View Related Questions</Button>
+        </div>
+        <div className="controls">
+          <Button className="btn--blue btn--lg" onClick={handleShow}>
             <MdQuestionAnswer />
             Ask a Question
           </Button>
-          <Button
-            className="btn--blue btn--md"
-            onClick={() => console.log("aa")}
-          >
+          <Button className="btn--blue btn--lg">
             <MdRateReview />
             Write a Review
           </Button>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
