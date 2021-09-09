@@ -157,15 +157,17 @@ export default function Home(apikey, apiusername) {
             {/*    uid={example.uid}*/}
             {/*></MicropubCard>*/}
 
-            {/* {posts.latest_posts.slice(0, 3).map((post) => (
-              <MicropubCard
-                img={post.img}
-                authorIds={post.username}
-                title={post.topic_html_title}
-                abstract={post.raw}
-                uid={post.id}
-              ></MicropubCard>
-            ))} */}
+            {posts.latest_posts.slice(0,3).map(post =>
+                <MicropubCard
+                    img={example.img}
+                    authorIds={post.username}
+                    title={post.topic_html_title}
+                    abstract={post.raw}
+                    uid={post.id}
+                ></MicropubCard>
+            )
+            }
+
           </div>
         </Row>
       </Container>
