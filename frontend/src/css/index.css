@@ -797,12 +797,16 @@ a, a:link, a:visited, a:hover, a:active {
   justify-content: space-evenly;
 }
 
-#publish .preview .label {
+#publish .preview .label, #publish .body-tab .label {
   font-size: 18px;
   margin: 0 auto 2rem auto;
   font-weight: 600;
   color: #323232;
   text-align: center;
+}
+
+#publish .body-tab .quill {
+  margin-bottom: 2rem;
 }
 
 #publish .preview .card {
@@ -1107,6 +1111,27 @@ a, a:link, a:visited, a:hover, a:active {
   background: var(--blue-100);
   border: none;
   color: white;
+}
+
+#publish .reference {
+  text-align: center;
+  width: 90%;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+#publish .reference .list-group-item {
+  border: none;
+  text-align: left;
+  font-size: 12px;
+}
+
+#publish .reference input {
+  width: 50%;
+  border: none;
+  border-bottom: 1px solid var(--gray-80);
+  margin-right: 1rem;
 }
 
 @media only screen and (max-width: 767px) {
