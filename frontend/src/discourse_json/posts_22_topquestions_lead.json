@@ -1,0 +1,81 @@
+{
+  "id": 22,
+  "name": "system",
+  "username": "system",
+  "avatar_template": "/images/discourse-logo-sketch-small.png",
+  "created_at": "2021-07-15T04:26:33.443Z",
+  "cooked": "\u003cp\u003eYou’ve been granted admin status by a fellow staff member.\u003c/p\u003e\n\u003cp\u003eAs a admin, you now have access to the \u003ca href=\"https://discourse.earth2.ucsd.edu/admin\" target=\"_blank\" rel=\"noopener\"\u003eadmin interface\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eWith great power comes great responsibility. If you’re new to moderating, please refer to the \u003ca href=\"https://meta.discourse.org/t/discourse-moderation-guide/63116\"\u003eModeration Guide\u003c/a\u003e.\u003c/p\u003e",
+  "post_number": 1,
+  "post_type": 1,
+  "updated_at": "2021-07-15T04:26:33.443Z",
+  "reply_count": 0,
+  "reply_to_post_number": null,
+  "quote_count": 0,
+  "incoming_link_count": 0,
+  "reads": 1,
+  "readers_count": 0,
+  "score": 0.2,
+  "yours": false,
+  "topic_id": 17,
+  "topic_slug": "congratulations-you-ve-been-granted-admin-status",
+  "display_username": "system",
+  "primary_group_name": null,
+  "flair_name": null,
+  "flair_url": null,
+  "flair_bg_color": null,
+  "flair_color": null,
+  "version": 1,
+  "can_edit": true,
+  "can_delete": false,
+  "can_recover": false,
+  "can_wiki": true,
+  "user_title": null,
+  "bookmarked": false,
+  "raw": "You’ve been granted admin status by a fellow staff member.\n\nAs a admin, you now have access to the \u003ca href='https://discourse.earth2.ucsd.edu/admin' target='_blank'\u003eadmin interface\u003c/a\u003e.\n\nWith great power comes great responsibility. If you’re new to moderating, please refer to the [Moderation Guide](https://meta.discourse.org/t/discourse-moderation-guide/63116).",
+  "actions_summary": [
+    {
+      "id": 2,
+      "can_act": true
+    },
+    {
+      "id": 3,
+      "can_act": true
+    },
+    {
+      "id": 4,
+      "can_act": true
+    },
+    {
+      "id": 8,
+      "can_act": true
+    },
+    {
+      "id": 7,
+      "can_act": true
+    }
+  ],
+  "moderator": true,
+  "admin": true,
+  "staff": true,
+  "user_id": -1,
+  "hidden": false,
+  "trust_level": 4,
+  "deleted_at": null,
+  "user_deleted": false,
+  "edit_reason": null,
+  "can_view_edit_history": true,
+  "wiki": false,
+  "reviewable_id": null,
+  "reviewable_score_count": 0,
+  "reviewable_score_pending_count": 0,
+  "category_expert_approved_group": null,
+  "needs_category_expert_approval": null,
+  "can_manage_category_expert_posts": true,
+  "qa_vote_count": 0,
+  "qa_voted": [],
+  "qa_enabled": false,
+  "ratings": [],
+  "can_accept_answer": false,
+  "can_unaccept_answer": false,
+  "accepted_answer": false
+}

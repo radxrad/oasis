@@ -1,0 +1,14 @@
+{
+  "tags": [
+    {
+      "id": "covid",
+      "text": "covid",
+      "count": 1,
+      "pm_count": 0,
+      "target_tag": null
+    }
+  ],
+  "extras": {
+    "categories": []
+  }
+}

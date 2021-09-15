@@ -1,0 +1,81 @@
+{
+  "id": 14,
+  "name": "discobot",
+  "username": "discobot",
+  "avatar_template": "/user_avatar/discourse.earth2.ucsd.edu/discobot/{size}/2_2.png",
+  "created_at": "2021-07-14T23:26:58.412Z",
+  "cooked": "\u003cp\u003eThanks for joining Oasis2, and welcome!\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003eI’m only a robot, but \u003ca href=\"/about\"\u003eour friendly staff\u003c/a\u003e are also here to help if you need to reach a person.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eFor safety reasons, we temporarily limit what new users can do. You’ll gain \u003ca href=\"https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/\"\u003enew abilities\u003c/a\u003e (and \u003ca href=\"/badges\"\u003ebadges\u003c/a\u003e) as we get to know you.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eWe believe in \u003ca href=\"/guidelines\"\u003ecivilized community behavior\u003c/a\u003e at all times.\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eIf you’d like to learn more, select \u003cimg src=\"https://discourse.earth2.ucsd.edu/plugins/discourse-narrative-bot/images/font-awesome-ellipsis.png\" width=\"16\" height=\"16\"\u003e below and \u003cimg src=\"https://discourse.earth2.ucsd.edu/plugins/discourse-narrative-bot/images/font-awesome-bookmark.png\" width=\"16\" height=\"16\"\u003e \u003cstrong\u003ebookmark this personal message\u003c/strong\u003e. If you do, there may be a \u003cimg src=\"https://discourse.earth2.ucsd.edu/images/emoji/twitter/gift.png?v=9\" title=\":gift:\" class=\"emoji\" alt=\":gift:\"\u003e in your future!\u003c/p\u003e",
+  "post_number": 1,
+  "post_type": 1,
+  "updated_at": "2021-07-14T23:26:58.412Z",
+  "reply_count": 0,
+  "reply_to_post_number": null,
+  "quote_count": 0,
+  "incoming_link_count": 0,
+  "reads": 1,
+  "readers_count": 0,
+  "score": 0.2,
+  "yours": false,
+  "topic_id": 11,
+  "topic_slug": "greetings",
+  "display_username": "discobot",
+  "primary_group_name": null,
+  "flair_name": null,
+  "flair_url": null,
+  "flair_bg_color": null,
+  "flair_color": null,
+  "version": 1,
+  "can_edit": true,
+  "can_delete": false,
+  "can_recover": false,
+  "can_wiki": true,
+  "user_title": null,
+  "bookmarked": false,
+  "raw": "Thanks for joining Oasis2, and welcome!\n\n- I’m only a robot, but [our friendly staff](/about) are also here to help if you need to reach a person.\n\n- For safety reasons, we temporarily limit what new users can do. You’ll gain [new abilities](https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/) (and [badges](/badges)) as we get to know you.\n\n- We believe in [civilized community behavior](/guidelines) at all times.\n\nIf you’d like to learn more, select \u003cimg src=\"/plugins/discourse-narrative-bot/images/font-awesome-ellipsis.png\" width=\"16\" height=\"16\"\u003e below and \u003cimg src=\"/plugins/discourse-narrative-bot/images/font-awesome-bookmark.png\" width=\"16\" height=\"16\"\u003e **bookmark this personal message**. If you do, there may be a :gift: in your future!",
+  "actions_summary": [
+    {
+      "id": 2,
+      "can_act": true
+    },
+    {
+      "id": 3,
+      "can_act": true
+    },
+    {
+      "id": 4,
+      "can_act": true
+    },
+    {
+      "id": 8,
+      "can_act": true
+    },
+    {
+      "id": 7,
+      "can_act": true
+    }
+  ],
+  "moderator": false,
+  "admin": true,
+  "staff": true,
+  "user_id": -2,
+  "hidden": false,
+  "trust_level": 4,
+  "deleted_at": null,
+  "user_deleted": false,
+  "edit_reason": null,
+  "can_view_edit_history": true,
+  "wiki": false,
+  "reviewable_id": null,
+  "reviewable_score_count": 0,
+  "reviewable_score_pending_count": 0,
+  "category_expert_approved_group": null,
+  "needs_category_expert_approval": null,
+  "can_manage_category_expert_posts": true,
+  "qa_vote_count": 0,
+  "qa_voted": [],
+  "qa_enabled": false,
+  "ratings": [],
+  "can_accept_answer": false,
+  "can_unaccept_answer": false,
+  "accepted_answer": false
+}

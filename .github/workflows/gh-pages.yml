@@ -2,7 +2,7 @@ name: Deploy to gh-page
 on:
   push:
     branches:
-      - stella_ui_dev
+      - ghdeploy
 # https://github.com/marketplace/actions/publish-docker
 # https://github.com/docker/build-push-action
 defaults:
@@ -14,19 +14,19 @@ jobs:
     name: deploy gh-pages using npm
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: install
-      run: npm install
-    - name: build deploy
-      run: npm run deploy
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Packages
+        run: npm install
+      - name: Build page
+        run: npm run build
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./build
+          publish_dir: ./frontend/build
     env:
       user_name: 'valentinedwv'
       user_email: 'github-actions[bot]@users.noreply.github.com'

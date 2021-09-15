@@ -1,0 +1,112 @@
+{
+  "directory_items": [
+    {
+      "id": 2,
+      "likes_received": 2,
+      "likes_given": 0,
+      "topic_count": 0,
+      "post_count": 2,
+      "topics_entered": 1,
+      "posts_read": 1,
+      "days_visited": 3,
+      "user": {
+        "id": 2,
+        "username": "easpencer",
+        "name": "Eliah Aronoff Spencer ",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/e/71c47a/{size}.png",
+        "title": null,
+        "flair_name": null,
+        "moderator": true,
+        "trust_level": 4
+      }
+    },
+    {
+      "id": 4,
+      "likes_received": 0,
+      "likes_given": 0,
+      "topic_count": 0,
+      "post_count": 0,
+      "topics_entered": 0,
+      "posts_read": 0,
+      "days_visited": 1,
+      "user": {
+        "id": 4,
+        "username": "Shengzhi_Wang",
+        "name": "Shengzhi Wang",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/s/50afbb/{size}.png",
+        "title": null,
+        "flair_name": null,
+        "admin": true,
+        "moderator": true,
+        "trust_level": 1
+      }
+    },
+    {
+      "id": 3,
+      "likes_received": 0,
+      "likes_given": 0,
+      "topic_count": 0,
+      "post_count": 0,
+      "topics_entered": 1,
+      "posts_read": 0,
+      "days_visited": 9,
+      "user": {
+        "id": 3,
+        "username": "somsinha",
+        "name": "Somaditya Sinha",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/s/848f3c/{size}.png",
+        "title": null,
+        "flair_name": null,
+        "admin": true,
+        "moderator": true,
+        "trust_level": 1
+      }
+    },
+    {
+      "id": 5,
+      "likes_received": 0,
+      "likes_given": 0,
+      "topic_count": 0,
+      "post_count": 0,
+      "topics_entered": 6,
+      "posts_read": 9,
+      "days_visited": 7,
+      "user": {
+        "id": 5,
+        "username": "qil134",
+        "name": "Qianzi Li",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/q/85e7bf/{size}.png",
+        "title": null,
+        "flair_name": null,
+        "admin": true,
+        "moderator": true,
+        "trust_level": 1
+      }
+    },
+    {
+      "id": 1,
+      "likes_received": 0,
+      "likes_given": 2,
+      "topic_count": 2,
+      "post_count": 0,
+      "topics_entered": 5,
+      "posts_read": 5,
+      "days_visited": 11,
+      "user": {
+        "id": 1,
+        "username": "valentinedwv",
+        "name": null,
+        "avatar_template": "/letter_avatar_proxy/v4/letter/v/67e7ee/{size}.png",
+        "title": null,
+        "flair_name": null,
+        "admin": true,
+        "trust_level": 1
+      }
+    }
+  ],
+  "meta": {
+    "last_updated_at": "2021-09-08T00:44:37.000Z",
+    "total_rows_directory_items": 5,
+    "load_more_directory_items": "/directory_items.json?asc=true&order=likes_given&page=1&period=quarterly"
+  }
+}
