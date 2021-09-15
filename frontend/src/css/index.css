@@ -251,8 +251,8 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .signup__container {
-  width: 210px;
-  height: 266px;
+  width: 270px;
+  height: 370px;
   background: #FFFFFF;
   border-radius: 10px;
   text-align: center;
@@ -266,9 +266,17 @@ a, a:link, a:visited, a:hover, a:active {
   box-shadow: 0px 2px 10px 0px #7c7c7c40;
 }
 
+.signup__container .controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
 .signup__header {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 22px;
   text-align: center;
   color: var(--blue-100);
 }
@@ -291,14 +299,14 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .home .headline--black {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 26px;
   line-height: 30px;
   color: #000000;
 }
 
 .home .headline--blue {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 20px;
   line-height: 24px;
   color: #0559FD;
@@ -606,7 +614,7 @@ a, a:link, a:visited, a:hover, a:active {
 .question .body {
   display: flex;
   padding: 30px;
-  width: 500px;
+  width: 100%;
   height: 162.35px;
   background: #499FF4;
   border-radius: 10px;
@@ -692,19 +700,8 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .body img {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-#read .sidebar .stars {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-#read .sidebar .stars svg {
-  margin-bottom: 2px;
-  margin-right: 3px;
+  display: block;
+  margin: 1rem auto;
 }
 
 #publish {
@@ -776,6 +773,10 @@ a, a:link, a:visited, a:hover, a:active {
   font-weight: 600;
   font-size: 13px;
   line-height: 23px;
+}
+
+#publish .preview .body {
+  width: 90%;
 }
 
 .search {
@@ -1052,11 +1053,16 @@ a, a:link, a:visited, a:hover, a:active {
 .custom-nav .user-avatar .dropdown-menu {
   right: 0;
   top: 30px;
-  font-size: 10px;
-  color: var(--gray-80);
+  font-size: 14px;
   background: white;
   height: auto;
-  min-width: none;
+  min-width: 120px;
+}
+
+.custom-nav .user-avatar .dropdown-menu a {
+  color: var(--gray-80);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .modal-dialog {
@@ -1237,7 +1243,6 @@ a, a:link, a:visited, a:hover, a:active {
     height: 100%;
   }
   .question .body {
-    width: 100%;
     height: auto;
     padding: 1rem;
     font-size: 14px;
@@ -1356,6 +1361,10 @@ a, a:link, a:visited, a:hover, a:active {
   }
   #read .info .controls {
     justify-content: start;
+  }
+  .home .definition {
+    font-size: 14px;
+    line-height: 24px;
   }
 }
 
