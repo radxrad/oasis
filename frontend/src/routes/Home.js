@@ -1,6 +1,8 @@
 import { Button, Form, Container, Row } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 
+
+//import { useEffect, useState } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 //import history from "history.js";
