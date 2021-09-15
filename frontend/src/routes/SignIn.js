@@ -42,15 +42,16 @@ export default function SignIn() {
           />
           <Form.Check type="checkbox" label="Remember me" />
         </Form.Group>
-
-        <Button
-          className="btn--md"
-          type="submit"
-          onClick={(e) => handleSignIn(e)}
-        >
-          Sign In
-        </Button>
-        <a href="/signup">New to OASIS? Sign up now</a>
+        <div className="controls">
+          <Button
+            className="btn--md"
+            type="submit"
+            onClick={(e) => handleSignIn(e)}
+          >
+            Sign In
+          </Button>
+          <a href="/signup">New to OASIS? Sign up now</a>
+        </div>
       </Form>
     </div>
   );

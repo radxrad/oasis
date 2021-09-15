@@ -53,15 +53,16 @@ export default function SignUp() {
           className="signup__textbox"
           placeholder="Password"
         />
-
-        <Button
-          className="btn--md"
-          type="submit"
-          onClick={(e) => handleSignUp(e)}
-        >
-          Sign Up
-        </Button>
-        <a href="/signin">Already have an account? Sign in here</a>
+        <div className="controls">
+          <Button
+            className="btn--md"
+            type="submit"
+            onClick={(e) => handleSignUp(e)}
+          >
+            Sign Up
+          </Button>
+          <a href="/signin">Already have an account? Sign in here</a>
+        </div>
       </Form>
     </div>
   );
