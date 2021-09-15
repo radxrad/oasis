@@ -16,10 +16,33 @@ import Dropzone from "react-dropzone";
 import { AiFillPicture } from "react-icons/ai";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Cite from "citation-js";
 
 export default function Publish() {
   const [abstractValue, setAbstractValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
+  const [refInput, setRefInput] = useState("");
+  const [refList, setRefList] = useState([]);
+  const [refError, setRefError] = useState("");
+
+  async function addReference(input) {
+    setRefError("");
+    try {
+      const data = await Cite.async(input);
+      let output = data.format("bibliography", {
+        format: "html",
+        template: "harvard",
+        lang: "en-US",
+      });
+      setRefList((refList) => [...refList, output]);
+      console.log(refList);
+    } catch (error) {
+      setRefError(error.message);
+    }
+  }
+  const handleRefInputChange = (event) => {
+    setRefInput(event.target.value);
+  };
 
   const example = text.micropub;
 
@@ -59,8 +82,25 @@ export default function Publish() {
     </div>
   );
   const body = (
-    <div>
-      <ReactQuill value={bodyValue} onChange={setBodyValue} />
+    <div className="body-tab">
+      <div className="label">Body</div>
+      <ReactQuill value={bodyValue} onChange={setBodyValue} theme="snow" />
+      <div className="label">References</div>
+      <div className="reference">
+        <input
+          type="search"
+          value={refInput}
+          onChange={handleRefInputChange}
+          placeholder="BibTeX, CFF, DOI, ISBN or Wikidata"
+        ></input>
+        <Button onClick={() => addReference(refInput)}>Add</Button>
+        <div className="error-msg">{refError}</div>
+        <ListGroup>
+          {refList.map((item) => (
+            <ListGroup.Item dangerouslySetInnerHTML={{ __html: item }} />
+          ))}
+        </ListGroup>
+      </div>
     </div>
   );
 

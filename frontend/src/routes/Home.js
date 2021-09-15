@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function Home() {
   const [micropubs, setMicropubs] = useState([]);
+  const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
   useEffect(() => {
     const options = {
       method: "GET",
@@ -68,36 +69,40 @@ export default function Home() {
               micro-publications.
             </div>
           </div>
-          <Form className="signup__container">
-            <div className="signup__header">Join OASIS</div>
-            <Form.Control
-              type="test"
-              className="signup__textbox"
-              placeholder="First Name"
-            />
-            <Form.Control
-              type="test"
-              className="signup__textbox"
-              placeholder="Last name"
-            />
-            <Form.Control
-              type="email"
-              className="signup__textbox"
-              placeholder="Email"
-            />
-            <Form.Control
-              type="password"
-              className="signup__textbox"
-              placeholder="Password"
-            />
-            <Button
-              className="btn--md"
-              type="submit"
-              onClick={(e) => handleSignUp(e)}
-            >
-              Sign Up
-            </Button>
-          </Form>
+          {isSignedIn ? (
+            ""
+          ) : (
+            <Form className="signup__container">
+              <div className="signup__header">Join OASIS</div>
+              <Form.Control
+                type="test"
+                className="signup__textbox"
+                placeholder="First Name"
+              />
+              <Form.Control
+                type="test"
+                className="signup__textbox"
+                placeholder="Last name"
+              />
+              <Form.Control
+                type="email"
+                className="signup__textbox"
+                placeholder="Email"
+              />
+              <Form.Control
+                type="password"
+                className="signup__textbox"
+                placeholder="Password"
+              />
+              <Button
+                className="btn--md"
+                type="submit"
+                onClick={(e) => handleSignUp(e)}
+              >
+                Sign Up
+              </Button>
+            </Form>
+          )}
         </Row>
 
         <Row className="preview">
