@@ -726,6 +726,7 @@ a, a:link, a:visited, a:hover, a:active {
 .micropub-body img {
   display: block;
   margin: 1rem auto;
+  width: 100%;
 }
 
 #publish {
@@ -1364,6 +1365,7 @@ a, a:link, a:visited, a:hover, a:active {
   }
   .dropzone>div {
     width: 100%;
+    padding: 0 2rem;
   }
   #publish>div {
     overflow: auto;
@@ -1443,9 +1445,6 @@ a, a:link, a:visited, a:hover, a:active {
     font-size: 16px;
   }
   .quill {
-    width: 100%;
-  }
-  .dropzone>div {
     width: 100%;
   }
   #publish>div {

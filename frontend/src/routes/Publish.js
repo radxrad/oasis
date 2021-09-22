@@ -1,23 +1,16 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Dropdown,
-  DropdownButton,
-  ListGroup,
-  Tab,
-  Table,
-} from "react-bootstrap";
-import { BiGlobe } from "react-icons/bi";
+import { Button, ListGroup, Tab, Table } from "react-bootstrap";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 import MicropubBody from "components/MicropubBody";
 import history from "history.js";
 import Dropzone from "react-dropzone";
 import { AiFillPicture } from "react-icons/ai";
-import { VscLock } from "react-icons/vsc";
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Cite from "citation-js";
+import VisibilitySelector from "../components/VisibilitySelector";
 
 export default function Publish() {
   const [abstractValue, setAbstractValue] = useState("");
@@ -26,34 +19,11 @@ export default function Publish() {
   const [refList, setRefList] = useState([]);
   const [refError, setRefError] = useState("");
   const [visibility, setVisibility] = useState(null);
+
   const [activeTab, setActiveTab] = useState("#abstract");
 
-  const getDropdownItem = (visibility) => {
-    if (visibility === null)
-      return (
-        <div>
-          <BiGlobe />
-          Selete
-        </div>
-      );
-    else if (visibility === "true")
-      return (
-        <div>
-          <BiGlobe />
-          Public
-        </div>
-      );
-    else
-      return (
-        <div>
-          <VscLock />
-          Anonymous
-        </div>
-      );
-  };
-  const handleSelect = (e) => {
-    setVisibility(e);
-  };
+  const handleSelect = (e) => setVisibility(e);
+
   async function addReference(input) {
     setRefError("");
     try {
@@ -219,25 +189,10 @@ export default function Publish() {
             </div>
             <div>
               <div className="label">Visibility</div>
-              <DropdownButton
-                className={"visibility visibility--" + visibility}
-                title={getDropdownItem(visibility)}
-                variant="light"
-                onSelect={handleSelect}
-              >
-                <Dropdown.Item eventKey="true" className="item__public">
-                  <div>
-                    <BiGlobe />
-                    Public
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="false" className="item__anonymous">
-                  <div>
-                    <VscLock />
-                    Anonymous
-                  </div>
-                </Dropdown.Item>
-              </DropdownButton>
+              <VisibilitySelector
+                visibility={visibility}
+                handleSelect={handleSelect}
+              />
             </div>
             <div>
               <div className="label">Keywords</div>
