@@ -14,6 +14,7 @@ import MicropubBody from "components/MicropubBody";
 import history from "history.js";
 import Dropzone from "react-dropzone";
 import { AiFillPicture } from "react-icons/ai";
+import { VscLock } from "react-icons/vsc";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Cite from "citation-js";
@@ -24,7 +25,35 @@ export default function Publish() {
   const [refInput, setRefInput] = useState("");
   const [refList, setRefList] = useState([]);
   const [refError, setRefError] = useState("");
+  const [visibility, setVisibility] = useState(null);
+  const [activeTab, setActiveTab] = useState("#abstract");
 
+  const getDropdownItem = (visibility) => {
+    if (visibility === null)
+      return (
+        <div>
+          <BiGlobe />
+          Selete
+        </div>
+      );
+    else if (visibility === "true")
+      return (
+        <div>
+          <BiGlobe />
+          Public
+        </div>
+      );
+    else
+      return (
+        <div>
+          <VscLock />
+          Anonymous
+        </div>
+      );
+  };
+  const handleSelect = (e) => {
+    setVisibility(e);
+  };
   async function addReference(input) {
     setRefError("");
     try {
@@ -124,31 +153,61 @@ export default function Publish() {
 
   return (
     <div id="publish">
-      <Tab.Container defaultActiveKey="#abstract">
+      <Tab.Container defaultActiveKey={activeTab}>
         <div className="max-window">
           <div className="tab__nav">
             <h2 className="heading">Create a Micropub</h2>
-            <ListGroup defaultActiveKey="#abstract">
-              <ListGroup.Item action href="#abstract">
+            <ListGroup
+              defaultActiveKey={activeTab}
+              onSelect={(e) => setActiveTab(e)}
+            >
+              <ListGroup.Item
+                action
+                href="#abstract"
+                active={"#abstract" === activeTab}
+              >
                 Abstract
               </ListGroup.Item>
-              <ListGroup.Item action href="#resources">
+              <ListGroup.Item
+                action
+                href="#resources"
+                active={"#resources" === activeTab}
+              >
                 <span>Data and </span>Resources
               </ListGroup.Item>
-              <ListGroup.Item action href="#body">
+              <ListGroup.Item
+                action
+                href="#body"
+                active={"#body" === activeTab}
+              >
                 Body
               </ListGroup.Item>
-              <ListGroup.Item action href="#preview">
+              <ListGroup.Item
+                action
+                href="#preview"
+                active={"#preview" === activeTab}
+              >
                 Preview
               </ListGroup.Item>
             </ListGroup>
           </div>
           <div className="tab__content">
-            <Tab.Content>
-              <Tab.Pane eventKey="#abstract">{abstract}</Tab.Pane>
-              <Tab.Pane eventKey="#resources">{resources}</Tab.Pane>
-              <Tab.Pane eventKey="#body">{body}</Tab.Pane>
-              <Tab.Pane eventKey="#preview">{preview}</Tab.Pane>
+            <Tab.Content defaultActiveKey={activeTab}>
+              <Tab.Pane eventKey="#abstract" active={"#abstract" === activeTab}>
+                {abstract}
+              </Tab.Pane>
+              <Tab.Pane
+                eventKey="#resources"
+                active={"#resources" === activeTab}
+              >
+                {resources}
+              </Tab.Pane>
+              <Tab.Pane eventKey="#body" active={"#body" === activeTab}>
+                {body}
+              </Tab.Pane>
+              <Tab.Pane eventKey="#preview" active={"#preview" === activeTab}>
+                {preview}
+              </Tab.Pane>
             </Tab.Content>
           </div>
           <div className="sidebar">
@@ -161,16 +220,23 @@ export default function Publish() {
             <div>
               <div className="label">Visibility</div>
               <DropdownButton
-                title={
+                className={"visibility visibility--" + visibility}
+                title={getDropdownItem(visibility)}
+                variant="light"
+                onSelect={handleSelect}
+              >
+                <Dropdown.Item eventKey="true" className="item__public">
                   <div>
                     <BiGlobe />
                     Public
                   </div>
-                }
-                id="bg-vertical-dropdown-2"
-              >
-                <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="false" className="item__anonymous">
+                  <div>
+                    <VscLock />
+                    Anonymous
+                  </div>
+                </Dropdown.Item>
               </DropdownButton>
             </div>
             <div>

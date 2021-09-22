@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 //import history from "history.js";
-import posts from "posts.json";
+// import posts from "posts.json";
 import axios from "axios";
 
 export default function Home(apikey, apiusername) {
@@ -154,7 +154,7 @@ export default function Home(apikey, apiusername) {
             {/*    uid={example.uid}*/}
             {/*></MicropubCard>*/}
 
-            {posts.latest_posts.slice(0, 3).map((post) => (
+            {/* {posts.latest_posts.slice(0, 3).map((post) => (
               <MicropubCard
                 img={post.img}
                 authorIds={post.username}
@@ -162,7 +162,7 @@ export default function Home(apikey, apiusername) {
                 abstract={post.raw}
                 uid={post.id}
               ></MicropubCard>
-            ))}
+            ))} */}
           </div>
         </Row>
       </Container>

@@ -17,7 +17,6 @@ export default function User() {
   const exampleQuestion = text.question;
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 

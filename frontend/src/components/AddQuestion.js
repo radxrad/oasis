@@ -4,7 +4,7 @@ import { MdQuestionAnswer } from "react-icons/md";
 import { BiGlobe } from "react-icons/bi";
 export default function AddQuestion(props) {
   return (
-    <Form className="addquestion">
+    <Form className="popup">
       <Form.Group className="inputs">
         <div className="heading">Add a Question </div>
         <Form.Control type="text" placeholder="Question" className="subject" />
