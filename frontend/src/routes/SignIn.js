@@ -44,7 +44,7 @@ export default function SignIn() {
         </Form.Group>
         <div className="controls">
           <Button
-            className="btn--md"
+            className="btn--lg"
             type="submit"
             onClick={(e) => handleSignIn(e)}
           >

@@ -1,52 +1,54 @@
 import React, { useState } from "react";
-import { Container, Button, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { MdQuestionAnswer, MdRateReview } from "react-icons/md";
 import { BsCloudDownload, BsStar, BsStarFill } from "react-icons/bs";
+import { GoArrowDown, GoArrowUp } from "react-icons/go";
 import MicropubBody from "components/MicropubBody";
 import text from "text.json";
 import AddQuestion from "components/AddQuestion";
-import { FaArrowUp } from "react-icons/fa";
-import { IoFlag, IoFlagOutline } from "react-icons/io5";
 import moment from "moment";
-import a_question from "discourse_json/post_20.json"
+import a_question from "discourse_json/post_20.json";
+import WriteReview from "../components/WriteReview";
 
 export default function Read() {
   const example = text.micropub;
-  const post = a_question
+  const post = a_question;
   const time = moment.unix(example.publishTime).format("MM/DD/YYYY");
-  const [upvoteNum, setUpvoteNum] = useState(0);
-  const [isUpvoted, setIsUpvoted] = useState(false);
-  const [isFlagged, setIsFlagged] = useState(false);
+  const [voteType, setVoteType] = useState(null);
+  const [voteNum, setVoteNum] = useState(0);
   const [isStarred, setIsStarred] = useState(false);
 
-  const [show, setShow] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [showReview, setShowReview] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handleUpvote = () => {
-    if (isUpvoted) setUpvoteNum(upvoteNum - 1);
-    else {
-      setUpvoteNum(upvoteNum + 1);
+  const handleVoteClick = (type) => {
+    if (voteType === null) {
+      setVoteNum(type === true ? voteNum + 1 : voteNum - 1);
+      setVoteType(type);
+    } else if (type === voteType) {
+      setVoteType(null);
+      setVoteNum(type === true ? voteNum - 1 : voteNum + 1);
+    } else {
+      setVoteType(type);
+      setVoteNum(type === true ? voteNum + 2 : voteNum - 2);
     }
-    setIsUpvoted(!isUpvoted);
   };
-  const handleFlag = () => setIsFlagged(!isFlagged);
+
   const handleStar = () => setIsStarred(!isStarred);
   return (
-    <Container id="read">
-      <Modal show={show} onHide={handleClose}>
-        <AddQuestion close={handleClose} />
+    <div id="read" className="max-window">
+      <Modal show={showQuestion} onHide={() => setShowQuestion(false)}>
+        <AddQuestion close={() => setShowQuestion(false)} />
       </Modal>
-      {/*<MicropubBody*/}
-      {/*  title={example.title}*/}
-      {/*  img={example.img}*/}
-      {/*  body={example.body}*/}
-      {/*/>*/}
+      <Modal show={showReview} onHide={() => setShowReview(false)}>
+        <WriteReview close={() => setShowReview(false)} />
+      </Modal>
       <MicropubBody
-          title={post.title}
-          img={post.avatar_template}
-          body={post.raw}
+        title={post.topic_slug}
+        img={post.avatar_template}
+        body={post.raw}
       />
+
       <div className="sidebar">
         <div className="info">
           <div className="publish-time">
@@ -83,31 +85,48 @@ export default function Read() {
                 : ""}
             </div>
           </div>
-          <div className="controls">
-            <Button className={"upvote--" + isUpvoted} onClick={handleUpvote}>
-              <FaArrowUp />
-              {upvoteNum}
-            </Button>
-            <Button className="icon-btn" id="flag-btn" onClick={handleFlag}>
-              {isFlagged ? <IoFlag /> : <IoFlagOutline />}
-            </Button>
-            <Button className="icon-btn" id="star-btn" onClick={handleStar}>
-              {isStarred ? <BsStarFill /> : <BsStar />}
-            </Button>
-          </div>
-          <Button className="btn--white">View Related Questions</Button>
+          <Button className="btn--white view-related-btn">
+            View Related Questions
+          </Button>
         </div>
         <div className="controls">
-          <Button className="btn--blue btn--lg" onClick={handleShow}>
+          <div className="icon-group">
+            <div id="vote-btn" className={"vote--" + voteType}>
+              <GoArrowUp
+                id="upvote-btn"
+                onClick={() => handleVoteClick(true)}
+              />
+              {voteNum}
+              <GoArrowDown
+                id="downvote-btn"
+                onClick={() => handleVoteClick(false)}
+              />
+            </div>
+
+            <Button className="icon-btn" id="star-btn" onClick={handleStar}>
+              {isStarred ? (
+                <BsStarFill className="star-btn--filled" />
+              ) : (
+                <BsStar />
+              )}
+            </Button>
+          </div>
+          <Button
+            className="btn--blue btn--md"
+            onClick={() => setShowQuestion(true)}
+          >
             <MdQuestionAnswer />
             Ask a Question
           </Button>
-          <Button className="btn--blue btn--lg">
+          <Button
+            className="btn--blue btn--md"
+            onClick={() => setShowReview(true)}
+          >
             <MdRateReview />
             Write a Review
           </Button>
         </div>
       </div>
-    </Container>
+    </div>
   );
 }

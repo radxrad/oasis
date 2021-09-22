@@ -13,6 +13,9 @@ html, #root, body {
   --gray-20: #E1E1E1;
   --gray-5: #F5F5F5;
   --bluegray: #768298;
+  --green: #00BA13;
+  --red: #FF4747;
+  --yellow: #FFC700;
 }
 
 body {
@@ -150,7 +153,8 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .btn--md {
-  width: 116px;
+  width: 140px;
+  font-size: 10px;
 }
 
 .btn--sm {
@@ -175,6 +179,7 @@ a, a:link, a:visited, a:hover, a:active {
 
 .icon-btn, .icon-btn:checked, .icon-btn.active, .icon-btn:active, .icon-btn:hover, .icon-btn:focus {
   background: none;
+  padding: 0;
   color: var(--gray-80);
   box-shadow: none;
   outline: none;
@@ -185,40 +190,57 @@ a, a:link, a:visited, a:hover, a:active {
   padding: 0;
 }
 
-.dropdown button {
-  background-color: #EFEFEF;
+.visibility {
+  height: 20px
+}
+
+.visibility button {
+  background-color: #EFEFEF !important;
   border: 0.5px solid var(--gray-60);
   box-sizing: border-box;
   border-radius: 10px;
   height: 20px;
   width: 110px;
   font-weight: 500;
-  padding: 0;
   font-size: 10px;
   color: var(--gray-80);
   display: flex;
   align-content: space-around;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 10px 0 10px;
+  padding: 0 10px;
   line-height: 20px;
+  position: absolute;
+  z-index: 2;
 }
 
-.dropdown-menu {
-  width: 110px;
+.visibility .dropdown-menu {
+  min-width: 110px;
   height: 72px;
+  font-size: 10px;
   border-radius: 10px;
-  background-color: var(--gray-5);
+  background-color: var(--gray-20);
   color: var(--gray-80);
+  border: none;
+  inset: -20px auto auto 0 !important;
   align-items: center;
+  padding: 24px 5px 0 5px;
+  z-index: 1;
 }
 
-.dropdown__selector {
-  width: 100px;
+.visibility .dropdown-item svg {
+  margin-right: 5px;
+}
+
+.visibility .dropdown-item {
   height: 16px;
   background: var(--gray-5);
   border-radius: 10px;
+  padding: 0;
   color: var(--gray-80);
+  padding: 0 6px;
+  padding-top: 1px;
+  margin: 4px 0;
 }
 
 .dropdown svg {
@@ -283,7 +305,7 @@ a, a:link, a:visited, a:hover, a:active {
 
 .signup__textbox {
   background: #F9F9F9;
-  width: 163px;
+  width: 172px;
   Height: 27px;
   font-weight: 600;
   line-height: 10px;
@@ -654,18 +676,19 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 #read .sidebar {
-  width: 172px;
+  width: 180px;
   margin-top: 3rem;
 }
 
-#read .sidebar button {
+#read .sidebar .view-related-btn {
   margin-top: 1rem;
+  font-size: 10px;
 }
 
-#read .sidebar .info {
-  width: 172px;
+#read .sidebar>div {
+  width: 100%;
   border-radius: 10px;
-  background-color: var(--gray-5);
+  background-color: white;
   padding: 20px 12px;
   font-size: 12px;
   display: flex;
@@ -687,19 +710,20 @@ a, a:link, a:visited, a:hover, a:active {
   margin-left: 2px;
 }
 
-.body {
+.micropub-body {
   width: 600px;
   padding: 3rem 2rem;
 }
 
-.body .heading {
+.micropub-body .heading {
   font-weight: 500;
   font-size: 36px;
   line-height: 42px;
-  color: #768298;
+  color: var(--gray-80);
+  margin-bottom: 2rem;
 }
 
-.body img {
+.micropub-body img {
   display: block;
   margin: 1rem auto;
 }
@@ -775,8 +799,10 @@ a, a:link, a:visited, a:hover, a:active {
   line-height: 23px;
 }
 
-#publish .preview .body {
+#publish .preview .micropub-body {
   width: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px 0px #7c7c7c40;
 }
 
 .search {
@@ -831,7 +857,7 @@ a, a:link, a:visited, a:hover, a:active {
   max-width: 800px;
 }
 
-.addquestion {
+.popup {
   background: white;
   display: flex;
   flex-direction: column;
@@ -839,7 +865,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
 }
 
-.addquestion .form-control {
+.popup .form-control {
   color: var(--gray-80);
   background: var(--gray-5);
   border: 0.5px solid var(--gray-60);
@@ -847,35 +873,35 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
 }
 
-.addquestion .subject {
+.popup .subject {
   font-weight: 500;
   font-size: 18px;
 }
 
-.addquestion .description {
+.popup .description {
   font-size: 14px;
   font-weight: 400;
 }
 
-.addquestion .dropdown button {
+.popup .dropdown button {
   margin-left: 10px;
 }
 
-.addquestion .heading {
+.popup .heading {
   font-weight: 500;
   font-size: 32px;
 }
 
-.addquestion .inputs {
+.popup .inputs {
   padding: 40px 80px 10px 80px;
   flex: 1;
 }
 
-.addquestion .inputs>div, .addquestion .inputs>textarea, .addquestion .inputs>input {
+.popup .inputs>div, .popup .inputs>textarea, .popup .inputs>input {
   margin-bottom: 30px;
 }
 
-.addquestion .controls {
+.popup .controls {
   height: 80px;
   padding-right: 80px;
   background: var(--gray-5);
@@ -885,7 +911,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 0 0 10px 10px;
 }
 
-.addquestion .btn--cancel {
+.popup .btn--cancel {
   margin-right: 30px;
 }
 
@@ -1080,15 +1106,6 @@ a, a:link, a:visited, a:hover, a:active {
   font-size: 10px;
 }
 
-#read .sidebar .icon-btn {
-  padding: 10px;
-  color: var(--blue-100);
-}
-
-#read #star-btn svg {
-  stroke-width: 0.5;
-}
-
 #read #flag-btn svg path {
   stroke-width: 55;
 }
@@ -1101,10 +1118,13 @@ a, a:link, a:visited, a:hover, a:active {
   height: 30px;
 }
 
-#read .info .controls {
+#read .controls {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
+  background-color: white;
+  margin-top: 1rem;
 }
 
 #read .upvote--false {
@@ -1280,23 +1300,23 @@ a, a:link, a:visited, a:hover, a:active {
     display: flex;
     justify-content: space-between;
   }
-  .addquestion .inputs>div, .addquestion .inputs>textarea, .addquestion .inputs>input {
+  .popup .inputs>div, .popup .inputs>textarea, .popup .inputs>input {
     margin-bottom: 1rem;
   }
-  .addquestion .heading {
+  .popup .heading {
     font-size: 24px;
   }
-  .addquestion .controls {
+  .popup .controls {
     padding-right: 0;
     justify-content: space-evenly;
   }
-  .addquestion .controls button {
+  .popup .controls button {
     width: 150px;
   }
-  .addquestion .btn--cancel {
+  .popup .btn--cancel {
     margin: 0
   }
-  .addquestion .inputs {
+  .popup .inputs {
     padding: 2rem;
   }
   #publish .tab__nav {
@@ -1365,6 +1385,10 @@ a, a:link, a:visited, a:hover, a:active {
   .home .definition {
     font-size: 14px;
     line-height: 24px;
+  }
+  .write-review .header {
+    flex-direction: column;
+    align-items: flex-start !important;
   }
 }
 
@@ -1446,4 +1470,134 @@ a, a:link, a:visited, a:hover, a:active {
     margin-right: .5rem;
     position: initial;
   }
+}
+
+.write-review .stars {
+  display: flex;
+  align-items: center;
+  color: var(--blue-80);
+  font-size: 18px;
+}
+
+.write-review .stars svg {
+  margin-right: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+.write-review textarea {
+  height: 200px;
+}
+
+.write-review .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#read {
+  background-color: var(--gray-5);
+}
+
+#read #vote-btn, #read #star-btn {
+  color: rgb(113, 113, 113);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-20);
+  font-size: 12px;
+}
+
+#read #star-btn {
+  width: 40px;
+}
+
+#read #vote-btn svg {
+  stroke-width: 1;
+  fill: none;
+  stroke: var(--gray-80);
+  height: 18px;
+}
+
+#read #vote-btn #upvote-btn {
+  margin-bottom: 2px;
+}
+
+#read #vote-btn #downvote-btn {
+  margin-bottom: 1.2px;
+}
+
+#read .vote--null {
+  color: var(--gray-80) !important;
+}
+
+#read .vote--true {
+  color: var(--green) !important;
+  fill: none;
+  stroke: var(--gray-80)
+}
+
+#read .vote--true #upvote-btn {
+  fill: var(--green);
+  stroke: var(--green);
+}
+
+#read .vote--false #downvote-btn {
+  fill: var(--red);
+  stroke: var(--red);
+}
+
+#read .vote--false {
+  color: var(--red) !important;
+  fill: none;
+  stroke: var(--gray-80)
+}
+
+#read .controls .icon-group {
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+}
+
+#read .controls>button {
+  margin-top: 5px;
+}
+
+#read .controls>div {
+  margin-bottom: 20px;
+}
+
+#read #star-btn .star-btn--filled {
+  fill: var(--yellow)
+}
+
+#read #star-btn svg {
+  margin-bottom: 2px;
+  margin-left: 1px;
+}
+
+.micropub-body .nav-tabs {
+  font-size: 12px;
+}
+
+.micropub-body .nav-tabs>a {
+  border-radius: 10px 10px 0 0;
+}
+
+.micropub-body .tab-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 0 0 10px 10px;
+}
+
+.visibility--true .item__public {
+  color: var(--blue-100) !important
+}
+
+.visibility--false .item__anonymous {
+  color: var(--blue-100) !important
 }

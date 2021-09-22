@@ -55,7 +55,7 @@ export default function SignUp() {
         />
         <div className="controls">
           <Button
-            className="btn--md"
+            className="btn--lg"
             type="submit"
             onClick={(e) => handleSignUp(e)}
           >
