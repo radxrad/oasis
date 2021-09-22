@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { DropdownButton, Dropdown, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
-import { BiGlobe } from "react-icons/bi";
+import VisibilitySelector from "./VisibilitySelector";
+
 export default function WriteReview(props) {
   const [starNum, setStarNum] = useState(0);
   const [hoverNum, setHoverNum] = useState(0);
+  const [visibility, setVisibility] = useState(null);
+  const handleSelect = (e) => setVisibility(e);
 
   const getIcon = (i) => {
     if (hoverNum >= i) return <FaStar fill="#0559FD" />;
@@ -45,16 +48,10 @@ export default function WriteReview(props) {
         />
         <div className="search">
           Make this question:
-          <DropdownButton
-            title={
-              <div>
-                <BiGlobe />
-                Public
-              </div>
-            }
-          >
-            <Dropdown.Item eventKey="1">Anonymous</Dropdown.Item>
-          </DropdownButton>
+          <VisibilitySelector
+            visibility={visibility}
+            handleSelect={handleSelect}
+          />
         </div>
       </Form.Group>
       <Form.Group className="controls">

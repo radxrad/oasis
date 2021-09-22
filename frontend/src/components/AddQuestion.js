@@ -1,8 +1,11 @@
-import React from "react";
-import { DropdownButton, Dropdown, Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import { MdQuestionAnswer } from "react-icons/md";
-import { BiGlobe } from "react-icons/bi";
+import VisibilitySelector from "./VisibilitySelector";
+
 export default function AddQuestion(props) {
+  const [visibility, setVisibility] = useState(null);
+  const handleSelect = (e) => setVisibility(e);
   return (
     <Form className="popup">
       <Form.Group className="inputs">
@@ -18,17 +21,10 @@ export default function AddQuestion(props) {
         </div>
         <div className="search">
           Make this question:
-          <DropdownButton
-            title={
-              <div>
-                <BiGlobe />
-                Public
-              </div>
-            }
-          >
-            <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
-          </DropdownButton>
+          <VisibilitySelector
+            visibility={visibility}
+            handleSelect={handleSelect}
+          />
         </div>
         <div className="search">
           Tag Researchers: <input type="text" placeholder="Search"></input>
