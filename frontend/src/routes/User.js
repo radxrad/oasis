@@ -21,7 +21,7 @@ export default function User() {
   const handleShow = () => setShow(true);
 
   return (
-    <Container className="userpage">
+    <Container className="userpage max-window">
       <Modal show={show} onHide={handleClose}>
         <AddQuestion close={handleClose} />
       </Modal>
