@@ -624,12 +624,12 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .block .list-group--small {
-  height: 200px;
+  height: calc(50vh - 240px);
   overflow-y: scroll;
 }
 
 .block .list-group--large {
-  height: 640px;
+  height: calc(100vh - 240px);
   overflow-y: scroll;
 }
 
@@ -1340,6 +1340,12 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 @media only screen and (max-width: 767px) {
+  .block .list-group--small {
+    height: calc(100vh - 240px);
+  }
+  .block .list-group--large {
+    height: calc(100vh - 240px);
+  }
   #publish .preview .micropub-body {
     padding: 1rem;
   }
@@ -1447,7 +1453,7 @@ a, a:link, a:visited, a:hover, a:active {
   .block {
     width: 100%;
     padding: 1rem;
-    margin: 1rem 0 2rem 0;
+    margin: 0 0 1rem 0;
   }
   .block .heading button {
     width: auto;
