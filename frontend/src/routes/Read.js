@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import { MdQuestionAnswer, MdRateReview } from "react-icons/md";
 import { BsCloudDownload, BsStar, BsStarFill } from "react-icons/bs";
 import { GoArrowDown, GoArrowUp } from "react-icons/go";
@@ -8,7 +8,9 @@ import text from "text.json";
 import AddQuestion from "components/AddQuestion";
 import moment from "moment";
 import a_question from "discourse_json/post_20.json";
-import WriteReview from "../components/WriteReview";
+
+import VisibilitySelector from "components/VisibilitySelector";
+import StarRating from "../components/StarRating";
 
 export default function Read() {
   const example = text.micropub;
@@ -17,9 +19,16 @@ export default function Read() {
   const [voteType, setVoteType] = useState(null);
   const [voteNum, setVoteNum] = useState(0);
   const [isStarred, setIsStarred] = useState(false);
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewRatingHover, setReviewRatingHover] = useState(0);
 
+  const [visibility, setVisibility] = useState(null);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [showReview, setShowReview] = useState(false);
+  const [reviews, setReviews] = useState([
+    { user: "Aa", text: "testing", rating: 3 },
+  ]);
+  const handleStar = () => setIsStarred(!isStarred);
+  const handleSelect = (e) => setVisibility(e);
 
   const handleVoteClick = (type) => {
     if (voteType === null) {
@@ -34,20 +43,64 @@ export default function Read() {
     }
   };
 
-  const handleStar = () => setIsStarred(!isStarred);
+  const writeReview = (
+    <Form className="write-review">
+      <Form.Group style={{ flex: "1 0" }}>
+        <Form.Control
+          as="textarea"
+          placeholder="Write a review..."
+          className="review"
+        />
+      </Form.Group>
+      <Form.Group className="controls">
+        <div className="selectors">
+          <StarRating
+            rating={reviewRating}
+            setRating={setReviewRating}
+            hover={reviewRatingHover}
+            setHover={setReviewRatingHover}
+            readonly={false}
+          />
+          <VisibilitySelector
+            visibility={visibility}
+            handleSelect={handleSelect}
+          />
+        </div>
+
+        <Button className="btn--md">
+          <MdRateReview />
+          Post Review
+        </Button>
+      </Form.Group>
+    </Form>
+  );
+
   return (
     <div id="read" className="max-window">
       <Modal show={showQuestion} onHide={() => setShowQuestion(false)}>
         <AddQuestion close={() => setShowQuestion(false)} />
       </Modal>
-      <Modal show={showReview} onHide={() => setShowReview(false)}>
-        <WriteReview close={() => setShowReview(false)} />
-      </Modal>
-      <MicropubBody
-        title={post.topic_slug}
-        img={post.avatar_template}
-        body={post.raw}
-      />
+      <div>
+        <MicropubBody
+          title={post.topic_slug}
+          img={post.avatar_template}
+          body={post.raw}
+        />
+        {writeReview}
+        <div className="review__wrapper">
+          {reviews
+            ? reviews.map((item, i) => (
+                <div id={i} key={i} className="review__item">
+                  <div className="header">
+                    {item.user}{" "}
+                    <StarRating readonly={true} rating={item.rating} />{" "}
+                  </div>
+                  {item.text}
+                </div>
+              ))
+            : ""}
+        </div>
+      </div>
 
       <div className="sidebar">
         <div className="info">
@@ -120,7 +173,7 @@ export default function Read() {
           </Button>
           <Button
             className="btn--blue btn--md"
-            onClick={() => setShowReview(true)}
+            onClick={() => console.log("aa")}
           >
             <MdRateReview />
             Write a Review

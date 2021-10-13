@@ -858,14 +858,6 @@ a, a:link, a:visited, a:hover, a:active {
   max-width: 800px;
 }
 
-.popup {
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  border-radius: 10px;
-}
-
 .popup .form-control {
   color: var(--gray-80);
   background: var(--gray-5);
@@ -1119,7 +1111,7 @@ a, a:link, a:visited, a:hover, a:active {
   height: 30px;
 }
 
-#read .controls {
+#read .sidebar .controls {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -1471,27 +1463,78 @@ a, a:link, a:visited, a:hover, a:active {
   }
 }
 
-.write-review .stars {
+.write-review {
+  background: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: -2rem 2rem 0 2rem;
+}
+
+.stars {
   display: flex;
   align-items: center;
   color: var(--blue-80);
   font-size: 18px;
+  height: 25px;
 }
 
-.write-review .stars svg {
+.stars svg {
   margin-right: 5px;
   height: 20px;
   width: 20px;
+  color: var(--gray-60);
 }
 
 .write-review textarea {
   height: 200px;
+  background-color: var(--gray-5);
+  border-radius: 10px;
+  padding: 1rem;
 }
 
-.write-review .header {
+.write-review .form-control:focus {
+  background-color: var(--gray-5);
+}
+.write-review .controls {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.write-review .visibility {
+  max-width: 110px;
+  margin: 10px auto;
+}
+
+#read>div {
+  overflow-y: auto;
+}
+
+.review__wrapper {
+  margin-bottom: 4rem;
+}
+
+.review__item {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 1rem 2rem 0 2rem;
+}
+
+.review__item .header {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 #read {
@@ -1509,6 +1552,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 10px;
   border: 1px solid var(--gray-20);
   font-size: 12px;
+  cursor: pointer;
 }
 
 #read #star-btn {
