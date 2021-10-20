@@ -24,7 +24,8 @@ export default function Read() {
 
   const [visibility, setVisibility] = useState(null);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [reviews, setReviews] = useState([
+ // const [reviews, setReviews] = useState([
+  const [reviews] = useState([
     { user: "Aa", text: "testing", rating: 3 },
   ]);
   const handleStar = () => setIsStarred(!isStarred);

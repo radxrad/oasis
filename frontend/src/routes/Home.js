@@ -10,7 +10,8 @@ import axios from "axios";
 export default function Home(apikey, apiusername) {
   //const example = text.micropub;
   const [micropubs, setMicropubs] = useState([]);
-  const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
+ // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
+  const [isSignedIn] = useState(localStorage.getItem("user"));
   useEffect(() => {
     const options = {
       method: "GET",
