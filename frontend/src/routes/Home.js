@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 //import history from "history.js";
-import posts from "posts.json"
+// import posts from "posts.json";
 import axios from "axios";
 
 export default function Home(apikey, apiusername) {
   //const example = text.micropub;
   const [micropubs, setMicropubs] = useState([]);
+ // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
+  const [isSignedIn] = useState(localStorage.getItem("user"));
   useEffect(() => {
     const options = {
       method: "GET",
@@ -90,36 +92,40 @@ export default function Home(apikey, apiusername) {
               micro-publications.
             </div>
           </div>
-          <Form className="signup__container">
-            <div className="signup__header">Join OASIS</div>
-            <Form.Control
-              type="test"
-              className="signup__textbox"
-              placeholder="First Name"
-            />
-            <Form.Control
-              type="test"
-              className="signup__textbox"
-              placeholder="Last name"
-            />
-            <Form.Control
-              type="email"
-              className="signup__textbox"
-              placeholder="Email"
-            />
-            <Form.Control
-              type="password"
-              className="signup__textbox"
-              placeholder="Password"
-            />
-            <Button
-              className="btn--md"
-              type="submit"
-              onClick={(e) => handleSignUp(e)}
-            >
-              Sign Up
-            </Button>
-          </Form>
+          {isSignedIn ? (
+            ""
+          ) : (
+            <Form className="signup__container">
+              <div className="signup__header">Join OASIS</div>
+              <Form.Control
+                type="test"
+                className="signup__textbox"
+                placeholder="First Name"
+              />
+              <Form.Control
+                type="test"
+                className="signup__textbox"
+                placeholder="Last name"
+              />
+              <Form.Control
+                type="email"
+                className="signup__textbox"
+                placeholder="Email"
+              />
+              <Form.Control
+                type="password"
+                className="signup__textbox"
+                placeholder="Password"
+              />
+              <Button
+                className="btn--md"
+                type="submit"
+                onClick={(e) => handleSignUp(e)}
+              >
+                Sign Up
+              </Button>
+            </Form>
+          )}
         </Row>
 
         <Row className="preview">
@@ -141,25 +147,23 @@ export default function Home(apikey, apiusername) {
                   ></MicropubCard>
                 ))
               : ""}
-          {/*  <MicropubCard*/}
-          {/*    img={example.img}*/}
-          {/*    authorIds={example.authorIds}*/}
-          {/*    title={example.title}*/}
-          {/*    abstract={example.abstract}*/}
-          {/*    uid={example.uid}*/}
-          {/*></MicropubCard>*/}
+            {/*  <MicropubCard*/}
+            {/*    img={example.img}*/}
+            {/*    authorIds={example.authorIds}*/}
+            {/*    title={example.title}*/}
+            {/*    abstract={example.abstract}*/}
+            {/*    uid={example.uid}*/}
+            {/*></MicropubCard>*/}
 
-            {posts.latest_posts.slice(0,3).map(post =>
-                <MicropubCard
-                    img={example.img}
-                    authorIds={post.username}
-                    title={post.topic_html_title}
-                    abstract={post.raw}
-                    uid={post.id}
-                ></MicropubCard>
-            )
-            }
-
+            {/* {posts.latest_posts.slice(0, 3).map((post) => (
+              <MicropubCard
+                img={post.img}
+                authorIds={post.username}
+                title={post.topic_html_title}
+                abstract={post.raw}
+                uid={post.id}
+              ></MicropubCard>
+            ))} */}
           </div>
         </Row>
       </Container>
