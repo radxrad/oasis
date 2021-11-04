@@ -24,10 +24,8 @@ export default function Read() {
 
   const [visibility, setVisibility] = useState(null);
   const [showQuestion, setShowQuestion] = useState(false);
- // const [reviews, setReviews] = useState([
-  const [reviews] = useState([
-    { user: "Aa", text: "testing", rating: 3 },
-  ]);
+  // const [reviews, setReviews] = useState([
+  const [reviews] = useState([{ user: "Aa", text: "testing", rating: 3 }]);
   const handleStar = () => setIsStarred(!isStarred);
   const handleSelect = (e) => setVisibility(e);
 
@@ -84,8 +82,9 @@ export default function Read() {
       <div>
         <MicropubBody
           title={post.topic_slug}
-          img={post.avatar_template}
+          figure={post.avatar_template}
           body={post.raw}
+          refList={post.refList}
         />
         {writeReview}
         <div className="review__wrapper">

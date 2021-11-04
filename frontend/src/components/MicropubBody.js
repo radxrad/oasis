@@ -1,19 +1,29 @@
 import React from "react";
-import { Tabs, Tab } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 
 export default function MicropubBody(props) {
+  const { title, figure, body, refList } = props;
   return (
     <div className="micropub-body">
-      <div className="heading">{props.title}</div>
-      <Tabs defaultActiveKey="body">
-        <Tab eventKey="body" title="Body">
-          <img src={props.img} alt="figure"></img>
-          <div className="text">{props.body}</div>
-        </Tab>
-        <Tab eventKey="reference" title="Reference">
-          <div></div>
-        </Tab>
-      </Tabs>
+      <div className="heading">{title}</div>
+      <div className="content">
+        <img src={figure} alt="figure"></img>
+        <div className="text">{body}</div>
+        <ListGroup className="ref-list">
+          {refList && refList.length > 0 ? (
+            <h6 className="heading">References</h6>
+          ) : (
+            ""
+          )}
+          {refList
+            ? refList.map((item, i) => (
+                <ListGroup.Item id={"ref-item-" + (i + 1)} key={i}>
+                  <span dangerouslySetInnerHTML={{ __html: item }} />
+                </ListGroup.Item>
+              ))
+            : ""}
+        </ListGroup>
+      </div>
     </div>
   );
 }

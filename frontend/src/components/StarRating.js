@@ -1,5 +1,5 @@
 import { FaRegStar, FaStar } from "react-icons/fa";
-//import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 
 function StarRating(props) {
