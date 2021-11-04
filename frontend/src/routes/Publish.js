@@ -158,7 +158,6 @@ export default function Publish() {
         <div className="max-window">
           {tabNav}
           {tabContent}
-
           {sidebar}
         </div>
       </Tab.Container>

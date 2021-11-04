@@ -110,7 +110,7 @@ export function AddReference(props) {
 
 export default function TextEditor(props) {
   const [editorState, setEditorState] = useState(null);
-  const { parent, refList, setRefList } = props;
+  const { value, onChange, parent, refList, setRefList } = props;
   const addRef = (item) => setRefList((refList) => [...refList, item]);
   const deleteRef = (index) => {
     setRefList(refList.filter((_, i) => i !== index));
@@ -119,11 +119,13 @@ export default function TextEditor(props) {
   return (
     <div className="tab-wrapper">
       <Editor
+        contentState={value}
         editorState={editorState}
         toolbarClassName="rdw__toolbar"
         wrapperClassName="rdw__wrapper"
         editorClassName="rdw__editor"
         onEditorStateChange={(e) => setEditorState(e)}
+        onContentStateChange={onChange}
         toolbarCustomButtons={[
           <AddReference
             addRef={addRef}
