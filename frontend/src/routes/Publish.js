@@ -4,15 +4,20 @@ import text from "text.json";
 import history from "history.js";
 import MicropubCard from "../components/MicropubCard";
 import MicropubBody from "../components/MicropubBody";
+import { EditorState } from "draft-js";
+// import { convertToRaw } from 'draft-js';
+// import draftToHtml from 'draftjs-to-html';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
 
 export default function Publish() {
-  const [abstractValue, setAbstractValue] = useState(null);
+  // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
+  const [abstractValue, setAbstractValue] = useState(EditorState.createEmpty());
+  const [bodyValue, setBodyValue] = useState(EditorState.createEmpty());
+
   const [refList, setRefList] = useState([]);
-  const [bodyValue, setBodyValue] = useState(null);
-  const [visibility, setVisibility] = useState(null);
+  const [visibility, setVisibility] = useState("");
   const [activeTab, setActiveTab] = useState("#abstract");
 
   const handleSelect = (e) => setVisibility(e);
