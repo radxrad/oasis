@@ -4,25 +4,32 @@ import text from "text.json";
 import history from "history.js";
 import MicropubCard from "../components/MicropubCard";
 import MicropubBody from "../components/MicropubBody";
-import { EditorState } from "draft-js";
-// import { convertToRaw } from 'draft-js';
-// import draftToHtml from 'draftjs-to-html';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
 
 export default function Publish() {
-  // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
-  const [abstractValue, setAbstractValue] = useState(EditorState.createEmpty());
-  const [bodyValue, setBodyValue] = useState(EditorState.createEmpty());
+  const [abstractValue, setAbstractValue] = useState({
+    editorHtml: "",
+    mountedEditor: false,
+  });
+  const [bodyValue, setBodyValue] = useState({
+    editorHtml: "",
+    mountedEditor: false,
+  });
 
-  const [refList, setRefList] = useState([]);
+  const [citationList, setCitationList] = useState([]);
   const [visibility, setVisibility] = useState("");
   const [activeTab, setActiveTab] = useState("#abstract");
 
   const handleSelect = (e) => setVisibility(e);
-  const handleAbstractChange = (e) => setAbstractValue(e);
-  const handleBodyChange = (e) => setBodyValue(e);
+  const handleAbstractValueChange = (html) => {
+    setAbstractValue({ editorHtml: html });
+    console.log(abstractValue);
+  };
+  const handleBodyValueChange = (html) => {
+    setBodyValue({ editorHtml: html });
+  };
 
   const micropub = text.micropub;
 
@@ -68,26 +75,32 @@ export default function Publish() {
               placeholder="What question would you like to answer?..."
             />
             <TextEditor
+              id="abstract-editor"
               parent="abstract"
-              value={abstractValue}
-              onChange={handleAbstractChange}
-              refList={refList}
-              setRefList={setRefList}
+              editorState={abstractValue}
+              onChange={handleAbstractValueChange}
+              citationList={citationList}
+              setCitationList={setCitationList}
             />
           </div>
         </Tab.Pane>
         <Tab.Pane eventKey="#resources" active={"#resources" === activeTab}>
           <ResourcesTab />
         </Tab.Pane>
-        <Tab.Pane eventKey="#body" active={"#body" === activeTab}>
+        <Tab.Pane
+          eventKey="#
+        "
+          active={"#body" === activeTab}
+        >
           <div className="body-tab">
             <div className="label">Body</div>
             <TextEditor
+              id="body-editor"
               parent="body"
-              value={bodyValue}
-              onChange={handleBodyChange}
-              refList={refList}
-              setRefList={setRefList}
+              editorState={bodyValue}
+              onChange={handleBodyValueChange}
+              citationList={citationList}
+              setCitationList={setCitationList}
             />
           </div>
         </Tab.Pane>
@@ -105,7 +118,7 @@ export default function Publish() {
               title={micropub.title}
               figure={micropub.img}
               body={micropub.body}
-              refList={micropub.refList}
+              citationList={micropub.citationList}
             />
           </div>
         </Tab.Pane>

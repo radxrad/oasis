@@ -1,46 +1,96 @@
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import React, { useState } from "react";
-import { AiFillFileAdd } from "react-icons/ai";
-import { EditorState, Modifier, ContentState } from "draft-js";
-import { ListGroup, Button } from "react-bootstrap";
-import htmlToDraft from "html-to-draftjs";
+import React, { useState, useEffect, useRef } from "react";
+import ReactQuill, { Quill } from "react-quill";
 import Cite from "citation-js";
+import "react-quill/dist/quill.snow.css";
+import { BiBookAdd } from "react-icons/bi";
 import { FiDelete } from "react-icons/fi";
+import { ListGroup, Button, Form } from "react-bootstrap";
+import MyLink from "./CustomTheme";
+import CustomTheme from "./CustomTheme";
 
-export function AddReference(props) {
-  const [refInput, setRefInput] = useState("");
-  const [refError, setRefError] = useState("");
-  const { parent, addRef, editorState, setEditorState, refIndex } = props;
+const SnowTooltip = Quill.import("themes/snow");
+class CustomTooltip extends SnowTooltip {}
+CustomTooltip.TEMPLATE = [
+  '<a class="ql-preview" rel="noopener noreferrer" target="_blank" href="about:blank"></a>',
+  '<h1>"hi"</h1>',
+  '<input type="text" data-formula="e=mc^2" data-link="https://quilljs.com" data-video="Embed URL">',
+  '<a class="ql-action"></a>',
+  '<a class="ql-remove"></a>',
+].join("");
+Quill.register(CustomTheme, true);
+Quill.register(MyLink, true);
+
+export default function TextEditor(props) {
+  const [citationInput, setCitationInput] = useState("");
+  const [citationError, setCitationError] = useState("");
+  const reactQuillRef = useRef(null);
+  const {
+    editorState,
+    onChange,
+    parent,
+    citationList,
+    setCitationList,
+  } = props;
+  const id = "toolbar-" + parent;
+
+  useEffect(() => {
+    const targets = document.querySelectorAll(".abstract .ql-preview");
+    if (targets && targets.length > 0) {
+      const link = targets[0];
+      if (link.href) {
+        console.log(link.href.startsWith("#"));
+        link.removeAttribute("rel");
+        link.setAttribute("target", "_self");
+      }
+      console.log(link);
+    }
+  });
+
+  const handleCitationInputChange = (e) => setCitationInput(e.target.value);
 
   const toggleShow = () => {
-    let popup = document.getElementById("ref-popup-" + parent);
+    let popup = document.getElementById("citation-popup-" + parent);
     popup.classList.toggle("hidden");
   };
 
-  function addRefMark(index) {
-    if (!editorState) {
-      console.log("no mark");
-      return;
+  const showPopUp = () => {
+    let popup = document.getElementById("citation-popup-" + parent);
+    popup.classList.remove("hidden");
+  };
+
+  function addCitation() {
+    const quillRef = reactQuillRef.current.getEditor();
+    const index = citationList.length + 1;
+    const length = quillRef.getLength();
+    let delta;
+    if (length === 1)
+      delta = {
+        ops: [
+          {
+            insert: `[${index}]`,
+            attributes: { link: `#citation-item-${index}` },
+          },
+        ],
+      };
+    else {
+      delta = {
+        ops: [
+          { retain: length - 1 },
+          {
+            insert: `[${index}]`,
+            attributes: { link: `#citation-item-${index}` },
+          },
+        ],
+      };
     }
-    const blocksFromHtml = `<a href="#ref-item-${index}">[${index}]</a>`;
-    let { contentBlocks, entityMap } = htmlToDraft(blocksFromHtml);
-
-    let contentState = Modifier.replaceWithFragment(
-      editorState.getCurrentContent(),
-      editorState.getSelection(),
-      ContentState.createFromBlockArray(contentBlocks, entityMap).getBlockMap()
-    );
-
-    setEditorState(
-      EditorState.push(editorState, contentState, "insert-fragment")
-    );
+    quillRef.updateContents(delta);
   }
 
-  async function addReference(input) {
-    setRefError("");
+  const getCitation = async () => {
+    const input = citationInput;
+    setCitationError("");
     if (!input || !input.trim()) {
-      setRefError("Invalid input");
+      setCitationError("Invalid input");
       return;
     }
     try {
@@ -50,130 +100,137 @@ export function AddReference(props) {
         template: "harvard",
         lang: "en-US",
       });
-      addRef(output);
+      setCitationList([...citationList, output]);
     } catch (error) {
-      setRefError(error.message);
+      setCitationError(error.message);
+      console.log(error);
       return;
     }
-    addRefMark(refIndex);
+    addCitation();
     toggleShow();
-  }
-
-  return (
-    <div className="addref__wrapper">
-      <button
-        className="rdw-option-wrapper addref__button"
-        onClick={toggleShow}
-      >
-        <AiFillFileAdd />
-        Add Reference
-      </button>
-      <div className="rdw-embedded-modal hidden" id={"ref-popup-" + parent}>
-        <div className="rdw-embedded-modal-header">
-          <span className="rdw-embedded-modal-header-option">
-            BibTeX, CFF, DOI, ISBN or Wikidata
-          </span>
-        </div>
-        <div className="rdw-embedded-modal-link-section">
-          <span className="rdw-embedded-modal-link-input-wrapper">
-            <input
-              className="rdw-embedded-modal-link-input"
-              placeholder="Enter code"
-              name="embeddedLink"
-              value={refInput}
-              onChange={(e) => setRefInput(e.target.value)}
-            />
-            <span className="rdw-image-mandatory-sign">*</span>
-          </span>
-          <div className="error-msg">{refError}</div>
-        </div>
-        <span className="rdw-embedded-modal-btn-section">
-          <button
-            type="button"
-            className="rdw-embedded-modal-btn"
-            onClick={() => addReference(refInput)}
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            className="rdw-embedded-modal-btn"
-            onClick={toggleShow}
-          >
-            Cancel
-          </button>
-        </span>
-      </div>
-    </div>
-  );
-}
-
-export default function TextEditor(props) {
-  const { value, onChange, parent, refList, setRefList } = props;
-  const addRef = (item) => setRefList((refList) => [...refList, item]);
-  const deleteRef = (index) => {
-    setRefList(refList.filter((_, i) => i !== index));
   };
 
-  return (
-    <div className="tab-wrapper">
-      <Editor
-        editorState={value}
-        toolbarClassName="rdw__toolbar"
-        wrapperClassName="rdw__wrapper"
-        editorClassName="rdw__editor"
-        onEditorStateChange={onChange}
-        toolbarCustomButtons={[
-          <AddReference
-            addRef={addRef}
-            parent={parent + "-editor"}
-            refIndex={refList.length + 1}
-            editorState={value}
-            setEditorState={onChange}
-          />,
-        ]}
-        toolbar={{
-          options: [
-            "blockType",
-            "textAlign",
-            "inline",
-            "list",
-            "colorPicker",
-            "link",
-            "embedded",
-            "image",
-            "remove",
-          ],
-          inline: {
-            inDropdown: false,
-            options: [
-              "bold",
-              "italic",
-              "underline",
-              "superscript",
-              "subscript",
-            ],
-          },
-          textAlign: {
-            inDropdown: true,
-            options: ["left", "center", "right", "justify"],
-          },
-        }}
-      />
+  console.log(Quill.imports);
+  const deleteCitation = (index) => {
+    setCitationList(citationList.filter((_, i) => i !== index));
+  };
 
-      <ListGroup className="ref-list">
-        {refList && refList.length > 0 ? (
+  const modules = {
+    toolbar: {
+      container: `#${id}`,
+      handlers: {
+        addCitation: showPopUp,
+      },
+    },
+  };
+
+  const customPopup = (
+    <div className="hidden" id={"citation-popup-" + parent}>
+      <Form>
+        <Form.Group controlId="formBasic">
+          <Form.Label>RBibTeX, CFF, DOI, ISBN or Wikidata</Form.Label>
+          <Form.Control
+            type="text"
+            value={citationInput}
+            onChange={handleCitationInputChange}
+          />
+          <Form.Control.Feedback>{citationError}</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group>
+          <Button onClick={getCitation}>Add</Button>
+          <Button onClick={toggleShow}>Cancel</Button>
+        </Form.Group>
+      </Form>
+    </div>
+  );
+
+  const customToolbar = (
+    <div id={id}>
+      <span className="ql-formats">
+        <select
+          className="ql-header"
+          defaultValue={""}
+          onChange={(e) => e.persist()}
+        >
+          <option value="1"></option>
+          <option value="2"></option>
+          <option value="3"></option>
+          <option value="4"></option>
+          <option value="5"></option>
+          <option value="6"></option>
+          <option value=""></option>
+        </select>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-bold"></button>
+        <button className="ql-italic"></button>
+        <button className="ql-underline"></button>
+        <button className="ql-code-block"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-script" value="sub"></button>
+        <button className="ql-script" value="super"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-list" value="ordered"></button>
+        <button className="ql-list" value="bullet"></button>
+        <button className="ql-align" value=""></button>
+        <button className="ql-align" value="center"></button>
+        <button className="ql-align" value="right"></button>
+        <button className="ql-align" value="justify"></button>
+      </span>
+
+      <span className="ql-formats">
+        <button className="ql-link"></button>
+        <button className="ql-image"></button>
+        <button className="ql-video"></button>
+        <button className="ql-formula"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-clean"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-addCitation">
+          <div className="addCitation__wrapper">
+            <BiBookAdd />
+            Add Reference
+          </div>
+        </button>
+      </span>
+    </div>
+  );
+
+  useEffect(() => {});
+
+  return (
+    <div className="text-editor-wrapper">
+      <div className="text-editor">
+        {customToolbar}
+        <ReactQuill
+          modules={modules}
+          ref={reactQuillRef}
+          defaultValue={editorState.editorHtml}
+          onChange={onChange}
+          // theme="customTheme"
+          placeholder="Enter here"
+        >
+          <div className="ql-editing-area">{customPopup}</div>
+        </ReactQuill>
+        {customPopup}
+      </div>
+      <ListGroup className="citation-list">
+        {citationList && citationList.length > 0 ? (
           <h6 className="heading">References</h6>
         ) : (
           ""
         )}
-        {refList
-          ? refList.map((item, i) => (
-              <ListGroup.Item id={"ref-item-" + (i + 1)} key={i}>
+        {citationList
+          ? citationList.map((item, i) => (
+              <ListGroup.Item id={"citation-item-" + (i + 1)} key={i}>
                 <span dangerouslySetInnerHTML={{ __html: item }} />
                 <Button
-                  className="icon-btn delete-ref-btn"
-                  onClick={() => deleteRef(i)}
+                  className="icon-btn delete-citation-btn"
+                  onClick={() => deleteCitation(i)}
                 >
                   <FiDelete />
                 </Button>
