@@ -1,6 +1,6 @@
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillFileAdd } from "react-icons/ai";
 import { EditorState, Modifier, ContentState } from "draft-js";
 import { ListGroup, Button } from "react-bootstrap";
@@ -23,7 +23,7 @@ export function AddReference(props) {
       console.log("no mark");
       return;
     }
-    const blocksFromHtml = `<a href="#ref-item-${index}">[${index}]</a>`;
+    const blocksFromHtml = `<a href="#ref-item-${index}" target="_self">[${index}]</a>`;
     let { contentBlocks, entityMap } = htmlToDraft(blocksFromHtml);
 
     let contentState = Modifier.replaceWithFragment(
@@ -115,6 +115,19 @@ export default function TextEditor(props) {
     setRefList(refList.filter((_, i) => i !== index));
   };
 
+  useEffect(() => {
+    const links = document.querySelectorAll(".rdw-link-decorator-wrapper");
+    if (links && links.length > 0) {
+      links.forEach((item) => {
+        if (item.childNodes && item.childNodes.length > 0) {
+          const aTag = item.childNodes[0];
+          if (aTag.target === "_self") {
+            aTag.onclick = () => (window.location.href = aTag.href);
+          } else aTag.onclick = () => window.open(aTag.href, "_blank");
+        }
+      });
+    }
+  });
   return (
     <div className="tab-wrapper">
       <Editor
@@ -153,6 +166,10 @@ export default function TextEditor(props) {
               "superscript",
               "subscript",
             ],
+          },
+          link: {
+            showOpenOptionOnHover: false,
+            defaultTargetOption: "_self",
           },
           textAlign: {
             inDropdown: true,
