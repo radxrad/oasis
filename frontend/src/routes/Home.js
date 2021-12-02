@@ -1,5 +1,6 @@
 import { Button, Form, Container, Row } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
+import Footer from "../components/Footer";
 
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
@@ -10,7 +11,7 @@ import axios from "axios";
 export default function Home(apikey, apiusername) {
   //const example = text.micropub;
   const [micropubs, setMicropubs] = useState([]);
- // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
+  // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
   const [isSignedIn] = useState(localStorage.getItem("user"));
   useEffect(() => {
     const options = {
@@ -167,6 +168,7 @@ export default function Home(apikey, apiusername) {
           </div>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 }

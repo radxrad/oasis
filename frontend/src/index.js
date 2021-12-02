@@ -10,6 +10,7 @@ import User from "routes/User";
 import Read from "routes/Read";
 import history from "./history";
 import Publish from "routes/Publish";
+import About from "routes/About";
 import * as serviceWorker from "./serviceWorker";
 import Test from "routes/Test";
 import CustomNavbar from "components/CustomNavbar";
@@ -50,6 +51,7 @@ function App() {
         <Route path={paths.read} component={Read} />
         <Route path={paths.publish} component={Publish} />
         <Route path={paths.test} component={Test} />
+        <Route path={paths.about} component={About} />
       </Switch>
     </Router>
   );

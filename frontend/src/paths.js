@@ -6,6 +6,7 @@ const paths = {
   read: "/read",
   publish: "/publish",
   test: "/test",
+  about: "/about",
 };
 
 export default paths;
