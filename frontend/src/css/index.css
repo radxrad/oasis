@@ -903,12 +903,14 @@ a, a:link, a:visited, a:hover, a:active {
   margin-right: 30px;
 }
 
-.resources .dropzone {
-  width: 480px;
+.resources .dzu-dropzone {
   height: 300px;
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   color: #0559FD;
+  overflow: auto;
+}
+
+.resources .dzu-dropzone .input-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -916,7 +918,7 @@ a, a:link, a:visited, a:hover, a:active {
   text-align: center;
 }
 
-.resources .dropzone .upload {
+.resources .dzu-dropzone .upload {
   background: #0559FD;
   border-radius: 10px;
   width: 180px;
@@ -927,23 +929,23 @@ a, a:link, a:visited, a:hover, a:active {
   padding: 2px 5px;
 }
 
-.resources .dropzone svg {
+.resources .dzu-dropzone svg {
   width: 50px;
   height: 50px;
   color: #0559FD;
   margin-bottom: 10px;
 }
 
-.resources .dropzone .label {
+.resources .dzu-dropzone .label {
   font-size: 24px;
   color: var(--blue-100)
 }
 
-.resources .dropzone input {
+.resources .dzu-dropzone input {
   display: none;
 }
 
-.resources .dropzone .req {
+.resources .dzu-dropzone .req {
   font-weight: normal;
   font-size: 14px;
   line-height: 8px;
@@ -1551,7 +1553,7 @@ a, a:link, a:visited, a:hover, a:active {
 
 .file-list table {
   color: var(--gray-80);
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .file-list th {
@@ -1873,7 +1875,7 @@ a, a:link, a:visited, a:hover, a:active {
     width: 100%;
   }
 
-  .resources .dropzone>div {
+  .resources .dzu-dropzone>div {
     width: 100%;
     padding: 0 2rem;
   }
