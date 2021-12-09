@@ -1,31 +1,62 @@
-import React from "react";
-import Dropzone from "react-dropzone";
-import { AiFillPicture } from "react-icons/ai";
+import React, { useState, useEffect } from "react";
+import { AiFillPicture, AiOutlineCheckCircle } from "react-icons/ai";
+import "react-dropzone-uploader/dist/styles.css";
+import Dropzone from "react-dropzone-uploader";
+import { Table } from "react-bootstrap";
 
-function ResourcesTab() {
+function ResourcesTab(props) {
+  //Initial Get request here and then set the files state
+  const [files, setFiles] = useState([]);
+
+  //Change url here to the api path
+  const getUploadParams = ({ meta }) => {
+    return { url: "https://httpbin.org/post" };
+  };
+
+  const handleChangeStatus = ({ meta, file }, status) => {
+    console.log(status, meta, file);
+  };
+  const handleSubmit = (newFiles, allFiles) => {
+    setFiles([...files, ...newFiles.map((f) => f.meta)]);
+    allFiles.forEach((f) => f.remove());
+  };
+
+  console.log(files);
   return (
     <div className="resources">
       <Dropzone
-        onDrop={(acceptedFiles) => console.log(acceptedFiles)}
-        maxSize={10000000}
-        multiple
-        accept=".jpg, .png, .pdf, .csv, .tsv, .xlsx"
-      >
-        {({ getRootProps, getInputProps }) => (
-          <section className="dropzone">
-            <input {...getInputProps()} />
-            <div {...getRootProps()}>
-              <AiFillPicture />
-              <p className="label">Drag Resources Here</p>
-              <p className="upload">Or select from your computer...</p>
-              <div className="req">
-                <p>.jpg .png .pdf .csv .tsv .xlsx</p>
-                <p>max file size: 10MB</p>
-              </div>
-            </div>
-          </section>
-        )}
-      </Dropzone>
+        getUploadParams={getUploadParams}
+        onChangeStatus={handleChangeStatus}
+        onSubmit={handleSubmit}
+        accept="image/*,audio/*,video/*"
+      />
+
+      <div className="file-list">
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>File name</th>
+              <th>Size</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {files.map((item, index) => (
+              <tr key={index}>
+                <th>{item.name}</th>
+                <th>{item.size} kb</th>
+                <th style={{ textAlign: "center" }}>
+                  {item.status === "removed" ? (
+                    <AiOutlineCheckCircle />
+                  ) : (
+                    item.status
+                  )}
+                </th>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 }

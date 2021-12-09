@@ -903,7 +903,7 @@ a, a:link, a:visited, a:hover, a:active {
   margin-right: 30px;
 }
 
-.dropzone>div {
+.resources .dropzone {
   width: 480px;
   height: 300px;
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.15);
@@ -916,7 +916,7 @@ a, a:link, a:visited, a:hover, a:active {
   text-align: center;
 }
 
-.dropzone .upload {
+.resources .dropzone .upload {
   background: #0559FD;
   border-radius: 10px;
   width: 180px;
@@ -927,23 +927,23 @@ a, a:link, a:visited, a:hover, a:active {
   padding: 2px 5px;
 }
 
-.dropzone svg {
+.resources .dropzone svg {
   width: 50px;
   height: 50px;
   color: #0559FD;
   margin-bottom: 10px;
 }
 
-.dropzone .label {
+.resources .dropzone .label {
   font-size: 24px;
   color: var(--blue-100)
 }
 
-.dropzone input {
+.resources .dropzone input {
   display: none;
 }
 
-.dropzone .req {
+.resources .dropzone .req {
   font-weight: normal;
   font-size: 14px;
   line-height: 8px;
@@ -1504,7 +1504,7 @@ a, a:link, a:visited, a:hover, a:active {
   padding: 1.5rem 1rem 1rem;
 }
 
-.about .team h3{
+.about .team h3 {
   margin-bottom: 3rem;
 }
 
@@ -1541,6 +1541,30 @@ a, a:link, a:visited, a:hover, a:active {
   color: rgba(41, 40, 40, 0.8);
   margin-top: 3rem;
   margin-bottom: 1rem;
+}
+
+.file-list {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.file-list table {
+  color: var(--gray-80);
+  font-size: 12px;
+}
+
+.file-list th {
+  font-weight: normal;
+}
+
+.resources>div {
+  width: 90%;
+  margin-bottom: 2rem;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px 0px #7c7c7c40;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1849,7 +1873,7 @@ a, a:link, a:visited, a:hover, a:active {
     width: 100%;
   }
 
-  .dropzone>div {
+  .resources .dropzone>div {
     width: 100%;
     padding: 0 2rem;
   }
