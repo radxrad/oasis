@@ -74,7 +74,7 @@ export default function CustomNavbar(props) {
           <Dropdown.Item href="/user">My Page</Dropdown.Item>
           <Dropdown.Item href="/publish">Publish</Dropdown.Item>
           <Dropdown.Item onClick={handleShow}>Ask</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
+          <Dropdown.Item href="/settings">Settings</Dropdown.Item>
           <Dropdown.Item onClick={() => handleSignOut()}>
             Sign Out
           </Dropdown.Item>

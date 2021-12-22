@@ -1569,6 +1569,35 @@ a, a:link, a:visited, a:hover, a:active {
   box-shadow: 0px 2px 10px 0px #7c7c7c40;
 }
 
+.settings .row {
+  width: 100%;
+  --bs-gutter-x: 0;
+  background-color: var(--gray-5);
+}
+
+.settings {
+  background-color: var(--gray-5);
+}
+
+.settings #profile-pic input {
+  display: block;
+}
+
+.settings #profile-pic img {
+  display: block;
+  width: 200px;
+  background-color: white;
+  height: 200px;
+}
+
+.settings .tab-pane {
+  padding: 2rem;
+}
+
+.settings #reset-password-btn {
+  display: block;
+}
+
 @media only screen and (max-width: 767px) {
   .block .list-group--small {
     height: calc(100vh - 240px);

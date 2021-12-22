@@ -11,6 +11,7 @@ import Read from "routes/Read";
 import history from "./history";
 import Publish from "routes/Publish";
 import About from "routes/About";
+import Settings from "routes/Settings";
 import * as serviceWorker from "./serviceWorker";
 import Test from "routes/Test";
 import CustomNavbar from "components/CustomNavbar";
@@ -52,6 +53,7 @@ function App() {
         <Route path={paths.publish} component={Publish} />
         <Route path={paths.test} component={Test} />
         <Route path={paths.about} component={About} />
+        <Route path={paths.settings} component={Settings} />
       </Switch>
     </Router>
   );
