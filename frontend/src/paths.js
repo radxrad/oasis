@@ -7,7 +7,7 @@ const paths = {
   publish: "/publish",
   test: "/test",
   about: "/about",
-  settings: "/settings",
+
 };
 
 export default paths;
