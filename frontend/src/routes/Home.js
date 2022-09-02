@@ -7,55 +7,98 @@ import text from "text.json";
 //import history from "history.js";
 // import posts from "posts.json";
 import axios from "axios";
+import {fetchAPI, getStrapiURL} from '../lib/api';
+
 
 export default function Home(apikey, apiusername) {
   //const example = text.micropub;
   const [micropubs, setMicropubs] = useState([]);
+  const [categories, setCategories ]= useState([]);
+  const [keywords, setKeywords ]= useState([]);
   // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
-  const [isSignedIn] = useState(localStorage.getItem("user"));
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
-      headers: { "Content-Type": "application/json", Prefer: "" },
-    };
+  const [isSignedIn,setIsSignedIn] = useState(localStorage.getItem("user"));
+  const [username,setUsername] = useState();
+  const [password,setPassword] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect( () =>  {
+    // const options = {
+    //   method: "GET",
+    //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
+    //   headers: { "Content-Type": "application/json", Prefer: "" },
+    // };
+    //
+    // axios
+    //   .request(options)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     setMicropubs(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //   });
+    const fetchData = async () => {
+      const [ categoriesRes, micropubRes, keywordRes, homepageRes] = await Promise.all([
+        fetchAPI("/categories", { populate: "*" }),
+        fetchAPI("/micropublications", { populate: ["files", "keyword", "writer"] }),
+        fetchAPI("/keywords", { populate: "*" }),
+        fetchAPI("/homepage", {
+          populate: {
+            hero: "*",
+            seo: { populate: "*" },
+          },
+        }),
+      ]);
+      const cats = await categoriesRes;
+      const micros  = await micropubRes;
+      const kws  = await keywordRes;
+      setCategories(cats.data);
+      setMicropubs(micros.data);
+      setKeywords(kws.data);
+    }
 
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        setMicropubs(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    fetchData()
+        // make sure to catch any error
+        .catch(console.error);
   }, []);
 
   async function handleSignUp(e) {
     e.preventDefault();
+    const handleUsername = (e)=> setUsername(e.target.value);
+    const handlePassword = (e)=> setPassword(e.target.value);
+    // const options = {
+    //   method: "POST",
+    //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/signup",
+    //   headers: { "Content-Type": "application/json", Prefer: "" },
+    //   data: {
+    //     firstName: "Alice",
+    //     lastName: "Smith",
+    //     email: "alice.smith@gmail.com",
+    //     password: "1234",
+    //   },
+    // };
+    //
+    // axios
+    //   .request(options)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     localStorage.setItem("user", JSON.stringify(response.data));
+    //     window.location.replace("/user");
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //   });
+     const { data } = await axios.post(getStrapiURL()+'/api/auth/local', {
+      identifier: username,
+      password: password,
+    }).then(response => {
+      console.log('User profile', response.data.user);
+      console.log('User token', response.data.jwt);
+      setLoggedIn(response.data)
+    })
+        .catch(error => {
+          console.log('An error occurred:', error.response);
+        });
 
-    const options = {
-      method: "POST",
-      url: "https://stoplight.io/mocks/oasis/oasis/19253909/signup",
-      headers: { "Content-Type": "application/json", Prefer: "" },
-      data: {
-        firstName: "Alice",
-        lastName: "Smith",
-        email: "alice.smith@gmail.com",
-        password: "1234",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
-        window.location.replace("/user");
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
   }
 
   // const [ latestposts, setLatestposts ] = useState([])
@@ -139,11 +182,11 @@ export default function Home(apikey, apiusername) {
             {micropubs
               ? micropubs.map((item, i) => (
                   <MicropubCard
-                    figure={item.figure}
-                    authorIds={item.authorNames}
-                    title={item.title}
-                    abstract={item.abstract}
-                    id={item.id}
+                    figure={getStrapiURL()+item.attributes.files?.data[0].attributes.url }
+                    authorIds={item.attributes.writer.data}
+                    title={item.attributes.title}
+                    abstract={item.attributes.abstract}
+                    id={item.attributes.slug}
                     key={i}
                   ></MicropubCard>
                 ))
