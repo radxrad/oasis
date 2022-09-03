@@ -188,6 +188,7 @@ export default function Home(apikey, apiusername) {
                     abstract={item.attributes.abstract}
                     id={item.attributes.slug}
                     key={i}
+
                   ></MicropubCard>
                 ))
               : ""}

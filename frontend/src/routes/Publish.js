@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Button, ListGroup, Tab, Table } from "react-bootstrap";
-import text from "text.json";
+//import text from "text.json";
 import history from "history.js";
 import MicropubCard from "../components/MicropubCard";
 import MicropubBody from "../components/MicropubBody";
@@ -10,6 +10,7 @@ import { EditorState } from "draft-js";
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
+import {fetchAPI} from "../lib/api";
 
 export default function Publish() {
   // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
@@ -24,7 +25,52 @@ export default function Publish() {
   const handleAbstractChange = (e) => setAbstractValue(e);
   const handleBodyChange = (e) => setBodyValue(e);
 
-  const micropub = text.micropub;
+  //const micropub = text.micropub;
+  const [micropub, setMicropub] = useState([]);
+  const [categories, setCategories ]= useState([]);
+  const [keywords, setKeywords ]= useState([]);
+  // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
+  const [isSignedIn,setIsSignedIn] = useState(localStorage.getItem("user"));
+  const [username,setUsername] = useState();
+  const [password,setPassword] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect( () =>  {
+    // const options = {
+    //   method: "GET",
+    //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
+    //   headers: { "Content-Type": "application/json", Prefer: "" },
+    // };
+    //
+    // axios
+    //   .request(options)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     setMicropubs(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //   });
+    const fetchData = async () => {
+      const [ categoriesRes, keywordRes, homepageRes] = await Promise.all([
+        fetchAPI("/categories", { populate: "*" }),
+        fetchAPI("/keywords", { populate: "*" }),
+        fetchAPI("/homepage", {
+          populate: {
+            hero: "*",
+            seo: { populate: "*" },
+          },
+        }),
+      ]);
+      const cats = await categoriesRes;
+      const kws  = await keywordRes;
+      setCategories(cats.data);
+      setKeywords(kws.data);
+    }
+
+    fetchData()
+        // make sure to catch any error
+        .catch(console.error);
+  }, []);
 
   const tabNav = (
     <div className="tab__nav">
@@ -95,17 +141,17 @@ export default function Publish() {
           <div className="preview">
             <div className="label">Card Preview</div>
             <MicropubCard
-              img={micropub.img}
-              authorIds={micropub.authorIds}
-              title={micropub.title}
-              abstract={micropub.abstract}
+              img={micropub.attributes.img}
+              authorIds={micropub.attributes.authorIds}
+              title={micropub.attributes.title}
+              abstract={micropub.attributes.abstract}
             ></MicropubCard>
             <div className="label">Micropub Preview</div>
             <MicropubBody
-              title={micropub.title}
-              figure={micropub.img}
-              body={micropub.body}
-              refList={micropub.refList}
+              title={micropub.attributes.title}
+              figure={micropub.attributes.img}
+              body={micropub.attributes.body}
+              refList={micropub.attributes.refList}
             />
           </div>
         </Tab.Pane>

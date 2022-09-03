@@ -1,5 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 
 export default function MicropubBody(props) {
   const { title, figure, body, refList } = props;
@@ -7,7 +8,7 @@ export default function MicropubBody(props) {
     <div className="micropub-body">
       <div className="heading">{title}</div>
       <div className="content">
-        <img src={figure} alt="figure"></img>
+        <Image src={figure} alt="figure" rounded></Image>
         <div className="text">{body}</div>
         <ListGroup className="ref-list">
           {refList && refList.length > 0 ? (

@@ -3,7 +3,7 @@ const paths = {
   signIn: "/signin",
   signUp: "/signup",
   user: "/user",
-  read: "/read",
+  read: "/read/:slug",
   publish: "/publish",
   test: "/test",
   about: "/about",

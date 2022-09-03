@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import history from "history.js";
 export default function MicropubCard(props) {
   return (
-    <Card className="micropub" onClick={() => history.push("/read")}>
+    <Card className="micropub" onClick={() => history.push(`/read/${props.id}`)}>
       <div className="content">
         <Card.Img src={props.figure} alt="img" />
         <div>
