@@ -9,9 +9,9 @@ function Footer() {
         <img alt="radxrad-logo" src="radxrad-logo.svg" />
       </div>
       <a href={paths.about}>About</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Terms of Use</a>
-      <a href="#">Privacy Policy</a>
+      <a href="/">Contact Us</a>
+      <a href="/">Terms of Use</a>
+      <a href="/">Privacy Policy</a>
       <div className="seperator"></div>
       <div>@2021 OASIS</div>
     </div>
