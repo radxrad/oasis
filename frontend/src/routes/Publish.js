@@ -4,27 +4,32 @@ import { Button, ListGroup, Tab, Table } from "react-bootstrap";
 import history from "history.js";
 import MicropubCard from "../components/MicropubCard";
 import MicropubBody from "../components/MicropubBody";
-import { EditorState } from "draft-js";
+import { EditorState,convertToRaw } from "draft-js";
 // import { convertToRaw } from 'draft-js';
-// import draftToHtml from 'draftjs-to-html';
+import draftToHtml from 'draftjs-to-html';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
-import {fetchAPI} from "../lib/api";
+import {fetchAPI, getStrapiURL} from "../lib/api";
 
 export default function Publish() {
   // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
   const [abstractValue, setAbstractValue] = useState(EditorState.createEmpty());
   const [bodyValue, setBodyValue] = useState(EditorState.createEmpty());
-
+  const [titleValue, setTitleValue] = useState("");
   const [refList, setRefList] = useState([]);
+  const [writerValue, setWriterVal]= useState([]);
+  const [filesValue, setFilesValue]= useState();
+  const [imageValue, setImageValue]= useState();
   const [visibility, setVisibility] = useState("");
   const [activeTab, setActiveTab] = useState("#abstract");
 
   const handleSelect = (e) => setVisibility(e);
   const handleAbstractChange = (e) => setAbstractValue(e);
   const handleBodyChange = (e) => setBodyValue(e);
-
+  const handleTitleChange=  (event) =>{
+    setTitleValue( event.target.value);
+  }
   //const micropub = text.micropub;
   const [micropub, setMicropub] = useState([]);
   const [categories, setCategories ]= useState([]);
@@ -110,8 +115,10 @@ export default function Publish() {
         <Tab.Pane eventKey="#abstract" active={"#abstract" === activeTab}>
           <div className="abstract">
             <input
-              type="textarea"
-              placeholder="What question would you like to answer?..."
+                type="textarea"
+                placeholder="What question would you like to answer?..."
+                value={titleValue}
+                onChange={handleTitleChange}
             />
             <TextEditor
               parent="abstract"
@@ -141,17 +148,17 @@ export default function Publish() {
           <div className="preview">
             <div className="label">Card Preview</div>
             <MicropubCard
-              img={micropub.attributes.img}
-              authorIds={micropub.attributes.authorIds}
-              title={micropub.attributes.title}
-              abstract={micropub.attributes.abstract}
+              img={imageValue}
+              authorIds={writerValue}
+              title={titleValue}
+              abstract={draftToHtml(convertToRaw(abstractValue.getCurrentContent()))}
             ></MicropubCard>
             <div className="label">Micropub Preview</div>
             <MicropubBody
-              title={micropub.attributes.title}
-              figure={micropub.attributes.img}
-              body={micropub.attributes.body}
-              refList={micropub.attributes.refList}
+              title={titleValue}
+              figure={imageValue}
+              body={draftToHtml(convertToRaw(bodyValue.getCurrentContent()))}
+              refList={refList}
             />
           </div>
         </Tab.Pane>
