@@ -183,7 +183,7 @@ export default function Home(apikey, apiusername) {
               ? micropubs.map((item, i) => (
                   <MicropubCard
                     figure={getStrapiURL()+item.attributes.files?.data[0].attributes.url }
-                    authorIds={item.attributes.writer.data}
+                    authorIds={item.attributes.writer?.data}
                     title={item.attributes.title}
                     abstract={item.attributes.abstract}
                     id={item.attributes.slug}

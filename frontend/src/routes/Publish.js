@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Button, ListGroup, Tab, Table } from "react-bootstrap";
+import { Button, ListGroup, Tab, Table, Dropdown } from "react-bootstrap";
 //import text from "text.json";
 import history from "history.js";
 import MicropubCard from "../components/MicropubCard";
@@ -10,7 +10,8 @@ import draftToHtml from 'draftjs-to-html';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
-import {fetchAPI, getStrapiURL} from "../lib/api";
+import {fetchAPI, getStrapiURL, createAPI} from "../lib/api";
+import slugify from "slugify";
 
 export default function Publish() {
   // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
@@ -22,7 +23,12 @@ export default function Publish() {
   const [filesValue, setFilesValue]= useState();
   const [imageValue, setImageValue]= useState();
   const [visibility, setVisibility] = useState("");
+  const [errors, setErrors]= useState("");
+  const [showError, setShowError] = useState(false);
   const [activeTab, setActiveTab] = useState("#abstract");
+
+  const handleErrorClose = () => setShowError(false);
+  const handleErrorShow = () => setShowError(true);
 
   const handleSelect = (e) => setVisibility(e);
   const handleAbstractChange = (e) => setAbstractValue(e);
@@ -77,6 +83,115 @@ export default function Publish() {
         .catch(console.error);
   }, []);
 
+  const handleSave = (e) => {
+    var form = e.target
+    // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
+    const hasErrors = false
+    setErrors(hasErrors)
+    let title =titleValue
+
+    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // let raw = `<div class="radquestion" >
+    //                <div class='abstract'> ${abstractHtml} </div>
+    //                 <div class="body">${bodyHtml} </div>
+    //                 <div class="referenceList">${refList}</div>
+    //                 <div class="resources">${resources}</div>
+    //              </div>
+    //   `
+  //  let tags = keywordsArray
+    //let title =convertToRaw(abstractValue.getCurrentContent())
+
+    // let raw =convertToRaw(bodyValue.getCurrentContent())
+    // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
+   // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]});
+    let slug = slugify(titleValue)
+    const mpObj = {
+      "title": titleValue,
+      "abstract": abstractHtml,
+      "body": bodyHtml,
+      "keywords": keywords,
+      "refList": refList,
+      "slug":slug
+
+    };
+    if(!errors) {
+      ///setFetching(true)
+      createAPI('/micropublications', mpObj)
+          // THIS IS HANDLE CREATE
+          .then(data => {
+            if(data.id) {
+              //navigate('/message?d=postcreated')
+              // router.push({
+              //   pathname: '/Read/[pid]',
+              //   query: { pid: data.id },
+              // })
+
+            } else {
+              // navigate('/message?d=postfail')
+              handleErrorShow()
+            }
+          }).catch(err => {
+        console.log(err)
+        handleErrorShow()
+      })
+    }
+  }
+  const handlePublish = (e) => {
+    var form = e.target
+    // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
+    const hasErrors = false
+    setErrors(hasErrors)
+    let title =titleValue
+
+    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // let raw = `<div class="radquestion" >
+    //                <div class='abstract'> ${abstractHtml} </div>
+    //                 <div class="body">${bodyHtml} </div>
+    //                 <div class="referenceList">${refList}</div>
+    //                 <div class="resources">${resources}</div>
+    //              </div>
+    //   `
+    // let tags = keywordsArray
+    //let title =convertToRaw(abstractValue.getCurrentContent())
+
+    // let raw =convertToRaw(bodyValue.getCurrentContent())
+    // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
+    // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]})
+    let slug = slugify(titleValue)
+    const mpObj = {
+      "title": titleValue,
+      "abstract": abstractHtml,
+      "body": bodyHtml,
+      "keywords": keywords,
+      "refList": refList,
+      "slug":slug,
+      "writer": 1 // for now
+
+    };
+    if(!errors) {
+      ///setFetching(true)
+      createAPI('micropublications', mpObj)
+          // THIS IS HANDLE CREATE
+          .then(data => {
+            if(data.id) {
+              //navigate('/message?d=postcreated')
+              // router.push({
+              //   pathname: '/Read/[pid]',
+              //   query: { pid: data.id },
+              // })
+
+            } else {
+              // navigate('/message?d=postfail')
+              handleErrorShow()
+            }
+          }).catch(err => {
+        console.log(err)
+        handleErrorShow()
+      })
+    }
+  }
   const tabNav = (
     <div className="tab__nav">
       <h2 className="heading">Create a Micropub</h2>
@@ -193,10 +308,10 @@ export default function Publish() {
       </div>
       <div style={{ flex: 1, background: "none" }}></div>
       <div className="controls">
-        <Button className="btn--sm btn--lightblue" variant="primary">
-          Save
-        </Button>
-        <Button className="btn--sm btn--blue" variant="primary">
+        <Button className="btn--sm btn--blue" variant="primary" onClick={handleSave}>
+          Publish
+        </Button>>
+        <Button className="btn--sm btn--blue" variant="primary" onClick={handlePublish}>
           Publish
         </Button>
         <Button
