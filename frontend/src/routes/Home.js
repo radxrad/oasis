@@ -180,17 +180,18 @@ export default function Home(apikey, apiusername) {
           <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>
           <div className="mp-list">
             {micropubs
-              ? micropubs.map((item, i) => (
-                  <MicropubCard
-                    figure={getStrapiURL()+item.attributes.files?.data[0].attributes.url }
-                    authorIds={item.attributes.writer?.data}
+              ? micropubs.map((item, i) => {
+                const file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url: "";
+               return   <MicropubCard
+                    figure={getStrapiURL(file)}
+                    authorIds={item.attributes.writer.data?.id }
                     title={item.attributes.title}
                     abstract={item.attributes.abstract}
                     id={item.attributes.slug}
                     key={i}
 
                   ></MicropubCard>
-                ))
+            })
               : ""}
             {/*  <MicropubCard*/}
             {/*    img={example.img}*/}
