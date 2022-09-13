@@ -155,7 +155,7 @@ export default function Read() {
      const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: "";
      return  <MicropubBody
          title={micropub.attributes.title}
-         figure={getStrapiURL()+micropub.attributes.files?.data[0].attributes.url}
+         figure={getStrapiURL()+file}
          body={micropub.attributes.body}
          refList={micropub.attributes?.citations}
      />
@@ -174,7 +174,7 @@ export default function Read() {
   }
   const renderFileList = (micropub) => {
     const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data: [];
-    micropub.attributes.files.data.map((file) => (
+      file.map((file) => (
         <a href={getStrapiURL() + file.attributes.url} key={file.id}>
           {file.attributes.name}
           <BsCloudDownload className="sidebar__icon"/>
