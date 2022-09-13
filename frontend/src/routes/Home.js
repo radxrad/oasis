@@ -180,7 +180,7 @@ export default function Home(apikey, apiusername) {
           <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>
           <div className="mp-list">
             {micropubs
-              ? micropubs.map((item, i) => {
+              ? micropubs.sort(() => Math.random() - 0.5).slice(0, 3).map((item, i) => {
                 const file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url: "";
                return   <MicropubCard
                     figure={getStrapiURL(file)}
