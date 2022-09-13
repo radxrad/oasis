@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useHistory } from "react-router-dom";
 import { Button, ListGroup, Tab, Table, Dropdown } from "react-bootstrap";
 //import text from "text.json";
 import history from "history.js";
@@ -10,11 +11,14 @@ import draftToHtml from 'draftjs-to-html';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
-import {fetchAPI, getStrapiURL, createAPI} from "../lib/api";
+import {fetchAPI, getStrapiURL, createAPI, updateAPI} from "../lib/api";
 import slugify from "slugify";
 
 export default function Publish() {
+  let navigate = useHistory();
   // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
+  const [editingValue, setEditingValue] = useState(false); // set to true after save or edit
+  const [strapiDocId, setStrapiDocId] = useState()
   const [abstractValue, setAbstractValue] = useState(EditorState.createEmpty());
   const [bodyValue, setBodyValue] = useState(EditorState.createEmpty());
   const [titleValue, setTitleValue] = useState("");
@@ -120,15 +124,17 @@ export default function Publish() {
       createAPI('/micropublications', mpObj)
           // THIS IS HANDLE CREATE
           .then(data => {
-            if(data.id) {
+            if(data.data.attributes.slug) {
               //navigate('/message?d=postcreated')
-              // router.push({
-              //   pathname: '/Read/[pid]',
-              //   query: { pid: data.id },
-              // })
+              setEditingValue(true)
+              setStrapiDocId(data.data.id)
+              setErrors("Saved")
+              handleErrorShow()
+
 
             } else {
               // navigate('/message?d=postfail')
+              setErrors(errors)
               handleErrorShow()
             }
           }).catch(err => {
@@ -138,6 +144,7 @@ export default function Publish() {
     }
   }
   const handlePublish = (e) => {
+
     var form = e.target
     // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
     const hasErrors = false
@@ -172,24 +179,50 @@ export default function Publish() {
     };
     if(!errors) {
       ///setFetching(true)
-      createAPI('micropublications', mpObj)
-          // THIS IS HANDLE CREATE
-          .then(data => {
-            if(data.id) {
-              //navigate('/message?d=postcreated')
-              // router.push({
-              //   pathname: '/Read/[pid]',
-              //   query: { pid: data.id },
-              // })
+      if (editingValue ){
+        updateAPI('/micropublications', slug,  mpObj)
+            // THIS IS HANDLE CREATE
+            .then(data => {
 
-            } else {
-              // navigate('/message?d=postfail')
-              handleErrorShow()
-            }
-          }).catch(err => {
-        console.log(err)
-        handleErrorShow()
-      })
+              if(data.data.attributes.slug) {
+                //navigate('/message?d=postcreated')
+                navigate.push({
+                  pathname: `/Read/${data.data.attributes.slug}`,
+
+                })
+
+
+              } else {
+                // navigate('/message?d=postfail')
+                handleErrorShow()
+              }
+            }).catch(err => {
+          console.log(err)
+          handleErrorShow()
+        })
+      } else {
+        createAPI('/micropublications', mpObj)
+            // THIS IS HANDLE CREATE
+            .then(data => {
+
+              if(data.data.attributes.slug) {
+                //navigate('/message?d=postcreated')
+                navigate.push({
+                  pathname: `/Read/${data.data.attributes.slug}`,
+
+                })
+
+
+              } else {
+                // navigate('/message?d=postfail')
+                handleErrorShow()
+              }
+            }).catch(err => {
+          console.log(err)
+          handleErrorShow()
+        })
+      }
+
     }
   }
   const tabNav = (
@@ -309,8 +342,8 @@ export default function Publish() {
       <div style={{ flex: 1, background: "none" }}></div>
       <div className="controls">
         <Button className="btn--sm btn--blue" variant="primary" onClick={handleSave}>
-          Publish
-        </Button>>
+          Save
+        </Button>
         <Button className="btn--sm btn--blue" variant="primary" onClick={handlePublish}>
           Publish
         </Button>

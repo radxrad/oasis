@@ -96,20 +96,63 @@ export async function createAPI(path, strapiObj = {}, options = {}) {
  * @param {Object} options Options passed to fetch
  * @returns Parsed API call response
  */
-export async function updateAPI(path, strapiObj = {}, options = {}) {
+export async function updateAPI(path, strapiDocId, strapiObj = {}, options = {}) {
+    const body = JSON.stringify({data: strapiObj});
+    const mergedOptions = {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+
+            "Authorization": getStrapiAuth()
+        },
+        ...options,
+        body: body
+    };
+
+    // Build request URL
+
+    const requestUrl = `${getStrapiURL(
+        `/api${path}/${strapiDocId}`
+    )}`;
+
+    // Trigger API call
+    const response = await fetch(requestUrl, mergedOptions);
+
+    // Handle response
+    if (!response.ok) {
+        console.error(response.statusText);
+        throw new Error(`An error occured please try again`);
+    }
+    const data = await response.json();
+    return data;
+}
+
+
+/**
+ * Helper to make POST requests to Strapi API endpoints
+ * @param {string} path Path of the API route
+ * @param {Object} json object, will be stringified
+ * @param {Object} options Options passed to fetch
+ * @returns Parsed API call response
+ */
+export async function uploadAPI(path, strapiObj = {}, options = {}) {
+    const body = JSON.stringify({data: strapiObj});
+
     // Merge default and user options
     const mergedOptions = {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
+            "Authorization": getStrapiAuth()
         },
         ...options,
+        body: body
     };
 
     // Build request URL
-    const body = JSON.stringify(strapiObj);
+
     const requestUrl = `${getStrapiURL(
-        `/api${path}`
+        `/api/upload${path}`
     )}`;
 
     // Trigger API call

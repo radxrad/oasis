@@ -39,9 +39,9 @@ export default function Read() {
   // const [reviews, setReviews] = useState([
   const [reviews] = useState([{ user: "Aa", text: "testing", rating: 3 }]);
 
-  const [micropubs, setMicropubs] = useState();
+  const [micropub, setMicropub] = useState();
   const [categories, setCategories ]= useState([]);
-  const [keywords, setKeywords ]= useState([]);
+  const [keywords, setKeywords]= useState([]);
   // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
   const [isSignedIn,setIsSignedIn] = useState(localStorage.getItem("user"));
   const [username,setUsername] = useState();
@@ -97,7 +97,7 @@ export default function Read() {
       })
       ]);
       const micros  = await micropubRes;
-      setMicropubs(micros.data[0]);
+      setMicropub(micros.data[0]);
     }
     fetchData()
         // make sure to catch any error
@@ -150,6 +150,37 @@ export default function Read() {
       </Form.Group>
     </Form>
   );
+ const renderMpBody = (micropub)=> {
+
+     const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: "";
+     return  <MicropubBody
+         title={micropub.attributes.title}
+         figure={getStrapiURL()+micropub.attributes.files?.data[0].attributes.url}
+         body={micropub.attributes.body}
+         refList={micropub.attributes?.citations}
+     />
+  }
+  const renderWriter= (micropub) => {
+      const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: "";
+      return <a href={micropub.attributes.writer.data.attributes.email} key={micropub.attributes.writer.data.id}>
+        <img
+            src={getStrapiURL() + file}
+            className="avatar--sm"
+            alt="avatar"
+        />
+        {micropub.attributes.writer.data.attributes.name}
+      </a>
+
+  }
+  const renderFileList = (micropub) => {
+    const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data: [];
+    micropub.attributes.files.data.map((file) => (
+        <a href={getStrapiURL() + file.attributes.url} key={file.id}>
+          {file.attributes.name}
+          <BsCloudDownload className="sidebar__icon"/>
+        </a>
+    ))
+  }
 
   return (
     <div id="read" className="max-window">
@@ -157,13 +188,7 @@ export default function Read() {
         <AddQuestion close={() => setShowQuestion(false)} />
       </Modal>
       <div>
-        { micropubs ?
-          <MicropubBody
-              title={micropubs.attributes.title}
-              figure={getStrapiURL()+micropubs.attributes.files?.data[0].attributes.url}
-              body={micropubs.attributes.body}
-              refList={micropubs.attributes?.citations}
-          /> : ""
+        { micropub ? renderMpBody(micropub) : ""
 
         }
 
@@ -187,35 +212,20 @@ export default function Read() {
         <div className="info">
           <div className="publish-time">
             <div className="label">Published:</div>
-            <div className="time">{time}</div>
+            <div className="time">2222222222</div>
           </div>
           <div className="authors">
             <div className="label">Author(s):</div>
             <div className="list">
-              {micropubs && micropubs.attributes.writer
-                ?   <a href={micropubs.attributes.writer.data.attributes.email} key={micropubs.attributes.writer.data.id}>
-                          <img
-                              src={getStrapiURL()+micropubs.attributes.writer.data.attributes.picture.data.attributes.url}
-                              className="avatar--sm"
-                              alt="avatar"
-                          />
-                          {micropubs.attributes.writer.data.attributes.name}
-                        </a>
-
-
-                : ""}
+              {micropub && micropub.attributes.writer
+                  ? renderWriter(micropub): ""}
             </div>
           </div>
           <div className="data">
             <div className="label">Data and Resources:</div>
             <div className="list">
-              {micropubs && micropubs.attributes.files
-                ? micropubs.attributes.files.data.map((file) => (
-                    <a href={getStrapiURL()+file.attributes.url} key={file.id}>
-                      {file.attributes.name}
-                      <BsCloudDownload className="sidebar__icon" />
-                    </a>
-                  ))
+              {micropub && micropub.attributes.files
+                ? renderFileList(micropub)
                 : ""}
             </div>
           </div>
