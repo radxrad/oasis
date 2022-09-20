@@ -95,10 +95,10 @@ export default function Publish() {
     setErrors(hasErrors)
     let title =titleValue
 
-    // const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    // const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
-    const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
-    const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
+    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
+    // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
     // let raw = `<div class="radquestion" >
     //                <div class='abstract'> ${abstractHtml} </div>
     //                 <div class="body">${bodyHtml} </div>
@@ -154,10 +154,10 @@ export default function Publish() {
     setErrors(hasErrors)
     let title =titleValue
 
-    // const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    // const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
-    const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
-    const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
+    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
+    // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
     // let raw = `<div class="radquestion" >
     //                <div class='abstract'> ${abstractHtml} </div>
     //                 <div class="body">${bodyHtml} </div>

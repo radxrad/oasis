@@ -8,7 +8,7 @@ export default function MicropubCard(props) {
         <Card.Img src={props.figure} alt="img" />
         <div>
           <Card.Title>{props.title}</Card.Title>
-          <Card.Text>{props.abstract}</Card.Text>
+          <Card.Text dangerouslySetInnerHTML={{__html:props.abstract}} ></Card.Text>
         </div>
       </div>
       <div className="authors">
