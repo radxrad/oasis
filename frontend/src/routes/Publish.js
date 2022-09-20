@@ -8,6 +8,7 @@ import MicropubBody from "../components/MicropubBody";
 import { EditorState,convertToRaw } from "draft-js";
 // import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import { draftToMarkdown } from 'markdown-draft-js';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
@@ -94,8 +95,10 @@ export default function Publish() {
     setErrors(hasErrors)
     let title =titleValue
 
-    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    // const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
+    const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
     // let raw = `<div class="radquestion" >
     //                <div class='abstract'> ${abstractHtml} </div>
     //                 <div class="body">${bodyHtml} </div>
@@ -151,8 +154,10 @@ export default function Publish() {
     setErrors(hasErrors)
     let title =titleValue
 
-    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    // const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
+    const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
     // let raw = `<div class="radquestion" >
     //                <div class='abstract'> ${abstractHtml} </div>
     //                 <div class="body">${bodyHtml} </div>

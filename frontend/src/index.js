@@ -16,6 +16,7 @@ import * as serviceWorker from "./serviceWorker";
 import Test from "routes/Test";
 import CustomNavbar from "components/CustomNavbar";
 import axios from "axios";
+import UserProvider from './context/user';
 
 function App() {
   const [user, setUser] = useState({ profilePic: "" });
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <Router history={history}>
+      <UserProvider>
       <CustomNavbar user={user} auth={auth} />
       <Switch>
         <Route exact path={paths.home} component={Home} />
@@ -54,6 +56,7 @@ function App() {
         <Route path={paths.test} component={Test} />
         <Route path={paths.about} component={About} />
       </Switch>
+      </UserProvider>
     </Router>
   );
 }
