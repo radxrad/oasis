@@ -5,7 +5,9 @@ export default function MicropubCard(props) {
   return (
     <Card className="micropub" onClick={() => history.push(`/read/${props.id}`)}>
       <div className="content">
-        <Card.Img src={props.figure} alt="img" />
+          { props.figure && <Card.Img src={props.figure} alt="img" />
+          }
+
         <div>
           <Card.Title>{props.title}</Card.Title>
           <Card.Text dangerouslySetInnerHTML={{__html:props.abstract}} ></Card.Text>

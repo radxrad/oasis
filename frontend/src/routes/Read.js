@@ -152,16 +152,17 @@ export default function Read() {
   );
  const renderMpBody = (micropub)=> {
 
-     const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: "";
+     let file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: undefined;
+     file = file? getStrapiURL(file): file;
      return  <MicropubBody
          title={micropub.attributes.title}
-         figure={getStrapiURL()+file}
+         figure={file}
          body={micropub.attributes.body}
          refList={micropub.attributes?.citations}
      />
   }
   const renderWriter= (micropub) => {
-      const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: "";
+      const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: undefined;
       return <a href={micropub.attributes.writer.data.attributes.email} key={micropub.attributes.writer.data.id}>
         <img
             src={getStrapiURL() + file}

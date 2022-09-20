@@ -8,7 +8,8 @@ export default function MicropubBody(props) {
     <div className="micropub-body">
       <div className="heading">{title}</div>
       <div className="content">
-        <Image src={figure} alt="figure" rounded></Image>
+
+          { figure && <Image src={figure} alt="figure" rounded></Image> }
         <div className="text" dangerouslySetInnerHTML={{__html:body}} ></div>
         <ListGroup className="ref-list">
           {refList && refList.length > 0 ? (

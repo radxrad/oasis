@@ -12,6 +12,7 @@ export function getStrapiURL(path = "") {
         process.env.REACT_APP_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
     }${path}`;
 }
+
 export function getPublicURL(path = "") {
     return `${
         process.env.REACT_APP_PUBLIC_URL || "http://localhost:3000"

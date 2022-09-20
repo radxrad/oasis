@@ -181,9 +181,10 @@ export default function Home(apikey, apiusername) {
           <div className="mp-list">
             {micropubs
               ? micropubs.sort(() => Math.random() - 0.5).slice(0, 3).map((item, i) => {
-                const file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url: "";
+                let file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url:undefined;
+                 file = file? getStrapiURL(file): file;
                return   <MicropubCard
-                    figure={getStrapiURL(file)}
+                    figure={file}
                     authorIds={item.attributes.writer.data?.id }
                     title={item.attributes.title}
                     abstract={item.attributes.abstract}
