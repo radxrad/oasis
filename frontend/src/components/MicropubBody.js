@@ -9,7 +9,7 @@ export default function MicropubBody(props) {
       <div className="heading">{title}</div>
       <div className="content">
         <Image src={figure} alt="figure" rounded></Image>
-        <div className="text">{body}</div>
+        <div className="text" dangerouslySetInnerHTML={{__html:body}} ></div>
         <ListGroup className="ref-list">
           {refList && refList.length > 0 ? (
             <h6 className="heading">References</h6>
