@@ -9,7 +9,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
  */
 export function getStrapiURL(path = "") {
     return `${
-        process.env.REACT_APP_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
+        process.env.REACT_APP_PUBLIC_STRAPI_API_URL || "http://localhost:1337" 
     }${path}`;
 }
 

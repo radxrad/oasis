@@ -1,54 +1,97 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { AiFillPicture, AiOutlineCheckCircle } from "react-icons/ai";
 import "react-dropzone-uploader/dist/styles.css";
 import Dropzone from "react-dropzone-uploader";
+
 import { Table } from "react-bootstrap";
+import {getStrapiAuth, getStrapiURL} from "../lib/api";
 
-function ResourcesTab(props) {
-    let resources = props.resources
-    let setResources = props.setResources
+const ResourcesTab = (props)  => {
+    let resources = props.resources;
+    let setResources = props.setResources;
 
-    function onDrop(acceptedFiles) {
-        var formData = new FormData();
+    // const getUploadParams = ({ meta }) => {
+    //     const headers= {
+    //
+    //         "Authorization": getStrapiAuth()
+    //     };
+    //     return { url: getStrapiURL('/api/upload'), headers: headers };
+    // };
+    const handleChangeStatus = ({ meta, file }, status) => { console.log(status, meta, file); };
 
-        acceptedFiles.forEach(file => {
-            formData.append('files[]', file);
-        })
+    const handleSubmit = async (files, allFiles) => {
+            console.log(files.map(f => f.meta));
+           // allFiles.forEach(f => f.remove());
 
-        fetch('api/upload', {
-            method: 'POST',
-            headers: {
-                //'Content-type': 'application/json; charset=UTF-8'
-            },
-            // body: JSON.stringify(form)
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                resources.push(data)
-                //setResources(resources)
-                // if(data.success) {
-                //     navigate('/message?d=postcreated')
-                // } else {
-                //     navigate('/message?d=postfail')
-                // }
-            })
-    }
+                var formData = new FormData();
+
+                allFiles.forEach(fileWithMeta => {
+                    formData.append('files', fileWithMeta.file);
+                });
+
+                await fetch(getStrapiURL('/api/upload'), {
+                    method: 'POST',
+                    headers: {
+                        //'Content-type': 'application/json; charset=UTF-8'
+                        "Authorization": getStrapiAuth()
+                    },
+                    // body: JSON.stringify(form)
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        resources.push(data)
+                        //setResources(resources)
+                        // if(data.success) {
+                        //     navigate('/message?d=postcreated')
+                        // } else {
+                        //     navigate('/message?d=postfail')
+                        // }
+                    });
+
+        };
+
+    // const onDrop = useCallback((acceptedFiles) => {
+    //     var formData = new FormData();
+    //
+    //     acceptedFiles.forEach(file => {
+    //         formData.append('files[]', file);
+    //     });
+    //
+    //     fetch('api/upload', {
+    //         method: 'POST',
+    //         headers: {
+    //             //'Content-type': 'application/json; charset=UTF-8'
+    //         },
+    //         // body: JSON.stringify(form)
+    //         body: formData
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             resources.push(data)
+    //             //setResources(resources)
+    //             // if(data.success) {
+    //             //     navigate('/message?d=postcreated')
+    //             // } else {
+    //             //     navigate('/message?d=postfail')
+    //             // }
+    //         });
+    // } , []);
 
 
 
   return (
     <div className="resources">
       <Dropzone
-        onDrop={(acceptedFiles) => onDrop(acceptedFiles)}
-        maxSize={10000000}
-        multiple
+
+          onChangeStatus={handleChangeStatus}
+          onSubmit={handleSubmit}
         accept=".jpg, .png, .pdf, .csv, .tsv, .xlsx"
       >
-        {({ getRootProps, getInputProps }) => (
+        { ({ getRootProps, getInputProps }) => (
           <section className="dropzone">
-            <input {...getInputProps()} />
-            <div {...getRootProps()}>
+            <input {...getInputProps() } />
+            <div {...getRootProps() }>
               <AiFillPicture />
               <p className="label">Drag Resources Here</p>
               <p className="upload">Or select from your computer...</p>
@@ -58,7 +101,7 @@ function ResourcesTab(props) {
               </div>
             </div>
           </section>
-        )}
+        ) }
       </Dropzone>
         <div className="file-list">
             <Table responsive>
