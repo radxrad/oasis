@@ -1,5 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import {fetchAPI} from "../lib/api";
+
+
 
 export default function Question(props) {
   const num = props.ansNum;

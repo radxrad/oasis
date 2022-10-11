@@ -12,12 +12,22 @@ export function AddReference(props) {
   const [refInput, setRefInput] = useState("");
   const [refError, setRefError] = useState("");
   const { parent, addRef, editorState, setEditorState, refIndex } = props;
+// so elements with multiple event handlers aren't unnecessarily
+  // called more than once(ie. SyntheticEvent Bubbling)
+   const stopEventPropagationTry = (event) => {
+    if (event.target === event.currentTarget) {
+      event.stopPropagation();
+    }
+  };
 
   const toggleShow = () => {
     let popup = document.getElementById("ref-popup-" + parent);
     popup.classList.toggle("hidden");
   };
-
+  const wrappedRefInput= (e) => {
+    stopEventPropagationTry(e);
+    setRefInput(e.target.value);
+  }
   function addRefMark(index) {
     if (!editorState) {
       console.log("no mark");
@@ -81,7 +91,7 @@ export function AddReference(props) {
               placeholder="Enter code"
               name="embeddedLink"
               value={refInput}
-              onChange={(e) => setRefInput(e.target.value)}
+              onChange={(e) => setRefInput(e)}
             />
             <span className="rdw-image-mandatory-sign">*</span>
           </span>
@@ -91,7 +101,7 @@ export function AddReference(props) {
           <button
             type="button"
             className="rdw-embedded-modal-btn"
-            onClick={() => addReference(refInput)}
+            onClick={(e) => addReference(e, refInput)}
           >
             Add
           </button>

@@ -12,11 +12,14 @@ import { draftToMarkdown } from 'markdown-draft-js';
 import VisibilitySelector from "../components/VisibilitySelector";
 import ResourcesTab from "../components/ResourcesTab";
 import TextEditor from "../components/TextEditor";
-import {fetchAPI, getStrapiURL, createAPI, updateAPI} from "../lib/api";
+import {fetchAPI, getStrapiURL, createAPI, updateAPI, getStrapiAuth} from "../lib/api";
 import slugify from "slugify";
+import {forEach} from "react-bootstrap/ElementChildren";
+//import Micropub from "../context/Micropub";
 
 export default function Publish() {
   let navigate = useHistory();
+  //const micropubContext = useContext(Micropub);
   // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
   const [editingValue, setEditingValue] = useState(false); // set to true after save or edit
   const [strapiDocId, setStrapiDocId] = useState()
@@ -34,15 +37,35 @@ export default function Publish() {
 
   const handleErrorClose = () => setShowError(false);
   const handleErrorShow = () => setShowError(true);
+  const stopEventPropagationTry = (event) => {
+    if (event.target === event.currentTarget) {
+      try {
+        event.stopPropagation();
+      } catch (e) {
+        console.log(e);
+      }
 
-  const handleSelect = (e) => setVisibility(e);
-  const handleAbstractChange = (e) => setAbstractValue(e);
-  const handleBodyChange = (e) => setBodyValue(e);
+    }
+  };
+  const handleSelect = (e) =>{
+    stopEventPropagationTry(e);
+    setVisibility(e);
+  }
+  const handleAbstractChange = (e) => {
+    stopEventPropagationTry(e);
+    setAbstractValue(e);
+  }
+  const handleBodyChange = (e) => {
+    stopEventPropagationTry(e);
+    setBodyValue(e);
+  }
   const handleTitleChange=  (event) =>{
+    stopEventPropagationTry(event);
     setTitleValue( event.target.value);
   }
   //const micropub = text.micropub;
   const [micropub, setMicropub] = useState([]);
+  const [resources,SetResources] = useState([]);
   const [categories, setCategories ]= useState([]);
   const [keywords, setKeywords ]= useState([]);
   // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
@@ -68,8 +91,8 @@ export default function Publish() {
     //   });
     const fetchData = async () => {
       const [ categoriesRes, keywordRes, homepageRes] = await Promise.all([
-        fetchAPI("/categories", { populate: "*" }),
-        fetchAPI("/keywords", { populate: "*" }),
+        fetchAPI("/categories", { populate:["name", "slug"]  }),
+        fetchAPI("/keywords", { populate:["name", "slug"]  }),
         fetchAPI("/homepage", {
           populate: {
             hero: "*",
@@ -87,146 +110,289 @@ export default function Publish() {
         // make sure to catch any error
         .catch(console.error);
   }, []);
+  const fileRefs = (fileList) => {
+    let data = new FormData()
 
-  const handleSave = (e) => {
-    var form = e.target
-    // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
-    const hasErrors = false
-    setErrors(hasErrors)
-    let title =titleValue
-
-    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
-    // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
-    // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
-    // let raw = `<div class="radquestion" >
-    //                <div class='abstract'> ${abstractHtml} </div>
-    //                 <div class="body">${bodyHtml} </div>
-    //                 <div class="referenceList">${refList}</div>
-    //                 <div class="resources">${resources}</div>
-    //              </div>
-    //   `
-  //  let tags = keywordsArray
-    //let title =convertToRaw(abstractValue.getCurrentContent())
-
-    // let raw =convertToRaw(bodyValue.getCurrentContent())
-    // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
-   // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]});
-    let slug = slugify(titleValue)
-    const mpObj = {
-      "title": titleValue,
-      "abstract": abstractHtml,
-      "body": bodyHtml,
-      "keywords": keywords,
-      "refList": refList,
-      "slug":slug
-
-    };
-    if(!errors) {
-      ///setFetching(true)
-      createAPI('/micropublications', mpObj)
-          // THIS IS HANDLE CREATE
-          .then(data => {
-            if(data.data.attributes.slug) {
-              //navigate('/message?d=postcreated')
-              setEditingValue(true)
-              setStrapiDocId(data.data.id)
-              setErrors("Saved")
-              handleErrorShow()
-
-
-            } else {
-              // navigate('/message?d=postfail')
-              setErrors(errors)
-              handleErrorShow()
-            }
-          }).catch(err => {
-        console.log(err)
-        handleErrorShow()
-      })
-    }
+    return ["25"]
   }
-  const handlePublish = (e) => {
+  const handleFileUpload = async (allFiles, pubId) => {
+    //console.log(files.map(f => f.meta));
+    // allFiles.forEach(f => f.remove());
+  if (allFiles === undefined) return;
 
-    var form = e.target
-    // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
-    const hasErrors = false
-    setErrors(hasErrors)
-    let title =titleValue
+    var formData = new FormData();
+    formData.append('ref', 'api::micropublication.micropublication');
+    formData.append('field', 'files');
+    formData.append('refId',pubId);
+    allFiles.forEach(fileWithMeta => {
+      formData.append('files', fileWithMeta.file);
+    });
 
-    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
-    // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
-    // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
-    // let raw = `<div class="radquestion" >
-    //                <div class='abstract'> ${abstractHtml} </div>
-    //                 <div class="body">${bodyHtml} </div>
-    //                 <div class="referenceList">${refList}</div>
-    //                 <div class="resources">${resources}</div>
-    //              </div>
-    //   `
-    // let tags = keywordsArray
-    //let title =convertToRaw(abstractValue.getCurrentContent())
+    await fetch(getStrapiURL('/api/upload'), {
+      method: 'POST',
+      headers: {
+        //'Content-type': 'application/json; charset=UTF-8'
+        "Authorization": getStrapiAuth()
+      },
+      // body: JSON.stringify(form)
+      body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+          resources.push(data)
+          //setResources(resources)
+          // if(data.success) {
+          //     navigate('/message?d=postcreated')
+          // } else {
+          //     navigate('/message?d=postfail')
+          // }
+        });
 
-    // let raw =convertToRaw(bodyValue.getCurrentContent())
-    // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
-    // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]})
-    let slug = slugify(titleValue)
+  };
+  function fileUploadList(){
+    const list = resources.map( r => {
+      return r.id;
+    });
+    return list;
+  };
+  function buildMicropub(){
+    let mp = micropub;
+    let slug = slugify(titleValue);
+    if (mp.slug) {
+      slug = mp.slug;
+    }
+    let title =titleValue;
+
+    const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
+    const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()));
+
+    //let mpFiles = fileRefs(filesValue);
+   // let mpFiles =fileUploadList();
     const mpObj = {
       "title": titleValue,
       "abstract": abstractHtml,
       "body": bodyHtml,
-      "keywords": keywords,
+     // "keywords": keywords,
       "refList": refList,
       "slug":slug,
+     // "files": mpFiles,
       "writer": 1 // for now
 
     };
+    return mpObj;
+  }
+ function createMp(mpObj){
+   createAPI('/micropublications', mpObj)
+       // THIS IS HANDLE CREATE
+       .then(data => {
+         if(data.data.attributes.slug) {
+           //navigate('/message?d=postcreated')
+           setEditingValue(true);
+           setStrapiDocId(data.data.id);
+           setErrors("Saved");
+           if (filesValue !== undefined){
+             handleFileUpload(filesValue,strapiDocId);
+           };
+
+           handleErrorShow()
+
+
+         } else {
+           // navigate('/message?d=postfail')
+           setErrors(errors)
+           handleErrorShow()
+         }
+       }).catch(err => {
+     console.log(err)
+     handleErrorShow()
+   })
+ }
+ function updateMp(mpObj, slug ){
+   updateAPI('/micropublications', strapiDocId,  mpObj)
+       // THIS IS HANDLE CREATE
+       .then(data => {
+
+         if(data.data.attributes.slug) {
+           //navigate('/message?d=postcreated')
+           if (filesValue !== undefined){
+             handleFileUpload(filesValue,strapiDocId);
+           };
+           navigate.push({
+             pathname: `/Read/${data.data.attributes.slug}`,
+
+           });
+
+
+         } else {
+           // navigate('/message?d=postfail')
+           handleErrorShow();
+         }
+       }).catch(err => {
+     console.log(err);
+     handleErrorShow();
+   })
+ }
+  const handleSave = (e) => {
+    stopEventPropagationTry(e);
+    var form = e.target;
+    // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
+    const hasErrors = false;
+    setErrors(hasErrors);
+  //   let title =titleValue
+  //
+  //   const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+  //   const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+  //   // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
+  //   // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
+  //   // let raw = `<div class="radquestion" >
+  //   //                <div class='abstract'> ${abstractHtml} </div>
+  //   //                 <div class="body">${bodyHtml} </div>
+  //   //                 <div class="referenceList">${refList}</div>
+  //   //                 <div class="resources">${resources}</div>
+  //   //              </div>
+  //   //   `
+  // //  let tags = keywordsArray
+  //   //let title =convertToRaw(abstractValue.getCurrentContent())
+  //
+  //   // let raw =convertToRaw(bodyValue.getCurrentContent())
+  //   // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
+  //  // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]});
+  //   let slug = slugify(titleValue)
+  //
+  //   const mpObj = {
+  //     "title": titleValue,
+  //     "abstract": abstractHtml,
+  //     "body": bodyHtml,
+  //     "keywords": keywords,
+  //     "refList": refList,
+  //
+  //   };
+
+    let mpObj = buildMicropub();
+    let slug = mpObj.slug;
+    if(!errors) {
+      ///setFetching(true)
+      // createAPI('/micropublications', mpObj)
+      //     // THIS IS HANDLE CREATE
+      //     .then(data => {
+      //       if(data.data.attributes.slug) {
+      //         //navigate('/message?d=postcreated')
+      //         setEditingValue(true)
+      //         setStrapiDocId(data.data.id)
+      //         setErrors("Saved")
+      //         handleFileUpload(filesValue,strapiDocId)
+      //         handleErrorShow()
+      //
+      //
+      //       } else {
+      //         // navigate('/message?d=postfail')
+      //         setErrors(errors)
+      //         handleErrorShow()
+      //       }
+      //     }).catch(err => {
+      //   console.log(err)
+      //   handleErrorShow()
+      // })
+      if(!errors) {
+        ///setFetching(true)
+        if (editingValue ){
+          updateMp(mpObj, slug);
+        } else  {
+        createMp(mpObj);
+        }
+      }
+    }
+  }
+
+  const handlePublish = (e) => {
+    stopEventPropagationTry(e);
+    var form = e.target
+    // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
+    const hasErrors = false
+    setErrors(hasErrors)
+    // let title =titleValue
+    //
+    // const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
+    // const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
+    // // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
+    // // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
+    // // let raw = `<div class="radquestion" >
+    // //                <div class='abstract'> ${abstractHtml} </div>
+    // //                 <div class="body">${bodyHtml} </div>
+    // //                 <div class="referenceList">${refList}</div>
+    // //                 <div class="resources">${resources}</div>
+    // //              </div>
+    // //   `
+    // // let tags = keywordsArray
+    // //let title =convertToRaw(abstractValue.getCurrentContent())
+    //
+    // // let raw =convertToRaw(bodyValue.getCurrentContent())
+    // // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
+    // // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]})
+    // let slug = slugify(titleValue)
+    // const mpObj = {
+    //   "title": titleValue,
+    //   "abstract": abstractHtml,
+    //   "body": bodyHtml,
+    //   "keywords": keywords,
+    //   "refList": refList,
+    //   "slug":slug,
+    //   "writer": 1 // for now
+    //
+    // };
+    let mpObj = buildMicropub();
+    let slug = mpObj.slug;
     if(!errors) {
       ///setFetching(true)
       if (editingValue ){
-        updateAPI('/micropublications', slug,  mpObj)
-            // THIS IS HANDLE CREATE
-            .then(data => {
-
-              if(data.data.attributes.slug) {
-                //navigate('/message?d=postcreated')
-                navigate.push({
-                  pathname: `/Read/${data.data.attributes.slug}`,
-
-                })
-
-
-              } else {
-                // navigate('/message?d=postfail')
-                handleErrorShow()
-              }
-            }).catch(err => {
-          console.log(err)
-          handleErrorShow()
-        })
-      } else {
-        createAPI('/micropublications', mpObj)
-            // THIS IS HANDLE CREATE
-            .then(data => {
-
-              if(data.data.attributes.slug) {
-                //navigate('/message?d=postcreated')
-                navigate.push({
-                  pathname: `/Read/${data.data.attributes.slug}`,
-
-                })
-
-
-              } else {
-                // navigate('/message?d=postfail')
-                handleErrorShow()
-              }
-            }).catch(err => {
-          console.log(err)
-          handleErrorShow()
-        })
+        updateMp(mpObj, slug);
+      } else  {
+        createMp(mpObj);
       }
+
+      // if (editingValue ){
+      //   updateAPI('/micropublications', slug,  mpObj)
+      //       // THIS IS HANDLE CREATE
+      //       .then(data => {
+      //
+      //         if(data.data.attributes.slug) {
+      //           //navigate('/message?d=postcreated')
+      //           navigate.push({
+      //             pathname: `/Read/${data.data.attributes.slug}`,
+      //
+      //           })
+      //
+      //
+      //         } else {
+      //           // navigate('/message?d=postfail')
+      //           handleErrorShow();
+      //         }
+      //       }).catch(err => {
+      //     console.log(err);
+      //     handleErrorShow();
+      //   });
+      // } else {
+      //   createAPI('/micropublications', mpObj)
+      //       // THIS IS HANDLE CREATE
+      //       .then(data => {
+      //
+      //         if(data.data.attributes.slug) {
+      //           //navigate('/message?d=postcreated')
+      //           navigate.push({
+      //             pathname: `/Read/${data.data.attributes.slug}`,
+      //
+      //           })
+      //
+      //
+      //         } else {
+      //           // navigate('/message?d=postfail')
+      //           handleErrorShow()
+      //         }
+      //       }).catch(err => {
+      //     console.log(err)
+      //     handleErrorShow()
+      //   })
+      // }
 
     }
   }
@@ -264,7 +430,7 @@ export default function Publish() {
 
   const tabContent = (
     <div className="tab__content">
-      <Tab.Content defaultActiveKey={activeTab}>
+      <Tab.Content >
         <Tab.Pane eventKey="#abstract" active={"#abstract" === activeTab}>
           <div className="abstract">
             <input
@@ -283,7 +449,8 @@ export default function Publish() {
           </div>
         </Tab.Pane>
         <Tab.Pane eventKey="#resources" active={"#resources" === activeTab}>
-          <ResourcesTab />
+
+          <ResourcesTab props={{filesValue,setFilesValue}} delayUpdate='true'/>
         </Tab.Pane>
         <Tab.Pane eventKey="#body" active={"#body" === activeTab}>
           <div className="body-tab">

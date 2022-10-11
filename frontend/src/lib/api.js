@@ -64,6 +64,11 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     // Handle response
     if (!response.ok) {
         console.error(response.statusText);
+        try {
+            const data = await response.json();
+        } catch (e){
+            console.log ('no data returned');
+        };
         throw new Error(`An error occured please try again`);
     }
     const data = await response.json();
@@ -104,6 +109,11 @@ export async function createAPI(path, strapiObj = {}, options = {}) {
     // Handle response
     if (!response.ok) {
         console.error(response.statusText);
+        try {
+            const data = await response.json();
+        } catch (e){
+            console.log ('no data returned');
+        };
         throw new Error(`An error occured please try again`);
     }
     const data = await response.json();

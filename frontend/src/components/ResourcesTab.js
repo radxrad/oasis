@@ -5,10 +5,11 @@ import Dropzone from "react-dropzone-uploader";
 
 import { Table } from "react-bootstrap";
 import {getStrapiAuth, getStrapiURL} from "../lib/api";
+import {MicropubContext} from "../context/Micropub";
 
 const ResourcesTab = (props)  => {
-    let resources = props.resources;
-    let setResources = props.setResources;
+    let resources = props.props.filesValue;
+    let setResources = props.props.setFilesValue;
 
     // const getUploadParams = ({ meta }) => {
     //     const headers= {
@@ -17,7 +18,16 @@ const ResourcesTab = (props)  => {
     //     };
     //     return { url: getStrapiURL('/api/upload'), headers: headers };
     // };
-    const handleChangeStatus = ({ meta, file }, status) => { console.log(status, meta, file); };
+    const handleChangeStatus = ({ meta, file }, status, filesWithMeta ) => {
+
+        console.log(status, meta, file);
+        if (filesWithMeta){
+            setResources(filesWithMeta);
+        } else {
+            setResources([file]);
+        }
+
+    };
 
     const handleSubmit = async (files, allFiles) => {
             console.log(files.map(f => f.meta));
@@ -125,7 +135,7 @@ const ResourcesTab = (props)  => {
                             )}
                         </th>
                     </tr>
-                )):""}
+                )):undefined}
                 </tbody>
             </Table><
             /div>
