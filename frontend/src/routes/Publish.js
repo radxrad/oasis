@@ -91,8 +91,8 @@ export default function Publish() {
     //   });
     const fetchData = async () => {
       const [ categoriesRes, keywordRes, homepageRes] = await Promise.all([
-        fetchAPI("/categories", { populate:["name", "slug"]  }),
-        fetchAPI("/keywords", { populate:["name", "slug"]  }),
+        fetchAPI("/categories", {}),
+        fetchAPI("/keywords", {   }),
         fetchAPI("/homepage", {
           populate: {
             hero: "*",
@@ -185,6 +185,7 @@ export default function Publish() {
    createAPI('/micropublications', mpObj)
        // THIS IS HANDLE CREATE
        .then(data => {
+         setMicropub(data.data);
          if(data.data.attributes.slug) {
            //navigate('/message?d=postcreated')
            setEditingValue(true);
@@ -211,22 +212,17 @@ export default function Publish() {
    updateAPI('/micropublications', strapiDocId,  mpObj)
        // THIS IS HANDLE CREATE
        .then(data => {
-
-         if(data.data.attributes.slug) {
-           //navigate('/message?d=postcreated')
+          setMicropub(data.data);
            if (filesValue !== undefined){
              handleFileUpload(filesValue,strapiDocId);
            };
-           navigate.push({
-             pathname: `/Read/${data.data.attributes.slug}`,
+           // navigate.push({
+           //   pathname: `/Read/${data.data.attributes.slug}`,
+           //
+           // });
 
-           });
 
 
-         } else {
-           // navigate('/message?d=postfail')
-           handleErrorShow();
-         }
        }).catch(err => {
      console.log(err);
      handleErrorShow();
@@ -349,7 +345,10 @@ export default function Publish() {
       } else  {
         createMp(mpObj);
       }
+      navigate.push({
+        pathname: `/Read/${slug}`,
 
+      });
       // if (editingValue ){
       //   updateAPI('/micropublications', slug,  mpObj)
       //       // THIS IS HANDLE CREATE
