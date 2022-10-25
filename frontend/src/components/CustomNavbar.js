@@ -12,18 +12,30 @@ import {
 import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import AddQuestion from "components/AddQuestion";
+//import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
+import { removeToken } from "../lib/helpers";
 
 export default function CustomNavbar(props) {
-  function handleSignOut() {
-    localStorage.clear();
-    window.location.replace("/");
-  }
+    const { user } = useAuthContext();
+    //const navigate = useNavigate();
+    const history = useHistory();
+  // function handleSignOut() {
+  //   localStorage.clear();
+  //   window.location.replace("/");
+  // }
+    const handleLogout = () => {
+        removeToken();
+        history.push('/signin');
+       // navigate("/signin", { replace: true });
+    };
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  if (!props.auth)
+  if (!user)
     return (
       <Navbar className="custom-nav" sticky="top">
         <Navbar.Brand className="navbar__brand" href="./">
@@ -75,7 +87,7 @@ export default function CustomNavbar(props) {
           <Dropdown.Item href="/publish">Publish</Dropdown.Item>
           <Dropdown.Item onClick={handleShow}>Ask</Dropdown.Item>
           <Dropdown.Item href="/settings">Settings</Dropdown.Item>
-          <Dropdown.Item onClick={() => handleSignOut()}>
+          <Dropdown.Item onClick={() => handleLogout()}>
             Sign Out
           </Dropdown.Item>
         </DropdownButton>
