@@ -89,9 +89,11 @@ export async function createAPI(path, strapiObj = {}, options = {}) {
     // Merge default and user options
     const mergedOptions = {
         method: 'POST',
+        mode: "cors",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": getStrapiAuth()
+            "Authorization": getStrapiAuth(),
+
         },
         ...options,
         body: body
@@ -130,10 +132,12 @@ export async function updateAPI(path, strapiDocId, strapiObj = {}, options = {})
     const body = JSON.stringify({data: strapiObj});
     const mergedOptions = {
         method: 'PUT',
+        mode: "cors",
         headers: {
             "Content-Type": "application/json",
 
-            "Authorization": getStrapiAuth()
+            "Authorization": getStrapiAuth(),
+
         },
         ...options,
         body: body
@@ -171,9 +175,11 @@ export async function uploadAPI(path, strapiObj = {}, options = {}) {
     // Merge default and user options
     const mergedOptions = {
         method: 'POST',
+        mode: "cors",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": getStrapiAuth()
+            "Authorization": getStrapiAuth(),
+
         },
         ...options,
         body: body

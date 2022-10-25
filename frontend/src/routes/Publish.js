@@ -18,6 +18,7 @@ import {forEach} from "react-bootstrap/ElementChildren";
 //import Micropub from "../context/Micropub";
 
 export default function Publish() {
+  let endpoint = '/micropublications';
   let navigate = useHistory();
   //const micropubContext = useContext(Micropub);
   // Convert these values to html: draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
@@ -182,7 +183,7 @@ export default function Publish() {
     return mpObj;
   }
  function createMp(mpObj){
-   createAPI('/micropublications', mpObj)
+   createAPI(endpoint, mpObj)
        // THIS IS HANDLE CREATE
        .then(data => {
          setMicropub(data.data);
@@ -209,7 +210,7 @@ export default function Publish() {
    })
  }
  function updateMp(mpObj, slug ){
-   updateAPI('/micropublications', strapiDocId,  mpObj)
+   updateAPI(endpoint, strapiDocId,  mpObj)
        // THIS IS HANDLE CREATE
        .then(data => {
           setMicropub(data.data);
