@@ -16,7 +16,7 @@ import {fetchAPI, getStrapiURL, createAPI, updateAPI, getStrapiAuth} from "../li
 import slugify from "slugify";
 import {forEach} from "react-bootstrap/ElementChildren";
 //import Micropub from "../context/Micropub";
-
+import { getToken } from "../lib/helpers";
 export default function Publish() {
   let endpoint = '/micropublications';
   let navigate = useHistory();
