@@ -1,7 +1,7 @@
 import { Button, Form, Container, Row } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
-
+import SignUp from "../routes/SignUp";
 import MicropubCard from "components/MicropubCard";
 import text from "text.json";
 //import history from "history.js";
@@ -139,36 +139,7 @@ export default function Home(apikey, apiusername) {
           {isSignedIn ? (
             ""
           ) : (
-            <Form className="signup__container">
-              <div className="signup__header">Join OASIS</div>
-              <Form.Control
-                type="test"
-                className="signup__textbox"
-                placeholder="First Name"
-              />
-              <Form.Control
-                type="test"
-                className="signup__textbox"
-                placeholder="Last name"
-              />
-              <Form.Control
-                type="email"
-                className="signup__textbox"
-                placeholder="Email"
-              />
-              <Form.Control
-                type="password"
-                className="signup__textbox"
-                placeholder="Password"
-              />
-              <Button
-                className="btn--md"
-                type="submit"
-                onClick={(e) => handleSignUp(e)}
-              >
-                Sign Up
-              </Button>
-            </Form>
+              <SignUp></SignUp>
           )}
         </Row>
 
