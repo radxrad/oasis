@@ -21,15 +21,15 @@ export default function SignUp() {
 
     const handleUsernameChange = (e) => {
         stopEventPropagationTry(e);
-        setUsername(e.value);
+        setUsername(e.target.value);
     };
     const handlepasswordChange = (e) => {
         stopEventPropagationTry(e);
-        setPassword(e.value);
+        setPassword(e.target.value);
     };
     const handleEmailChange = (e) => {
         stopEventPropagationTry(e);
-        setEmail(e.value);
+        setEmail(e.target.value);
     };
     const stopEventPropagationTry = (event) => {
         if (event.target === event.currentTarget) {
@@ -66,12 +66,12 @@ export default function SignUp() {
       );
       const options = {
           method: "POST",
-          url: getStrapiURL('/auth/local/register'),
+          url: getStrapiURL('/api/auth/local/register'),
           mode: "cors",
           headers: { "Content-Type": "application/json", Prefer: "" },
           data: userInput,
       };
-    axios
+    await axios
       .request(options)
       .then(function (response) {
           if (response.data?.error) {

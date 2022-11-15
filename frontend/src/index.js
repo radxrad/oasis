@@ -18,30 +18,31 @@ import CustomNavbar from "components/CustomNavbar";
 import axios from "axios";
 //import UserProvider from './context/user';
 import AuthProvider from "./components/AuthProvider/AuthProvider";
+import {useAuthContext} from "./context/AuthContext";
 
 function App() {
-  const [user, setUser] = useState({ profilePic: "" });
+    const { user, isLoading, setUser } = useAuthContext();
   const auth = JSON.parse(localStorage.getItem("user"));
-  useEffect(() => {
-    if (auth) {
-      const options = {
-        method: "GET",
-        url: `https://stoplight.io/mocks/oasis/oasis/19253909/user/${auth.userId}`,
-        headers: { "Content-Type": "application/json" },
-      };
-
-      axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          setUser(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   if (auth) {
+  //     const options = {
+  //       method: "GET",
+  //       url: `https://stoplight.io/mocks/oasis/oasis/19253909/user/${auth.userId}`,
+  //       headers: { "Content-Type": "application/json" },
+  //     };
+  //
+  //     axios
+  //       .request(options)
+  //       .then(function (response) {
+  //         console.log(response.data);
+  //         setUser(response.data);
+  //       })
+  //       .catch(function (error) {
+  //         console.error(error);
+  //       });
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <Router history={history}>

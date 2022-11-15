@@ -76,7 +76,7 @@ export default function CustomNavbar(props) {
           align={{ lg: "end" }}
           title={
             <img
-              src={props.user.profilePic}
+              src={ user?.picture ? (user?.picture?.url) : ("https://source.unsplash.com/random") }
               drop="down"
               variant="light"
               alt="user avatar"
