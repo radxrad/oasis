@@ -95,18 +95,13 @@ export default function User() {
             </Button>
           </div>
           <ListGroup className="list-group--small">
+            ( micropublications?
             <ListItem
               type="micropub"
               title="Looking at vaccine hesitancy through Behavioural Economics"
             ></ListItem>
-            <ListItem
-              type="micropub"
-              title="Looking at vaccine hesitancy through Behavioural Economics"
-            ></ListItem>
-            <ListItem
-              type="micropub"
-              title="Looking at vaccine hesitancy through Behavioural Economics"
-            ></ListItem>
+
+            )
           </ListGroup>
         </div>
 

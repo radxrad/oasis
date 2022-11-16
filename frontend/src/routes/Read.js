@@ -21,9 +21,11 @@ import moment from "moment";
 import VisibilitySelector from "components/VisibilitySelector";
 import StarRating from "../components/StarRating";
 import {fetchAPI, getStrapiURL} from "../lib/api";
+import {useAuthContext} from "../context/AuthContext";
 
 
 export default function Read() {
+    const { setUser } = useAuthContext();
   const { slug } = useParams(); // router.query;
  // const example = text.micropub;
  // const post = a_question;

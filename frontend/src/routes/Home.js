@@ -8,10 +8,12 @@ import text from "text.json";
 // import posts from "posts.json";
 import axios from "axios";
 import {fetchAPI, getStrapiURL} from '../lib/api';
+import {useAuthContext} from "../context/AuthContext";
 
 
 export default function Home(apikey, apiusername) {
   //const example = text.micropub;
+  const { setUser } = useAuthContext();
   const [micropubs, setMicropubs] = useState([]);
   const [categories, setCategories ]= useState([]);
   const [keywords, setKeywords ]= useState([]);

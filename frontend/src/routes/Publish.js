@@ -17,7 +17,9 @@ import slugify from "slugify";
 import {forEach} from "react-bootstrap/ElementChildren";
 //import Micropub from "../context/Micropub";
 import { getToken } from "../lib/helpers";
+import {useAuthContext} from "../context/AuthContext";
 export default function Publish() {
+  const { setUser } = useAuthContext();
   let endpoint = '/micropublications';
   let navigate = useHistory();
   //const micropubContext = useContext(Micropub);

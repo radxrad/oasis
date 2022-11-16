@@ -6,7 +6,9 @@ import {
   RiGithubLine,
   RiGlobalLine,
 } from "react-icons/ri";
+import {useAuthContext} from "../context/AuthContext";
 function About() {
+  const { setUser } = useAuthContext();
   const team = [
     {
       name: "John Appleseed",
