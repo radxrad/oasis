@@ -95,7 +95,7 @@ export default function Read() {
         filters: {
           slug: slug,
         },
-        populate: ["files", "keyword", "writer.picture", "writer"],
+        populate: ["files", "keyword", "writer.picture", "writer", "ratings"],
       })
       ]);
       const micros  = await micropubRes;

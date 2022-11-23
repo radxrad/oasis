@@ -16,8 +16,8 @@ import Spinner from "react-bootstrap/Spinner";
 export default function User() {
   let navigate = useHistory();
   const { user, isLoading, setUser } = useAuthContext();
-  const {questions, setQuestions} = useState([]);
-  const {micropubs,setMicropubs} = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [micropubs, setMicropubs] = useState([]);
 
   // const user = {
   //   name: "User",
@@ -48,7 +48,7 @@ export default function User() {
     //   });
     const fetchData = async () => {
       const [ questionRes, micropubRes,  homepageRes] = await Promise.all([
-        fetchAPI("/questions", { populate: "*" }),
+        fetchAPI("/questions", { populate: "answers" }),
         fetchAPI("/micropublications", { populate: ["files", "keyword", "writer"] }),
         fetchAPI("/homepage", {
           populate: {
@@ -59,8 +59,9 @@ export default function User() {
       ]);
       const cats = await questionRes;
       const micros  = await micropubRes;
-      setQuestions(cats.data);
+
       setMicropubs(micros.data);
+      setQuestions(cats.data);
     };
 
     fetchData()
@@ -95,13 +96,16 @@ export default function User() {
             </Button>
           </div>
           <ListGroup className="list-group--small">
-            ( micropublications?
-            <ListItem
-              type="micropub"
-              title="Looking at vaccine hesitancy through Behavioural Economics"
+            {  micropubs ?
+                micropubs.map( mp => {
+           return  <ListItem
+                type="micropub"
+                title={mp.attributes.title}
+                slug={mp.attributes.slug}
             ></ListItem>
+          } ):""
 
-            )
+            }
           </ListGroup>
         </div>
 
@@ -114,18 +118,17 @@ export default function User() {
             </Button>
           </div>
           <ListGroup className="list-group--small">
-            <ListItem
-              type="question"
-              title="Looking at vaccine hesitancy through Behavioural Economics"
-            ></ListItem>
-            <ListItem
-              type="answer"
-              title="Looking at vaccine hesitancy through Behavioural Economics"
-            ></ListItem>
-            <ListItem
-              type="question"
-              title="Looking at vaccine hesitancy through Behavioural Economics"
-            ></ListItem>
+            {questions?
+                questions.map( q =>
+                {
+                 return  <ListItem
+                      type="question"
+                      title={q.attributes.title}
+                  ></ListItem>
+                }): ""
+            }
+
+
           </ListGroup>
         </div>
       </div>
@@ -136,30 +139,24 @@ export default function User() {
             <Button className="btn--blue btn--lg">Browse Open Questions</Button>
           </div>
           <ListGroup className="list-group--large">
-            <Question
-              asker={exampleQuestion.asker}
-              title={exampleQuestion.title}
-              uid={exampleQuestion.uid}
-              ansNum={0}
-            />
-            <Question
-              asker={exampleQuestion.asker}
-              title={exampleQuestion.title}
-              uid={exampleQuestion.uid}
-              ansNum={0}
-            />
-            <Question
-              asker={exampleQuestion.asker}
-              title={exampleQuestion.title}
-              uid={exampleQuestion.uid}
-              ansNum={0}
-            />
-            <Question
-              asker={exampleQuestion.asker}
-              title={exampleQuestion.title}
-              uid={exampleQuestion.uid}
-              ansNum={0}
-            />
+
+              {questions?
+                  questions.map( q =>
+                  {
+                    let answerCount = q.attributes.answers ? q.attributes.answers.length : 0
+                    return  <Question
+                        type="question"
+                        title={q.attributes.title}
+                        uid={q.id}
+                        ansNum={answerCount}
+                     //   asker={q.attributes?.user_permissions_users.data.attributes.name}
+                    >
+
+                    </Question>
+                  }): ""
+              }
+
+
           </ListGroup>
         </div>
       </div>

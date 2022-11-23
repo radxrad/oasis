@@ -134,7 +134,7 @@ export default function SignIn() {
           <Form.Control
             type="email"
             className="signup__textbox"
-            placeholder="Email"
+            placeholder="username"
             value={username}
             onChange={handleUsername}
           />
