@@ -188,7 +188,7 @@ export default function Read() {
   return (
     <div id="read" className="max-window">
       <Modal show={showQuestion} onHide={() => setShowQuestion(false)}>
-        <AddQuestion close={() => setShowQuestion(false)} />
+        <AddQuestion close={() => setShowQuestion(false)}  />
       </Modal>
       <div>
         { micropub ? renderMpBody(micropub) : ""

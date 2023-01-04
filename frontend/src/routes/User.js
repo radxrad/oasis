@@ -57,11 +57,11 @@ export default function User() {
           },
         }),
       ]);
-      const cats = await questionRes;
+      const qs = await questionRes;
       const micros  = await micropubRes;
 
       setMicropubs(micros.data);
-      setQuestions(cats.data);
+      setQuestions(qs.data);
     };
 
     fetchData()
@@ -123,7 +123,7 @@ export default function User() {
                 {
                  return  <ListItem
                       type="question"
-                      title={q.attributes.title}
+                      title={q.attributes.question}
                   ></ListItem>
                 }): ""
             }
@@ -146,7 +146,7 @@ export default function User() {
                     let answerCount = q.attributes.answers ? q.attributes.answers.length : 0
                     return  <Question
                         type="question"
-                        title={q.attributes.title}
+                        title={q.attributes.question}
                         uid={q.id}
                         ansNum={answerCount}
                      //   asker={q.attributes?.user_permissions_users.data.attributes.name}

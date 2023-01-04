@@ -10,7 +10,7 @@ const VisibilitySelector = (props) => {
       return (
         <div>
           <BiGlobe />
-          Selete
+          Myself
         </div>
       );
     else if (visibility === "true")
