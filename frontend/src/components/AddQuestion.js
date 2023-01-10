@@ -45,6 +45,7 @@ export default function AddQuestion(props) {
     return createAPI("/questions",submitQ ).then((response)=>{
       console.log(response.data);
       history.push("/user");
+      props.close()
     }).catch((err) => {
       console.log(err);
     });
