@@ -17,6 +17,8 @@ export default function User() {
   let navigate = useHistory();
   const { user, isLoading, setUser } = useAuthContext();
   const [questions, setQuestions] = useState([]);
+  const [questionOpen, setQuestionOpen]= useState(true);
+  const [questionLabel, setQuestionLabel]= useState("Show All Questions");
   const [micropubs, setMicropubs] = useState([]);
 
   // const user = {
@@ -29,6 +31,11 @@ export default function User() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleShowOpenQuestions = () => {
+    setQuestionOpen(!questionOpen);
+    var label = questionOpen ? "Show All Questions": "Show Open Questions";
+    setQuestionLabel(label);
+  }
 
   useEffect( () =>  {
     // const options = {
@@ -99,6 +106,7 @@ export default function User() {
             {  micropubs ?
                 micropubs.map( mp => {
            return  <ListItem
+               key={mp.id}
                 type="micropub"
                 title={mp.attributes.title}
                 slug={mp.attributes.slug}
@@ -122,6 +130,7 @@ export default function User() {
                 questions.map( q =>
                 {
                  return  <ListItem
+                     key={q.id}
                       type="question"
                       title={q.attributes.question}
                   ></ListItem>
@@ -136,19 +145,25 @@ export default function User() {
         <div className="block">
           <div className="heading">
             My Feeds
-            <Button className="btn--blue btn--lg">Browse Open Questions</Button>
+
+            <Button className="btn--blue btn--lg" onClick={handleShowOpenQuestions}>
+              {questionLabel}</Button>
+
           </div>
           <ListGroup className="list-group--large">
 
               {questions?
-                  questions.map( q =>
+                  questions.filter(o => questionOpen ?  o.attributes.open == true: true
+                  ).map( q =>
                   {
                     let answerCount = q.attributes.answers ? q.attributes.answers.length : 0
                     return  <Question
+                        key={q.id}
                         type="question"
                         title={q.attributes.question}
                         uid={q.id}
                         ansNum={answerCount}
+                        open={q.open}
                      //   asker={q.attributes?.user_permissions_users.data.attributes.name}
                     >
 
