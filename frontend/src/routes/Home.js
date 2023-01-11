@@ -127,7 +127,7 @@ export default function Home(apikey, apiusername) {
         <Row className="header">
           <div className="headlines">
             <div className="headline--black mb-4">
-              <b>Get</b> and <b>Share</b> rapid science micropubs for COVID-19
+              <b>Get</b> and <b>Share</b> rapid science  with micropubs
             </div>
             <div className="headline--blue mb-2">
               <b>Get</b> answers on the latest research from other experts in
