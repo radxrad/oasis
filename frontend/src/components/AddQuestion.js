@@ -47,7 +47,7 @@ export default function AddQuestion(props) {
       history.push("/user");
       props.close()
     }).catch((err) => {
-      console.log(err);
+console.log(err);
     });
   };
 

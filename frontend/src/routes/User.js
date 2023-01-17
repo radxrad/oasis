@@ -35,7 +35,7 @@ export default function User() {
     setQuestionOpen(!questionOpen);
     var label = questionOpen ? "Show All Questions": "Show Open Questions";
     setQuestionLabel(label);
-  }
+  };
 
   useEffect( () =>  {
     // const options = {
@@ -153,7 +153,7 @@ export default function User() {
           <ListGroup className="list-group--large">
 
               {questions?
-                  questions.filter(o => questionOpen ?  o.attributes.open == true: true
+                  questions.filter(o => questionOpen ?  o.attributes.open === true : true
                   ).map( q =>
                   {
                     let answerCount = q.attributes.answers ? q.attributes.answers.length : 0
