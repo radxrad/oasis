@@ -18,10 +18,10 @@ import CustomNavbar from "components/CustomNavbar";
 import axios from "axios";
 //import UserProvider from './context/user';
 import AuthProvider from "./components/AuthProvider/AuthProvider";
-import {useAuthContext} from "./context/AuthContext";
+import { useAuthContext } from "./context/AuthContext";
 
 function App() {
-    const { user, isLoading, setUser } = useAuthContext();
+  const { user, isLoading, setUser } = useAuthContext();
   const auth = JSON.parse(localStorage.getItem("user"));
   // useEffect(() => {
   //   if (auth) {
@@ -47,17 +47,17 @@ function App() {
   return (
     <Router history={history}>
       <AuthProvider>
-      <CustomNavbar user={user} auth={auth} />
-      <Switch>
-        <Route exact path={paths.home} component={Home} />
-        <Route path={paths.signIn} component={SignIn} />
-        <Route path={paths.signUp} component={SignUp} />
-        <Route path={paths.user} component={User} />
-        <Route path={paths.read} component={Read} />
-        <Route path={paths.publish} component={Publish} />
-        <Route path={paths.test} component={Test} />
-        <Route path={paths.about} component={About} />
-      </Switch>
+        <CustomNavbar user={user} auth={auth} />
+        <Switch>
+          <Route exact path={paths.home} component={Home} />
+          <Route path={paths.signIn} component={SignIn} />
+          <Route path={paths.signUp} component={SignUp} />
+          <Route path={paths.user} component={User} />
+          <Route path={paths.read} component={Read} />
+          <Route path={paths.publish} component={Publish} />
+          <Route path={paths.test} component={Test} />
+          <Route path={paths.about} component={About} />
+        </Switch>
       </AuthProvider>
     </Router>
   );

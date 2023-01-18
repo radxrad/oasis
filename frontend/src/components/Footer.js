@@ -1,24 +1,26 @@
 import React from "react";
 import paths from "paths";
-import ListGroup from 'react-bootstrap/ListGroup';
+import { ListGroup, Navbar, Nav, Container } from 'react-bootstrap';
 
 function Footer() {
   return (
     <div className="footer">
-
-      <div className="logo">
-        <span>OASIS</span>
-        <img alt="radxrad-logo" src="radxrad-logo.svg" />
-      </div>
-            <ListGroup horizontal>
-                <ListGroup.Item>
-                    <a href={paths.about}>About</a></ListGroup.Item>
-                 <ListGroup.Item><a href="/">Contact Us</a></ListGroup.Item>
-                 <ListGroup.Item><a href="/">Terms of Use</a></ListGroup.Item>
-                 <ListGroup.Item><a href="/">Privacy Policy</a></ListGroup.Item>
-            </ListGroup >
-        <div className="seperator"></div>
-                              <div>@2022 OASIS</div>
+      <Navbar id="footer-navbar">
+        <Container>
+          <Navbar.Brand>
+            <img alt="oasis-logo" id="oasis-logo" src="oasis-logo.svg" />
+            <img alt="radxrad-logo" id="radxrad-logo" src="radxrad-logo.svg" />
+          </Navbar.Brand>
+          <Nav id="footer-nav">
+            <Nav.Link href="/">About</Nav.Link>
+            <Nav.Link href="/">Contact Us</Nav.Link>
+            <Nav.Link href="/">Terms of Use</Nav.Link>
+            <Nav.Link href="/">Privacy Policy</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <div className="seperator"></div>
+      <div>@2022 OASIS</div>
 
     </div>
   );
