@@ -18,7 +18,10 @@ import {forEach} from "react-bootstrap/ElementChildren";
 //import Micropub from "../context/Micropub";
 import { getToken } from "../lib/helpers";
 import {useAuthContext} from "../context/AuthContext";
-export default function Publish() {
+
+export default function Publish(props) {
+
+
   const { setUser } = useAuthContext();
   let endpoint = '/micropublications';
   let navigate = useHistory();
@@ -28,6 +31,7 @@ export default function Publish() {
   const [strapiDocId, setStrapiDocId] = useState()
   const [abstractValue, setAbstractValue] = useState(EditorState.createEmpty());
   const [bodyValue, setBodyValue] = useState(EditorState.createEmpty());
+
   const [titleValue, setTitleValue] = useState("");
   const [refList, setRefList] = useState([]);
   const [writerValue, setWriterVal]= useState([]);
@@ -76,7 +80,13 @@ export default function Publish() {
   const [username,setUsername] = useState();
   const [password,setPassword] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+
   useEffect( () =>  {
+    const question = props.history.location.state?.question;
+    const questionid = props.history.location.state?.questionid;
+    if (question !=="" || question === undefined )(
+        setTitleValue(question)
+    );
     // const options = {
     //   method: "GET",
     //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",

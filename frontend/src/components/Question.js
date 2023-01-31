@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
+import { useHistory } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import {createAPI, fetchAPI} from "../lib/api";
-
+import { MdQuestionAnswer } from "react-icons/md";
 
 
 export default function Question(props) {
+    let navigate = useHistory();
     const [question, setQuestion] = useState([]);
     const [keywords, setKeywords ]= useState([]);
 
@@ -23,7 +25,18 @@ export default function Question(props) {
 
         }
     };
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    //const handleShow = () => setShow(true);
+    const handleShowNewPublication = (e) =>{
+        navigate.push({
+            pathname: `/Publish/`,
+            state: {
+                question: props.title,
+                questionid: props.id
+            },
+        });
+    }
     useEffect( () =>  {
         // const options = {
         //   method: "GET",
@@ -92,9 +105,10 @@ export default function Question(props) {
         <p>{props.title}</p>
         <div className="control">
           {num > 1 ? `${num} answers` : `${num} answer`}
-          <Button className="btn--white btn--lg">
-            Answer <span>Question</span>
-          </Button>
+            <Button className="btn--blue btn--lg" onClick={handleShowNewPublication}>
+                <MdQuestionAnswer close={handleClose} />
+                <span>Answer a Question</span>
+            </Button>
         </div>
       </div>
       <div className="arrow-down"></div>
