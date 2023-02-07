@@ -128,6 +128,10 @@ a:active {
   background-color: white;
 }
 
+.custom-nav img {
+  height: 30px;
+}
+
 .btn--blue {
   color: white;
   background-color: var(--blue-100);
@@ -309,7 +313,7 @@ a:active {
 }
 
 .signup__header {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 22px;
   text-align: center;
   color: var(--blue-100);
@@ -318,11 +322,9 @@ a:active {
 .signup__textbox {
   background: #F9F9F9;
   width: 172px;
-  Height: 27px;
-  font-weight: 600;
   line-height: 10px;
   color: var(--gray-80);
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .signup__textbox::placeholder {
@@ -553,6 +555,7 @@ a:active {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(/greens.jpeg);
 }
 
 .signin .form-check-input {
@@ -568,10 +571,10 @@ a:active {
 }
 
 .signin .form-group {
-  height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .signin .form-check {
@@ -594,9 +597,8 @@ a:active {
 }
 
 .listitem {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
+  display: grid;
+  grid-template-columns: 8% 92%;
   align-items: center;
   padding: 30px;
   border-radius: 10px;
@@ -604,7 +606,6 @@ a:active {
   font-size: 16px;
   line-height: 20px;
   width: 100%;
-  height: 80px;
   margin: 10px 0;
 }
 
@@ -652,7 +653,6 @@ a:active {
   display: flex;
   padding: 30px;
   width: 100%;
-  height: 162.35px;
   background: #499FF4;
   border-radius: 10px;
   flex-direction: column;
@@ -2024,6 +2024,15 @@ a:active {
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+  .home .mp-list {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .home .mp-list .card{
+    width: 100%;
+  }
   .micropub-body {
     width: 100%;
   }

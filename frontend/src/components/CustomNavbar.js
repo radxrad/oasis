@@ -39,7 +39,7 @@ export default function CustomNavbar(props) {
     return (
       <Navbar className="custom-nav" sticky="top">
         <Navbar.Brand className="navbar__brand" href="./">
-          OASIS
+          <img src="oasis-logo-blue.svg"/>
         </Navbar.Brand>
         <Nav>
           <Nav.Link className="navbar__signin" href="./signin">
