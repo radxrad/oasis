@@ -87,6 +87,9 @@ export default function Publish(props) {
     if (question !=="" || question === undefined )(
         setTitleValue(question)
     );
+
+    //let params = questionid? {filter:questionid}
+    // https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.html#filtering
     // const options = {
     //   method: "GET",
     //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
@@ -103,7 +106,7 @@ export default function Publish(props) {
     //     console.error(error);
     //   });
     const fetchData = async () => {
-      const [ categoriesRes, keywordRes, homepageRes] = await Promise.all([
+      const [ categoriesRes, keywordRes, homepageRes, questionRes] = await Promise.all([
         fetchAPI("/categories", {}),
         fetchAPI("/keywords", {   }),
         fetchAPI("/homepage", {
@@ -112,9 +115,11 @@ export default function Publish(props) {
             seo: { populate: "*" },
           },
         }),
+          fetchAPI("/question", {})
       ]);
       const cats = await categoriesRes;
       const kws  = await keywordRes;
+      const aq = await questionRes;
       setCategories(cats.data);
       setKeywords(kws.data);
     }

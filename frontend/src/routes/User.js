@@ -3,6 +3,7 @@ import { Button, ListGroup, Container, Modal } from "react-bootstrap";
 import { MdQuestionAnswer } from "react-icons/md";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import ListItem from "components/ListItem";
+import ListQuestion from "components/ListQuestion";
 import Question from "components/Question";
 import history from "history.js";
 import text from "text.json";
@@ -129,11 +130,12 @@ export default function User() {
             {questions?
                 questions.map( q =>
                 {
-                 return  <ListItem
+                 return  <ListQuestion
                      key={q.id}
                       type="question"
                       title={q.attributes.question}
-                  ></ListItem>
+                     slug={q.attributes.slug}
+                  ></ListQuestion>
                 }): ""
             }
 

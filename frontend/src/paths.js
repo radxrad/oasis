@@ -7,6 +7,7 @@ const paths = {
   publish: "/publish",
   test: "/test",
   about: "/about",
+  question: "/question/:slug",
 
 };
 

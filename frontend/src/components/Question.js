@@ -57,7 +57,7 @@ export default function Question(props) {
             const [ questionRes, keywordRes, homepageRes] = await Promise.all([
                 fetchAPI("/questions", {}),
                 fetchAPI("/keywords", {   }),
-                fetchAPI("/homepage", {
+                fetchAPI("/micropubs", {
                     populate: {
                         hero: "*",
                         seo: { populate: "*" },

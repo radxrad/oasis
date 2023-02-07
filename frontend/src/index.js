@@ -11,6 +11,7 @@ import Read from "routes/Read";
 import history from "./history";
 import Publish from "routes/Publish";
 import About from "routes/About";
+import Question from "./routes/Question";
 
 import * as serviceWorker from "./serviceWorker";
 import Test from "routes/Test";
@@ -57,6 +58,7 @@ function App() {
           <Route path={paths.publish} component={Publish} />
           <Route path={paths.test} component={Test} />
           <Route path={paths.about} component={About} />
+          <Route path={paths.question} component={Question} />
         </Switch>
       </AuthProvider>
     </Router>
