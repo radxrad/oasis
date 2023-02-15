@@ -12,7 +12,8 @@ import {
 
 import {useAuthContext} from "../context/AuthContext";
 import {fetchAPI, getStrapiURL} from "../lib/api";
-import MicropubCard from "../components/MicropubCard";
+
+import MicropubCardAnswer from "../components/MicropubCardAnswer";
 
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
@@ -119,7 +120,7 @@ return (
                         {
                                 let file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url:undefined;
                                 file = file? getStrapiURL(file): file;
-                                return   <MicropubCard
+                                return   <MicropubCardAnswer
                                     figure={file}
                                     authorIds={item.attributes.writer.data?.id }
                                     title={item.attributes.title}
@@ -127,7 +128,7 @@ return (
                                     id={item.attributes.slug}
                                     key={item.attributes.slug}
 
-                                ></MicropubCard>
+                                ></MicropubCardAnswer>
                             }
 
 
