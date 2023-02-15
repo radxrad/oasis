@@ -54,9 +54,9 @@ export default function CustomNavbar(props) {
         <Modal show={show} onHide={handleClose}>
           <AddQuestion close={handleClose} />
         </Modal>
-        <Navbar.Brand className="navbar__brand" href="./">
-          OASIS
-        </Navbar.Brand>
+          <Navbar.Brand className="navbar__brand" href="./">
+              <img src="/oasis-logo-blue.svg"/>
+          </Navbar.Brand>
         <Nav>
           <Form className="searchbar">
             <FormControl
