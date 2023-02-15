@@ -112,7 +112,7 @@ return (
         <div>
             Micropubs
         </div>
-        <div>
+        <div className="mp-list">
             {question ?
                 question.attributes.micropublications.data.length >0 ?
                 question.attributes.micropublications.data.map(item =>
