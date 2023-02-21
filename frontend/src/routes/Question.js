@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { Button, Form, Container, Row } from "react-bootstrap";
 
 import {
     BrowserRouter as Router,
@@ -102,18 +103,29 @@ export default function Question(props) {
     }, []);
 
 return (
-    <div>
-        <div>
+    <div id="question">
+        <Container >
+            <Row className="writing">
+
+
+        <div className={"answer"}>
             {question? question.attributes.question: ""}
         </div>
 
         <div>
             {question? question.attributes.details: ""}
         </div>
-        <div>
-            Micropubs
-        </div>
-        <div className="mp-list">
+            </Row>
+
+        <Row>
+            <div className={"heading"}>
+                Micropubs
+            </div>
+        </Row>
+        <Row >
+
+
+        <div >
             {question ?
                 question.attributes.micropublications.data.length >0 ?
                 question.attributes.micropublications.data.map(item =>
@@ -135,6 +147,8 @@ return (
                 ): "No Micropublications"
                 : "Loading"}
         </div>
+        </Row>
+        </Container>
     </div>
 )
 }

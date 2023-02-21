@@ -166,6 +166,7 @@ export default function User() {
                         uid={q.id}
                         ansNum={answerCount}
                         open={q.open}
+                        slug={q.attributes.slug}
                      //   asker={q.attributes?.user_permissions_users.data.attributes.name}
                     >
 

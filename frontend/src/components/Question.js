@@ -37,6 +37,15 @@ export default function Question(props) {
             },
         });
     }
+    const handleShowQuestion = (e) =>{
+        navigate.push({
+            pathname: `/question/${props.slug}`,
+            state: {
+                question: props.title,
+                questionid: props.id
+            },
+        });
+    }
     useEffect( () =>  {
         // const options = {
         //   method: "GET",
@@ -102,7 +111,7 @@ export default function Question(props) {
   return (
     <div id={props.id} className="question">
       <div className="body">
-        <p>{props.title}</p>
+        <p  onClick={handleShowQuestion}>{props.title}</p>
         <div className="control">
           {num > 1 ? `${num} answers` : `${num} answer`}
             <Button className="btn--blue btn--lg" onClick={handleShowNewPublication}>
