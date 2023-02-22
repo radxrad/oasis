@@ -56,7 +56,7 @@ export default function User() {
     //   });
     const fetchData = async () => {
       const [ questionRes, micropubRes,  homepageRes] = await Promise.all([
-        fetchAPI("/questions", { populate: "answers" }),
+        fetchAPI("/questions", { populate: ["answers","micropublications" ]}),
         fetchAPI("/micropublications", { populate: ["files", "keyword", "writer"] }),
         fetchAPI("/homepage", {
           populate: {
@@ -158,7 +158,7 @@ export default function User() {
                   questions.filter(o => questionOpen ?  o.attributes.open === true : true
                   ).map( q =>
                   {
-                    let answerCount = q.attributes.answers ? q.attributes.answers.length : 0
+                    let answerCount = q.attributes.micropublications.data ? q.attributes.micropublications.data.length : 0
                     return  <Question
                         key={q.id}
                         type="question"
