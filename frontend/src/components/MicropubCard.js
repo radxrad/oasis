@@ -14,14 +14,22 @@ export default function MicropubCard(props) {
         </div>
       </div>
       <div className="authors">
-        {/* {props.authors
-          ? props.authors.map((author) => (
-              <Card.Link href={author.link} key={author.id}>
-                <img src={author.img} className="avatar--sm" alt="avatar" />
-                {author.name}
-              </Card.Link>
-            ))
-          : ""} */}
+         {/*{props.authors?*/}
+         {/*  props.authors.map((author) => (*/}
+         {/*     <Card.Link href={author.attributes.link} key={author.attributes.id}>*/}
+         {/*       <img src={author.attributes.picture} className="avatar--sm" alt="avatar" />*/}
+         {/*       {author.attributes.name}*/}
+         {/*     </Card.Link>*/}
+         {/*   ))*/}
+         {/* : ""}*/}
+          {props.authors?
+             (
+               <Card.Link href={props.authors.attributes.name} key={props.authors.attributes.id}>
+                 <img src={props.authors.attributes.picture} className="avatar--sm" alt="avatar" />
+                 {props.authors.attributes.name}
+               </Card.Link>
+             )
+           : ""}
       </div>
     </Card>
   );

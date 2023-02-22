@@ -158,7 +158,7 @@ export default function Home(apikey, apiusername) {
                  file = file? getStrapiURL(file): file;
                return   <MicropubCard
                     figure={file}
-                    authorIds={item.attributes.writer.data?.id }
+                    authors={item.attributes.writer.data }
                     title={item.attributes.title}
                     abstract={item.attributes.abstract}
                     id={item.attributes.slug}
