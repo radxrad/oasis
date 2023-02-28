@@ -252,35 +252,7 @@ export default function Publish(props) {
     // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
     const hasErrors = false;
     setErrors(hasErrors);
-  //   let title =titleValue
-  //
-  //   const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-  //   const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
-  //   // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
-  //   // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
-  //   // let raw = `<div class="radquestion" >
-  //   //                <div class='abstract'> ${abstractHtml} </div>
-  //   //                 <div class="body">${bodyHtml} </div>
-  //   //                 <div class="referenceList">${refList}</div>
-  //   //                 <div class="resources">${resources}</div>
-  //   //              </div>
-  //   //   `
-  // //  let tags = keywordsArray
-  //   //let title =convertToRaw(abstractValue.getCurrentContent())
-  //
-  //   // let raw =convertToRaw(bodyValue.getCurrentContent())
-  //   // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
-  //  // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]});
-  //   let slug = slugify(titleValue)
-  //
-  //   const mpObj = {
-  //     "title": titleValue,
-  //     "abstract": abstractHtml,
-  //     "body": bodyHtml,
-  //     "keywords": keywords,
-  //     "refList": refList,
-  //
-  //   };
+
 
     let mpObj = buildMicropub();
     let slug = mpObj.slug;
@@ -324,36 +296,7 @@ export default function Publish(props) {
     // const hasErrors = !form.email?.length || !validator.isEmail(form.email ?? '')
     const hasErrors = false
     setErrors(hasErrors)
-    // let title =titleValue
-    //
-    // const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()))
-    // const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()))
-    // // const abstractHtml =draftToMarkdown(convertToRaw(abstractValue.getCurrentContent()))
-    // // const bodyHtml = draftToMarkdown(convertToRaw(bodyValue.getCurrentContent()))
-    // // let raw = `<div class="radquestion" >
-    // //                <div class='abstract'> ${abstractHtml} </div>
-    // //                 <div class="body">${bodyHtml} </div>
-    // //                 <div class="referenceList">${refList}</div>
-    // //                 <div class="resources">${resources}</div>
-    // //              </div>
-    // //   `
-    // // let tags = keywordsArray
-    // //let title =convertToRaw(abstractValue.getCurrentContent())
-    //
-    // // let raw =convertToRaw(bodyValue.getCurrentContent())
-    // // "tags[]" is repeated in the formbody in discourse.. so will need to do something.
-    // // let body = JSON.stringify({"title":title, "raw":raw, "tags[]":keywordsArray[0]})
-    // let slug = slugify(titleValue)
-    // const mpObj = {
-    //   "title": titleValue,
-    //   "abstract": abstractHtml,
-    //   "body": bodyHtml,
-    //   "keywords": keywords,
-    //   "refList": refList,
-    //   "slug":slug,
-    //   "writer": 1 // for now
-    //
-    // };
+
     let mpObj = buildMicropub();
     let slug = mpObj.slug;
     if(!errors) {
@@ -367,49 +310,7 @@ export default function Publish(props) {
         pathname: `/Read/${slug}`,
 
       });
-      // if (editingValue ){
-      //   updateAPI('/micropublications', slug,  mpObj)
-      //       // THIS IS HANDLE CREATE
-      //       .then(data => {
-      //
-      //         if(data.data.attributes.slug) {
-      //           //navigate('/message?d=postcreated')
-      //           navigate.push({
-      //             pathname: `/Read/${data.data.attributes.slug}`,
-      //
-      //           })
-      //
-      //
-      //         } else {
-      //           // navigate('/message?d=postfail')
-      //           handleErrorShow();
-      //         }
-      //       }).catch(err => {
-      //     console.log(err);
-      //     handleErrorShow();
-      //   });
-      // } else {
-      //   createAPI('/micropublications', mpObj)
-      //       // THIS IS HANDLE CREATE
-      //       .then(data => {
-      //
-      //         if(data.data.attributes.slug) {
-      //           //navigate('/message?d=postcreated')
-      //           navigate.push({
-      //             pathname: `/Read/${data.data.attributes.slug}`,
-      //
-      //           })
-      //
-      //
-      //         } else {
-      //           // navigate('/message?d=postfail')
-      //           handleErrorShow()
-      //         }
-      //       }).catch(err => {
-      //     console.log(err)
-      //     handleErrorShow()
-      //   })
-      // }
+
 
     }
   }

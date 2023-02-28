@@ -22,7 +22,7 @@ import VisibilitySelector from "components/VisibilitySelector";
 import StarRating from "../components/StarRating";
 import {fetchAPI, getStrapiURL} from "../lib/api";
 import {useAuthContext} from "../context/AuthContext";
-
+import { format } from 'date-fns'
 
 export default function Read() {
     const { setUser } = useAuthContext();
@@ -215,7 +215,9 @@ export default function Read() {
         <div className="info">
           <div className="publish-time">
             <div className="label">Published:</div>
-            <div className="time">2222222222</div>
+            <div className="time">{micropub?.attributes?.publishedAt ?
+               format (Date.parse(micropub?.attributes?.publishedAt), "yyyy/mm/dd"): ""
+            }</div>
           </div>
           <div className="authors">
             <div className="label">Author(s):</div>

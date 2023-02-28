@@ -25,7 +25,12 @@ export default function MicropubCard(props) {
           {props.authors?
              (
                <Card.Link href={props.authors.attributes.name} key={props.authors.attributes.id}>
-                 <img src={props.authors.attributes.picture} className="avatar--sm" alt="avatar" />
+                   {
+                       props.authors.attributes.picture? (
+                           <img src={props.authors.attributes.picture} className="avatar--sm" alt="avatar" />
+                       ) : ""
+                   }
+
                  {props.authors.attributes.name}
                </Card.Link>
              )
