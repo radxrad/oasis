@@ -20,11 +20,11 @@ export default function AddQuestion(props) {
   const handleSelect = (e) => setVisibility(e);
   const handleDescriptionChange = (e) => {
     stopEventPropagationTry(e);
-    setDescription(e.value);
+    setDescription(e.target.value);
   };
   const handleQuestionChange = (e) => {
     stopEventPropagationTry(e);
-    setQuestion(e.value);
+    setQuestion(e.target.value);
   };
 
   const stopEventPropagationTry = (event) => {
