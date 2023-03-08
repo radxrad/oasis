@@ -121,6 +121,7 @@ export default function Read() {
     }
   };
 
+
   const writeReview = (
     <Form className="write-review">
       <Form.Group style={{ flex: "1 0" }}>
@@ -165,9 +166,10 @@ export default function Read() {
   }
   const renderWriter= (micropub) => {
       const file = micropub.attributes?.files?.data?.length > 0 ? micropub.attributes?.files?.data[0].attributes.url: undefined;
+      const image = file !== undefined ? getStrapiURL('/') + file : "https://source.unsplash.com/random"
       return <a href={micropub.attributes.writer.data.attributes.email} key={micropub.attributes.writer.data.id}>
         <img
-            src={getStrapiURL() + file}
+            src={image}
             className="avatar--sm"
             alt="avatar"
         />
@@ -202,7 +204,7 @@ export default function Read() {
                 <div id={i} key={i} className="review__item">
                   <div className="header">
                     {item.user}{" "}
-                    <StarRating readonly={true} rating={item.rating} />{" "}
+                    <StarRating readonly={true} rating={item.attributes?.rating} />{" "}
                   </div>
                   {item.text}
                 </div>
@@ -234,9 +236,14 @@ export default function Read() {
                 : ""}
             </div>
           </div>
-          <Button className="btn--white view-related-btn">
-            View Related Questions
-          </Button>
+            { micropub?.attributes?.question ? (
+                <Button className="btn--white view-related-btn">
+                    <a  href={`/question/${micropub?.attributes?.question.attributes.slug}`}>
+                        View Related Question
+                    </a>
+                </Button> ) : ""
+            }
+
         </div>
         <div className="controls">
           <div className="icon-group">

@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import SignUp from "../routes/SignUp";
 import MicropubCard from "components/MicropubCard";
+import QuestionFrontPage from "components/QuestionFrontPage";
 import text from "text.json";
 //import history from "history.js";
 // import posts from "posts.json";
 import axios from "axios";
 import {fetchAPI, getStrapiURL} from '../lib/api';
 import {useAuthContext} from "../context/AuthContext";
+import Question from "../components/Question";
 
 
 export default function Home(apikey, apiusername) {
@@ -17,6 +19,7 @@ export default function Home(apikey, apiusername) {
   const [micropubs, setMicropubs] = useState([]);
   const [categories, setCategories ]= useState([]);
   const [keywords, setKeywords ]= useState([]);
+  const [questions, setQuestions ]= useState([]);
   // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
   const [isSignedIn,setIsSignedIn] = useState(localStorage.getItem("user"));
   const [username,setUsername] = useState();
@@ -39,23 +42,25 @@ export default function Home(apikey, apiusername) {
     //     console.error(error);
     //   });
     const fetchData = async () => {
-      const [ categoriesRes, micropubRes, keywordRes, homepageRes] = await Promise.all([
+      const [ categoriesRes, micropubRes, keywordRes, questionRes] = await Promise.all([
         fetchAPI("/categories", { populate: "*" }),
         fetchAPI("/micropublications", { populate: ["files", "keyword", "writer"] }),
         fetchAPI("/keywords", { populate: "*" }),
-        fetchAPI("/homepage", {
+        fetchAPI("/questions", {
           populate: {
-            hero: "*",
-            seo: { populate: "*" },
+            writer: "*",
+            micropublications: "*",
           },
         }),
       ]);
       const cats = await categoriesRes;
       const micros  = await micropubRes;
       const kws  = await keywordRes;
+      const qs = await questionRes
       setCategories(cats.data);
       setMicropubs(micros.data);
       setKeywords(kws.data);
+      setQuestions(qs.data);
     }
 
     fetchData()
@@ -150,7 +155,7 @@ export default function Home(apikey, apiusername) {
           <div className="definition">{text.intro}</div>
         </Row>
         <Row className="preview">
-          <p className="preview__subtitle">Featured QUESTIONS AND MICROPUBS</p>
+          <p className="preview__subtitle">Featured MICROPUBS</p>
           <div className="mp-list">
             {micropubs
               ? micropubs.sort(() => Math.random() - 0.5).slice(0, 3).map((item, i) => {
@@ -184,6 +189,29 @@ export default function Home(apikey, apiusername) {
                 uid={post.id}
               ></MicropubCard>
             ))} */}
+          </div>
+        </Row>
+        <Row className="preview">
+          <p className="preview__subtitle">Featured QUESTIONS</p>
+          <div className="mp-list">
+            {questions?
+                questions.map( q =>
+                {
+                  let answerCount = q.attributes.micropublications.data ? q.attributes.micropublications.data.length : 0
+                  return  <QuestionFrontPage
+                      key={q.id}
+                      type="question"
+                      title={q.attributes.question}
+                      uid={q.id}
+                      ansNum={answerCount}
+                      open={q.open}
+                      slug={q.attributes.slug}
+                      //   asker={q.attributes?.user_permissions_users.data.attributes.name}
+                  >
+
+                  </QuestionFrontPage>
+                }): ""
+            }
           </div>
         </Row>
       </Container>

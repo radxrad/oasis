@@ -36,6 +36,14 @@ export default function MicropubCard(props) {
              )
            : ""}
       </div>
+        <div className="rating">
+
+            {props.rating?
+                (
+                    <div>*</div>
+                )
+                : ""}
+        </div>
     </Card>
   );
 }
