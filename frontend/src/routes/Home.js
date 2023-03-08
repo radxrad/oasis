@@ -195,7 +195,7 @@ export default function Home(apikey, apiusername) {
           <p className="preview__subtitle">Featured QUESTIONS</p>
           <div className="mp-list">
             {questions?
-                questions.map( q =>
+                questions.sort(() => Math.random() - 0.5).slice(0, 3).map( q =>
                 {
                   let answerCount = q.attributes.micropublications.data ? q.attributes.micropublications.data.length : 0
                   return  <QuestionFrontPage
