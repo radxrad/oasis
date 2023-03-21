@@ -6,13 +6,34 @@ import { AuthContext } from "../../context/AuthContext";
 import Alert from 'react-bootstrap/Alert';
 import { API, BEARER } from "../../lib/constant";
 import { useEffect } from "react";
-import { getToken } from "../../lib/helpers";
+import {getToken, removeToken, setToken} from "../../lib/helpers";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState();
     const [isLoading, setIsLoading] = useState(false);
 
     const authToken = getToken();
+    const    getRefreshToken= async () => {
+        try {
+            const data = {
+                refreshToken: getToken(),
+            };
+            const options = {
+                "Access-Control-Allow-Credentials": true,
+                withCredentials: true,
+            };
+            const res = await axios.post(
+                `${API}/token/refresh`,
+                data,
+                options
+            );
+            setToken( res.data.jwt);
+            this.$emit("close-modal");
+        } catch (err) {
+            console.log(err);
+        }
+    } ;
 
     const fetchLoggedInUser = async (token) => {
         setIsLoading(true);
@@ -21,11 +42,16 @@ const AuthProvider = ({ children }) => {
                 headers: { Authorization: `${BEARER} ${token}` },
             });
             const data = await response.json();
+            if (data.status == 401){
+                getRefreshToken();
+            } else {
+                setUserData(data);
+            }
 
-            setUserData(data);
         } catch (error) {
             console.error(error);
             Alert.error("Error While Getting Logged In User Details");
+            getRefreshToken();
         } finally {
             setIsLoading(false);
         }

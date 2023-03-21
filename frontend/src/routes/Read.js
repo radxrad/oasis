@@ -15,6 +15,7 @@ import { GoArrowDown, GoArrowUp } from "react-icons/go";
 import MicropubBody from "components/MicropubBody";
 //import text from "text.json";
 import AddQuestion from "components/AddQuestion";
+import AddReview from "components/AddReview";
 import moment from "moment";
 //import a_question from "discourse_json/post_20.json";
 
@@ -38,6 +39,7 @@ export default function Read() {
 
   const [visibility, setVisibility] = useState(null);
   const [showQuestion, setShowQuestion] = useState(false);
+  const [showReview, setShowReview] = useState(false);
   // const [reviews, setReviews] = useState([
   const [reviews] = useState([{ user: "Aa", text: "testing", rating: 3 }]);
 
@@ -192,6 +194,9 @@ export default function Read() {
       <Modal show={showQuestion} onHide={() => setShowQuestion(false)}>
         <AddQuestion close={() => setShowQuestion(false)}  />
       </Modal>
+        <Modal show={showReview} onHide={() => setShowReview(false)}>
+            <AddReview close={() => setShowReview(false)}  />
+        </Modal>
       <div>
         { micropub ? renderMpBody(micropub) : ""
 
@@ -276,7 +281,7 @@ export default function Read() {
           </Button>
           <Button
             className="btn--blue btn--md"
-            onClick={() => console.log("aa")}
+            onClick={() => setShowReview(true)}
           >
             <MdRateReview />
             Write a Review

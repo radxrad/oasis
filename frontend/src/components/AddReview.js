@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import { Redirect, useLocation } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { MdQuestionAnswer } from "react-icons/md";
 import VisibilitySelector from "./VisibilitySelector";
 import {createAPI, getStrapiURL} from "../lib/api";
 import { useHistory } from "react-router-dom";
 import {useAuthContext} from "../context/AuthContext";
-import {getRefreshToken} from "../lib/helpers";
 
-export default function AddQuestion(props) {
-  const { user } = useAuthContext();
-  const location = useLocation();
-  const [micopubs, setMicropubs] = useState([]);
+export default function AddReview(props) {
+  const { setUser } = useAuthContext();
+  const [micopub, setMicropub] = useState();
   if (props.micropub) {
-    setMicropubs([props.micropub]);
+    setMicropub(props.micropub);
   }
   const [visibility, setVisibility] = useState(null);
   const [description, setDescription] = useState(null);
@@ -44,6 +41,7 @@ export default function AddQuestion(props) {
     const submitQ = {
       "question": question,
       "description": description,
+      "micropublication": micopub
     };
     return createAPI("/questions",submitQ ).then((response)=>{
       console.log(response.data);
@@ -51,24 +49,17 @@ export default function AddQuestion(props) {
       props.close()
     }).catch((err) => {
      console.error(err);
+     if (err.status == 401 ){
 
-       if (user) {
-         getRefreshToken();
-       } else {
-         // display some dialog login
-          Redirect("/signin");
-       }
-
-
+     }
     });
   };
-  if (user) {
 
   return (
     <Form className="popup">
       <Form.Group className="inputs">
-        <div className="heading">Add a Question </div>
-        <Form.Control type="text" placeholder="Question"
+        <div className="heading">Add a Review </div>
+        <Form.Control type="text" placeholder="Review"
                       className="subject"
                       value={question}
                       onChange={handleQuestionChange}
@@ -107,18 +98,9 @@ export default function AddQuestion(props) {
         </Button>
         <Button className="btn--lg" onClick={(e) => handleAddQuestion(e)}>
           <MdQuestionAnswer />
-          Ask a Question
+          Add a Review
         </Button>
       </Form.Group>
     </Form>
   );
-  } else {
-    return   <Redirect
-        to={{
-          pathname: "/signin",
-          state: { from: location }
-        }}
-    />
-  }
-
 }

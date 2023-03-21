@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
@@ -9,11 +8,7 @@ import { useHistory } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { setToken } from "../lib/helpers";
 
-export default function SignIn() {
-    const history = useHistory();
-    const { setUser } = useAuthContext();
-    let location = useLocation();
-  let { from } = location.state || { from: { pathname: "/user" } };
+export default function SignInDialog() {
   const [isSignedIn,setIsSignedIn] = useState(false);
   const [username,setUsername] = useState();
   const [password,setPassword] = useState();
@@ -21,7 +16,8 @@ export default function SignIn() {
   const handleUsername = (e)=> setUsername(e.target.value);
   const handlePassword = (e)=> setPassword(e.target.value);
   //const navigate = useNavigate();
-
+  const history = useHistory();
+  const { setUser } = useAuthContext();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,7 +52,7 @@ export default function SignIn() {
         //  Alert.success(`Welcome back ${response.data.user.username}!`);
 
           // navigate("/profile", { replace: true });
-          history.push(from);
+          history.push("/user");
         })
             .catch(error => {
               console.error(error);
@@ -127,12 +123,12 @@ export default function SignIn() {
   //       .catch(error => {
   //         console.log('An error occurred:', error.response);
   //       });
-  // }
+  // }  <Form className="popup">
+    //       <Form.Group className="inputs">
 
   return (
-      <Fragment>
-    <div className="signin light-bg max-window">
-      <Form className="signup__container">
+
+      <Form className="popup signup__container">
         <div className="signup__header">Sign In</div>
         <Form.Group>
           <Form.Control
@@ -162,7 +158,6 @@ export default function SignIn() {
           <a href="/signup">New to OASIS? Sign up now</a>
         </div>
       </Form>
-    </div>
-      </Fragment>
+
   );
 }
