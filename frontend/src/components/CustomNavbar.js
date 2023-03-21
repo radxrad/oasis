@@ -35,20 +35,20 @@ export default function CustomNavbar(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  if (!user)
-    return (
-      <Navbar className="custom-nav" sticky="top">
-        <Navbar.Brand className="navbar__brand" href="/">
-          <img src="/oasis-logo-blue.svg"/>
-        </Navbar.Brand>
-        <Nav>
-          <Nav.Link className="navbar__signin" href="/signin">
-            Sign In
-          </Nav.Link>
-        </Nav>
-      </Navbar>
-    );
-  else {
+  if (!user) {
+      return (
+          <Navbar className="custom-nav" sticky="top">
+              <Navbar.Brand className="navbar__brand" href="./">
+                  <img src="/oasis-logo-blue.svg"/>
+              </Navbar.Brand>
+              <Nav>
+                  <Nav.Link className="navbar__signin" href="./signin">
+                      Sign In
+                  </Nav.Link>
+              </Nav>
+          </Navbar>
+      );
+  } else {
     return (
       <Navbar className="custom-nav" sticky="top">
         <Modal show={show} onHide={handleClose}>

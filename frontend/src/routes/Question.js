@@ -101,7 +101,12 @@ export default function Question(props) {
         }
         fetchData()
             // make sure to catch any error
-            .catch(console.error);
+            .catch( (err) => {
+                console.error(err);
+                if (err.status = 401){
+
+                }
+            });
     }, []);
 
     return (
