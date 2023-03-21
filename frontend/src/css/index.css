@@ -598,8 +598,9 @@ a:active {
 
 .listitem {
   display: grid;
-  grid-template-columns: 8% 92%;
+  grid-template-columns: 20px auto;
   align-items: center;
+  gap: 10px;
   padding: 30px;
   border-radius: 10px;
   font-weight: bold;
@@ -607,11 +608,12 @@ a:active {
   line-height: 20px;
   width: 100%;
   margin: 10px 0;
+  height: 100%;
 }
 
 .listitem svg {
-  height: 24px;
-  margin-right: 20px;
+  height: 20px;
+  width: 20px;
 }
 
 .block .heading {
@@ -1676,88 +1678,49 @@ a:active {
 .settings #reset-password-btn {
   display: block;
 }
-#question .writing {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
 
-  background: #FFFFFF;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+.qpage .container>div {
+  background: white;
   border-radius: 10px;
-}
-#question .question {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  background: #FFFFFF;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-}
-#question .answer{
-  position: absolute;
-  width: 896px;
-  height: 112px;
-  left: 35px;
-  top: 67px;
-
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 37px;
-  /* or 116% */
-
-
-  color: #000000;
+  padding: 2rem;
 }
 
-#question .heading{
-  position: absolute;
-  left: 0%;
-  right: -0.66%;
-  top: 0%;
-  bottom: 0%;
-
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 37px;
-  /* or 116% */
-
+.qpage>.container {
   display: flex;
-  align-items: center;
-
-  /* Blue Gray */
-
-  color: #4366AA;
-
+  flex-direction: column;
+  gap: 20px;
+  padding: 2rem 0;
+  max-width: 900px;
 }
 
-#question .micropub{
+.home .home-qs {
+  font-size: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.home-qs p {
+  grid-column: 2/3;
+  justify-self: right;
+}
+
+.qpage .control {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 25px;
-  gap: 25px;
+  justify-content: flex-end;
+  gap: 20px;
+}
 
-  width: 973px;
-  height: 300px;
+.qpage {
+  background-color: var(--gray-5);
+}
 
-  background: #FFFFFF;
-  box-shadow: 0px 0px 40.6011px rgba(0, 0, 0, 0.15);
-  border-radius: 6.76685px;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+.qpage .answer {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  color: var(--gray-80);
+  margin-bottom: 2rem;
 }
 
 @media only screen and (max-width: 767px) {
@@ -2113,9 +2076,10 @@ a:active {
     gap: 1.5rem;
   }
 
-  .home .mp-list .card{
+  .home .mp-list .card {
     width: 100%;
   }
+
   .micropub-body {
     width: 100%;
   }

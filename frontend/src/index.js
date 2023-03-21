@@ -47,7 +47,7 @@ function App() {
 
   return (
     <Router history={history}>
-      <AuthProvider>
+      {/* <AuthProvider> */}
         <CustomNavbar user={user} auth={auth} />
         <Switch>
           <Route exact path={paths.home} component={Home} />
@@ -60,7 +60,7 @@ function App() {
           <Route path={paths.about} component={About} />
           <Route path={paths.question} component={Question} />
         </Switch>
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </Router>
   );
 }

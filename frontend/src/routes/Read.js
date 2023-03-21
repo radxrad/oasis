@@ -129,6 +129,7 @@ export default function Read() {
           as="textarea"
           placeholder="Write a review..."
           className="review"
+          id="write_review"
         />
       </Form.Group>
       <Form.Group className="controls">
@@ -276,7 +277,7 @@ export default function Read() {
           </Button>
           <Button
             className="btn--blue btn--md"
-            onClick={() => console.log("aa")}
+            onClick={() => document.getElementById("write_review").scrollIntoView({behavior: 'smooth'})}
           >
             <MdRateReview />
             Write a Review

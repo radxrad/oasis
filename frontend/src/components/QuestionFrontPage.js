@@ -12,16 +12,11 @@ export default function QuestionFrontPage(props) {
   const slug = props.slug;
   const num = props.ansNum;
   return (
-      <div >
-       <div className={`listitem__${type} listitem`}>
-         <a href={`/question/${slug}`}>
+      <div className ="questions">
+         <a href={`/question/${slug}`} className={`listitem__${type} listitem`}>
            {iconMapping[type]} {title}
-
+           <p>{num > 1 ? `${num} answers` : `${num} answer`}</p>
          </a>
-       </div>
-        <div >
-          {num > 1 ? `${num} answers` : `${num} answer`}
-        </div>
       </div>
 
   );

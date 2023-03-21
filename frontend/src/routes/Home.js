@@ -193,7 +193,7 @@ export default function Home(apikey, apiusername) {
         </Row>
         <Row className="preview">
           <p className="preview__subtitle">Featured QUESTIONS</p>
-          <div className="mp-list">
+          <div className="home-qs">
             {questions?
                 questions.sort(() => Math.random() - 0.5).slice(0, 3).map( q =>
                 {

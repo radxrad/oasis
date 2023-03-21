@@ -1,5 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Container, Row } from "react-bootstrap";
+import { MdQuestionAnswer } from "react-icons/md";
+import { BsFillPlusSquareFill } from "react-icons/bs";
 
 import {
     BrowserRouter as Router,
@@ -11,15 +13,15 @@ import {
 } from "react-router-dom";
 
 
-import {useAuthContext} from "../context/AuthContext";
-import {fetchAPI, getStrapiURL} from "../lib/api";
+import { useAuthContext } from "../context/AuthContext";
+import { fetchAPI, getStrapiURL } from "../lib/api";
 
 import MicropubCardAnswer from "../components/MicropubCardAnswer";
 
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
 
-    const {setUser} = useAuthContext();
+    const { setUser } = useAuthContext();
     const [micropubs, setMicropubs] = useState();
     const [question, setQuestion] = useState();
 
@@ -35,11 +37,11 @@ export default function Question(props) {
 
         }
     };
-    useEffect( () =>  {
+    useEffect(() => {
         //const slug ="culture-and-identification-of-a-deltamicron-sars-co-v-2-in-a-three-cases-cluster-in-southern-france"
 
         console.log("query");
-        console.log("passed slug: " + slug );
+        console.log("passed slug: " + slug);
         // const options = {
         //   method: "GET",
         //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
@@ -75,24 +77,24 @@ export default function Question(props) {
         //   setKeywords(kws.data);
         // }
         const fetchData = async () => {
-            const [ questionRes,micropubRes ] = await Promise.all([
+            const [questionRes, micropubRes] = await Promise.all([
                 fetchAPI("/questions", {
                     filters: {
                         slug: slug,
                     },
-                    populate: [ "micropublications", "writer", "micropublications.writer", "micropublications.files"],
-                   // populate: ["*"],
+                    populate: ["micropublications", "writer", "micropublications.writer", "micropublications.files"],
+                    // populate: ["*"],
                 }),
                 fetchAPI("/micropublications", {
-                // filters: {
-                //     micropublications: slug,
-                // },
-             //   populate: ["files", "keyword", "writer.picture", "writer", "ratings"],
-               }),
+                    // filters: {
+                    //     micropublications: slug,
+                    // },
+                    //   populate: ["files", "keyword", "writer.picture", "writer", "ratings"],
+                }),
 
 
             ]);
-            const micros  = await micropubRes;
+            const micros = await micropubRes;
             const aq = await questionRes;
             setMicropubs(micros.data);
             setQuestion(aq.data[0]);
@@ -102,53 +104,65 @@ export default function Question(props) {
             .catch(console.error);
     }, []);
 
-return (
-    <div id="question">
-        <Container >
-            <Row className="writing">
+    return (
+        <div id="question" className="qpage max-window">
+            <Container >
+                <Row className="writing">
+
+                    <div className="answer">
+                        {question ? question.attributes.question : ""}
+                    </div>
+
+                    <div>
+                        {question ? question.attributes.details : ""}
+                    </div>
+
+                    <div className="control">
+                        <Button className="btn--white">
+                            Answer With Existing Micropub
+                        </Button>
+                        <Button className="btn--lg">
+                            <BsFillPlusSquareFill />
+                            Write New Answer
+                        </Button>
+                        <Button className="btn--lg">
+                            <MdQuestionAnswer />
+                            Ask Another Question
+                        </Button>
+                    </div>
+                </Row>
+
+                <Row>
+                    <div className={"heading"}>
+                        Micropubs
+                    </div>
+                </Row>
+                <Row >
 
 
-        <div className={"answer"}>
-            {question? question.attributes.question: ""}
+                    <div >
+                        {question ?
+                            question.attributes.micropublications.data.length > 0 ?
+                                question.attributes.micropublications.data.map(item => {
+                                    let file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url : undefined;
+                                    file = file ? getStrapiURL(file) : file;
+                                    return <MicropubCardAnswer
+                                        figure={file}
+                                        authorIds={item.attributes.writer.data?.id}
+                                        title={item.attributes.title}
+                                        abstract={item.attributes.abstract}
+                                        id={item.attributes.slug}
+                                        key={item.attributes.slug}
+
+                                    ></MicropubCardAnswer>
+                                }
+
+
+                                ) : "No Micropublications"
+                            : "Loading"}
+                    </div>
+                </Row>
+            </Container>
         </div>
-
-        <div>
-            {question? question.attributes.details: ""}
-        </div>
-            </Row>
-
-        <Row>
-            <div className={"heading"}>
-                Micropubs
-            </div>
-        </Row>
-        <Row >
-
-
-        <div >
-            {question ?
-                question.attributes.micropublications.data.length >0 ?
-                question.attributes.micropublications.data.map(item =>
-                        {
-                                let file = item.attributes?.files?.data?.length > 0 ? item.attributes?.files?.data[0].attributes.url:undefined;
-                                file = file? getStrapiURL(file): file;
-                                return   <MicropubCardAnswer
-                                    figure={file}
-                                    authorIds={item.attributes.writer.data?.id }
-                                    title={item.attributes.title}
-                                    abstract={item.attributes.abstract}
-                                    id={item.attributes.slug}
-                                    key={item.attributes.slug}
-
-                                ></MicropubCardAnswer>
-                            }
-
-
-                ): "No Micropublications"
-                : "Loading"}
-        </div>
-        </Row>
-        </Container>
-    </div>
-)
+    )
 }

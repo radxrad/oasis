@@ -38,11 +38,11 @@ export default function CustomNavbar(props) {
   if (!user)
     return (
       <Navbar className="custom-nav" sticky="top">
-        <Navbar.Brand className="navbar__brand" href="./">
+        <Navbar.Brand className="navbar__brand" href="/">
           <img src="/oasis-logo-blue.svg"/>
         </Navbar.Brand>
         <Nav>
-          <Nav.Link className="navbar__signin" href="./signin">
+          <Nav.Link className="navbar__signin" href="/signin">
             Sign In
           </Nav.Link>
         </Nav>

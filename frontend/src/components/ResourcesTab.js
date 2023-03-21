@@ -137,8 +137,8 @@ const ResourcesTab = (props)  => {
                     </tr>
                 )):undefined}
                 </tbody>
-            </Table><
-            /div>
+            </Table>
+            </div>
     </div>
   );
 }
