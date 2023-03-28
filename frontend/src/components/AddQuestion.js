@@ -7,6 +7,7 @@ import {createAPI, getStrapiURL} from "../lib/api";
 import { useHistory } from "react-router-dom";
 import {useAuthContext} from "../context/AuthContext";
 import {getRefreshToken} from "../lib/helpers";
+import slugify from "slugify";
 
 export default function AddQuestion(props) {
   const { user } = useAuthContext();
@@ -44,11 +45,15 @@ export default function AddQuestion(props) {
     const submitQ = {
       "question": question,
       "description": description,
+      "slug" : slugify(question),
     };
     return createAPI("/questions",submitQ ).then((response)=>{
       console.log(response.data);
-      history.push("/user");
-      props.close()
+     // history.push("/user");
+      let slug = response.data.attributes.slug;
+      let redir = `/question/${slug}`;
+      //Redirect(redir);
+      history.push(redir);
     }).catch((err) => {
      console.error(err);
 

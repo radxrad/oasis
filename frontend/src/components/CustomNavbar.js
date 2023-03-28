@@ -1,5 +1,6 @@
 import {
   Navbar,
+    NavbarBrand,
   Nav,
   Form,
   Button,
@@ -13,7 +14,7 @@ import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import AddQuestion from "components/AddQuestion";
 //import { useNavigate } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../lib/helpers";
 
@@ -29,6 +30,7 @@ export default function CustomNavbar(props) {
         removeToken();
         history.push('/signin');
        // navigate("/signin", { replace: true });
+
     };
 
   const [show, setShow] = useState(false);
@@ -38,13 +40,22 @@ export default function CustomNavbar(props) {
   if (!user) {
       return (
           <Navbar className="custom-nav" sticky="top">
-              <Navbar.Brand className="navbar__brand" href="./">
-                  <img src="/oasis-logo-blue.svg"/>
-              </Navbar.Brand>
+              <Navbar>
+                  <NavbarBrand className="navbar__brand" >
+                      <Link  to="/">
+
+                          <img src="/oasis-logo-blue.svg" alt="logo">
+                          </img>
+
+                      </Link>
+                  </NavbarBrand>
+              </Navbar
+              >
               <Nav>
-                  <Nav.Link className="navbar__signin" href="./signin">
-                      Sign In
-                  </Nav.Link>
+
+                  <Link className="navbar__signin" to="/signin">
+                      <li>Sign In</li>
+                  </Link>
               </Nav>
           </Navbar>
       );

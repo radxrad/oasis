@@ -140,7 +140,10 @@ export default function SignUp() {
           >
             Sign Up  {isLoading && <Spinner size="small" />}
           </Button>
-          <a href="/signin">Already have an account? Sign in here</a>
+            <Link to="/signin">
+                <li>Already have an account? Sign in here</li>
+            </Link>
+
         </div>
       </Form>
 

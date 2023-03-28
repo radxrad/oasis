@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Container, Row } from "react-bootstrap";
+import {Button, Form, Container, Row, Modal} from "react-bootstrap";
 import { MdQuestionAnswer } from "react-icons/md";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 
@@ -17,6 +17,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { fetchAPI, getStrapiURL } from "../lib/api";
 
 import MicropubCardAnswer from "../components/MicropubCardAnswer";
+import AddQuestion from "../components/AddQuestion";
 
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
@@ -42,40 +43,7 @@ export default function Question(props) {
 
         console.log("query");
         console.log("passed slug: " + slug);
-        // const options = {
-        //   method: "GET",
-        //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
-        //   headers: { "Content-Type": "application/json", Prefer: "" },
-        // };
-        //
-        // axios
-        //   .request(options)
-        //   .then(function (response) {
-        //     console.log(response.data);
-        //     setMicropubs(response.data);
-        //   })
-        //   .catch(function (error) {
-        //     console.error(error);
-        //   });
-        // const fetchData = async () => {
-        //   const [ categoriesRes, micropubRes, keywordRes, homepageRes] = await Promise.all([
-        //     fetchAPI("/categories", { populate: "*" }),
-        //     fetchAPI("/micropublications/", { populate: ["files", "keyword", "writer"] }),
-        //     fetchAPI("/keywords", { populate: "*" }),
-        //     fetchAPI("/homepage", {
-        //       populate: {
-        //         hero: "*",
-        //         seo: { populate: "*" },
-        //       },
-        //     }),
-        //   ]);
-        //   const cats = await categoriesRes;
-        //   const micros  = await micropubRes;
-        //   const kws  = await keywordRes;
-        //   setCategories(cats.data);
-        //   setMicropubs(micros.data);
-        //   setKeywords(kws.data);
-        // }
+
         const fetchData = async () => {
             const [questionRes, micropubRes] = await Promise.all([
                 fetchAPI("/questions", {
@@ -103,15 +71,20 @@ export default function Question(props) {
             // make sure to catch any error
             .catch( (err) => {
                 console.error(err);
-                if (err.status = 401){
+                if (err.status == 401){
 
                 }
             });
     }, []);
-
+    const [show, setShow] = useState(false);
+    const handleQClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div id="question" className="qpage max-window">
             <Container >
+                <Modal show={show} onHide={handleQClose}>
+                    <AddQuestion close={handleQClose} />
+                </Modal>
                 <Row className="writing">
 
                     <div className="answer">
@@ -130,9 +103,9 @@ export default function Question(props) {
                             <BsFillPlusSquareFill />
                             Write New Answer
                         </Button>
-                        <Button className="btn--lg">
-                            <MdQuestionAnswer />
-                            Ask Another Question
+                        <Button className="btn--blue btn--lg" onClick={handleShow}>
+                            <MdQuestionAnswer close={handleQClose} />
+                            <span>Ask Another Question</span>
                         </Button>
                     </div>
                 </Row>

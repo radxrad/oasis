@@ -64,70 +64,9 @@ export default function SignIn() {
             }).finally( ()=>
             {setIsLoading(false);
             });
-    //   const response = await fetch(getStrapiURL("/api/auth/local/")
-    //   , {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(value),
-    //   });
-    //
-    //   const data = await response.json();
-    //   if (data?.error) {
-    //     throw data?.error;
-    //   } else {
-    //     // set the token
-    //     setToken(data.jwt);
-    //
-    //     // set the user
-    //     setUser(data.user);
-    //
-    //     Alert.success(`Welcome back ${data.user.username}!`);
-    //
-    //    // navigate("/profile", { replace: true });
-    //     history("/profile");
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   setError(error?.message ?? "Something went wrong!");
-    // } finally {
-    //   setIsLoading(false);
-    // }
+
   };
-  // async function handleSignIn(e) {
-  //   e.preventDefault();
-  //
-  //   // const options = {
-  //   //   method: "POST",
-  //   //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/signin",
-  //   //   headers: { "Content-Type": "application/json", Prefer: "" },
-  //   //   data: { email: "alice.smith@gmail.com", password: "1234" },
-  //   // };
-  //   //
-  //   // axios
-  //   //   .request(options)
-  //   //   .then(function (response) {
-  //   //     console.log(response.data);
-  //   //     localStorage.setItem("user", JSON.stringify(response.data));
-  //   //     window.location.replace("/user");
-  //   //   })
-  //   //   .catch(function (error) {
-  //   //     console.error(error);
-  //   //   });
-  //   await axios.post(getStrapiURL()+'/api/auth/local/', {
-  //     identifier: username,
-  //     password: password,
-  //   }).then(response => {
-  //     console.log('User profile', response.data.user);
-  //     console.log('User token', response.data.jwt);
-  //     setIsSignedIn(true);
-  //     setUser(response.data);
-  //   })
-  //       .catch(error => {
-  //         console.log('An error occurred:', error.response);
-  //       });
-  // }
+
 
   return (
       <Fragment>
