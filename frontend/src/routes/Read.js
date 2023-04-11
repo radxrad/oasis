@@ -40,8 +40,8 @@ export default function Read() {
   const [visibility, setVisibility] = useState(null);
   const [showQuestion, setShowQuestion] = useState(false);
   const [showReview, setShowReview] = useState(false);
-  // const [reviews, setReviews] = useState([
-  const [reviews] = useState([{ user: "Aa", text: "testing", rating: 3 }]);
+   const [reviews, setReviews] = useState([]);
+ // const [reviews] = useState([{ user: "Aa", text: "testing", rating: 3 }]);
 
   const [micropub, setMicropub] = useState();
   const [categories, setCategories ]= useState([]);
@@ -93,16 +93,27 @@ export default function Read() {
     //   setKeywords(kws.data);
     // }
     const fetchData = async () => {
-     const [ micropubRes ] = await Promise.all([fetchAPI("/micropublications", {
+     const [ micropubRes, reviewsRes ] = await Promise.all([
+         fetchAPI("/micropublications", {
         filters: {
           slug: slug,
         },
         populate: ["files", "keyword", "writer.picture", "writer", "ratings"],
-      })
+      }),
+         fetchAPI("/reviews", {
+             filters: {
+                 micropublication: {
+                     slug: slug,
+                 }
+             },
+             populate: [ "ratings"],
+         }),
       ]);
       const micros  = await micropubRes;
+      const reviews = await reviewsRes;
       setMicropub(micros.data[0]);
-    }
+        setReviews(reviews.data);
+    };
     fetchData()
         // make sure to catch any error
         .catch(console.error);
@@ -209,10 +220,10 @@ export default function Read() {
             ? reviews.map((item, i) => (
                 <div id={i} key={i} className="review__item">
                   <div className="header">
-                    {item.user}{" "}
-                    <StarRating readonly={true} rating={item.attributes?.rating} />{" "}
+                    {item.attributes?.user}{" "}
+                    <StarRating readonly={true} rating={item.attributes?.ratings.data[0]?.attributes?.rating} />{" "}
                   </div>
-                  {item.text}
+                  {item.attributes?.review}
                 </div>
               ))
             : ""}

@@ -1,6 +1,7 @@
 
 import {API, AUTH_TOKEN} from "./constant";
 import axios from "axios";
+import {getStrapiURL} from "./api";
 
 export const getToken = () => {
     return localStorage.getItem(AUTH_TOKEN);
@@ -27,7 +28,7 @@ export const    getRefreshToken= async () => {
             withCredentials: true,
         };
         const res = await axios.post(
-            `${API}/token/refresh`,
+            `${getStrapiURL()}/token/refresh`,
             data,
             options
         );
