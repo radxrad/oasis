@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams, Redirect, useHistory
 } from "react-router-dom";
 
 import { Button, Modal, Form } from "react-bootstrap";
@@ -21,12 +21,14 @@ import moment from "moment";
 
 import VisibilitySelector from "components/VisibilitySelector";
 import StarRating from "../components/StarRating";
-import {fetchAPI, getStrapiURL} from "../lib/api";
+import {createAPI, fetchAPI, getStrapiURL} from "../lib/api";
 import {useAuthContext} from "../context/AuthContext";
 import { format } from 'date-fns'
+import slugify from "slugify";
+import {getRefreshToken} from "../lib/helpers";
 
 export default function Read() {
-    const { setUser } = useAuthContext();
+    const { user } = useAuthContext();
   const { slug } = useParams(); // router.query;
  // const example = text.micropub;
  // const post = a_question;
@@ -36,13 +38,13 @@ export default function Read() {
   const [isStarred, setIsStarred] = useState(false);
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewRatingHover, setReviewRatingHover] = useState(0);
-
+    const [review, setReview] = useState("");
   const [visibility, setVisibility] = useState(null);
   const [showQuestion, setShowQuestion] = useState(false);
   const [showReview, setShowReview] = useState(false);
    const [reviews, setReviews] = useState([]);
  // const [reviews] = useState([{ user: "Aa", text: "testing", rating: 3 }]);
-
+    let history = useHistory();
   const [micropub, setMicropub] = useState();
   const [categories, setCategories ]= useState([]);
   const [keywords, setKeywords]= useState([]);
@@ -52,6 +54,16 @@ export default function Read() {
   const [password,setPassword] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
 
+    const stopEventPropagationTry = (event) => {
+        if (event.target === event.currentTarget) {
+            try {
+                event.stopPropagation();
+            } catch (e) {
+                console.log(e);
+            }
+
+        }
+    };
 
   useEffect( () =>  {
     //const slug ="culture-and-identification-of-a-deltamicron-sars-co-v-2-in-a-three-cases-cluster-in-southern-france"
@@ -133,7 +145,45 @@ export default function Read() {
       setVoteNum(type === true ? voteNum + 2 : voteNum - 2);
     }
   };
+    const refresh = () => window.location.reload(true)
 
+
+    const handleUpdateReview = (e) => {
+        stopEventPropagationTry(e);
+        setReview(e.target.value);
+    };
+    const handleAddReview = async (e) => {
+        if (review === undefined || review.trim() === "") {
+            return;
+        }
+        const submitQ = {
+            "review":review,
+            "micropublication":  micropub.id,
+            "slug" : slugify(review),
+        };
+        return createAPI("/reviews",submitQ ).then((response)=>{
+            console.log(response.data);
+            // history.push("/user");
+            let slug = response.data.id;
+            //let redir = `/reviews/${slug}`;
+            //Redirect(redir);
+           // history.push(redir);
+            let newList = reviews.push(response);
+            setReviews(reviews);
+            refresh();
+        }).catch((err) => {
+            console.error(err);
+
+            if (user) {
+                getRefreshToken();
+            } else {
+                // display some dialog login
+                Redirect("/signin");
+            }
+
+
+        });
+    };
 
   const writeReview = (
     <Form className="write-review">
@@ -143,6 +193,7 @@ export default function Read() {
           placeholder="Write a review..."
           className="review"
           id="write_review"
+          onChange={handleUpdateReview}
         />
       </Form.Group>
       <Form.Group className="controls">
@@ -160,7 +211,7 @@ export default function Read() {
           />
         </div>
 
-        <Button className="btn--md">
+        <Button className="btn--md" onClick={handleAddReview}>
           <MdRateReview />
           Post Review
         </Button>
