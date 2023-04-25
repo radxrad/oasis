@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
 import { Button, ListGroup, Tab, Table, Dropdown } from "react-bootstrap";
+
 //import text from "text.json";
 import history from "history.js";
 import MicropubCard from "../components/MicropubCard";
@@ -22,7 +23,7 @@ import {useAuthContext} from "../context/AuthContext";
 export default function Publish(props) {
 
 
-  const { setUser } = useAuthContext();
+  const { user, isLoading, setUser } = useAuthContext();
   let endpoint = '/micropublications';
   let navigate = useHistory();
   //const micropubContext = useContext(Micropub);
@@ -41,7 +42,7 @@ export default function Publish(props) {
   const [errors, setErrors]= useState("");
   const [showError, setShowError] = useState(false);
   const [activeTab, setActiveTab] = useState("#abstract");
-
+  const [authors,setAuthors] = useState([]);
   const handleErrorClose = () => setShowError(false);
   const handleErrorShow = () => setShowError(true);
   const stopEventPropagationTry = (event) => {
@@ -75,6 +76,7 @@ export default function Publish(props) {
   const [resources,SetResources] = useState([]);
   const [categories, setCategories ]= useState([]);
   const [keywords, setKeywords ]= useState([]);
+  const [questions, setQuestions]= useState([]);
   // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
   const [isSignedIn,setIsSignedIn] = useState(localStorage.getItem("user"));
   const [username,setUsername] = useState();
@@ -115,19 +117,70 @@ export default function Publish(props) {
             seo: { populate: "*" },
           },
         }),
-          fetchAPI("/question", {})
+          fetchAPI("/questions", {}),
+
       ]);
       const cats = await categoriesRes;
       const kws  = await keywordRes;
       const aq = await questionRes;
+
+
+
       setCategories(cats.data);
       setKeywords(kws.data);
+      setQuestions(aq.data);
+
+
     }
 
     fetchData()
         // make sure to catch any error
         .catch(console.error);
   }, []);
+
+  useEffect( () =>  {
+    const question = props.history.location.state?.question;
+    const questionid = props.history.location.state?.questionid;
+    if (question !=="" || question === undefined )(
+        setTitleValue(question)
+    );
+
+    //let params = questionid? {filter:questionid}
+    // https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.html#filtering
+    // const options = {
+    //   method: "GET",
+    //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
+    //   headers: { "Content-Type": "application/json", Prefer: "" },
+    // };
+    //
+    // axios
+    //   .request(options)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     setMicropubs(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //   });
+    const fetchData = async () => {
+      const [ userRes] = await Promise.all([
+        fetchAPI("/users", { filters: {
+            username: user.username,
+          },}),
+      ]);
+
+      const users = await userRes;
+      if (users.length >0) {
+        const user_id = await users[0].id ;
+      }
+      setAuthors([user]);
+    }
+
+    fetchData()
+        // make sure to catch any error
+        .catch(console.error);
+  }, [user]);
+
   const fileRefs = (fileList) => {
     let data = new FormData()
 
@@ -411,6 +464,9 @@ export default function Publish(props) {
         <div className="search">
           Add Author: <input type="text" placeholder="Search"></input>
         </div>
+        { authors ? authors.map((a, i) => (
+            <div>{a.name}</div>
+        ) ) : "" }
       </div>
       <div>
         <div className="label">Visibility</div>

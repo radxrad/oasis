@@ -8,7 +8,7 @@ import { API, BEARER } from "../../lib/constant";
 import { useEffect } from "react";
 import {getToken, removeToken, setToken} from "../../lib/helpers";
 import axios from "axios";
-import {getStrapiURL} from "../../lib/api";
+import {fetchAPI, getStrapiURL} from "../../lib/api";
 
 const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState();
@@ -39,12 +39,13 @@ const AuthProvider = ({ children }) => {
     const fetchLoggedInUser = async (token) => {
         setIsLoading(true);
         try {
-            const response = await fetch(`${API}/users/me`, {
+            const response = await fetch(`${getStrapiURL("/api/users/me")}`, {
                 headers: { Authorization: `${BEARER} ${getToken()}` },
             });
+          //  const response = await fetchAPI('/users/me');
             const data = await response.json();
             if (data.status === 401){
-                getRefreshToken();
+               getRefreshToken();
             } else {
                 setUserData(data);
             }
@@ -52,7 +53,7 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error(error);
           //  Alert.error("Error While Getting Logged In User Details");
-            getRefreshToken();
+           // getRefreshToken();
         } finally {
             setIsLoading(false);
         }

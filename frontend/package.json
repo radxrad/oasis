@@ -23,7 +23,9 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-select": "^5.4.0",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "strapi-plugin-ratings": "^1.1.9",
+    "strapi-ratings-client": "^2.0.13"
   },
   "scripts": {
     "start": "react-scripts start",
