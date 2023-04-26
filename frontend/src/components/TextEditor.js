@@ -47,7 +47,7 @@ export function AddReference(props) {
     );
   }
 
-  async function addReference(input) {
+  async function addReference(e, input) {
     setRefError("");
     if (!input || !input.trim()) {
       setRefError("Invalid input");
@@ -91,7 +91,7 @@ export function AddReference(props) {
               placeholder="Enter code"
               name="embeddedLink"
               value={refInput}
-              onChange={(e) => setRefInput(e)}
+              onChange={(e) => setRefInput(e.target.value)}
             />
             <span className="rdw-image-mandatory-sign">*</span>
           </span>
