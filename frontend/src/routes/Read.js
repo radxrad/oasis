@@ -105,26 +105,26 @@ export default function Read() {
     //   setKeywords(kws.data);
     // }
     const fetchData = async () => {
-     const [ micropubRes, reviewsRes ] = await Promise.all([
+     const [ micropubRes] = await Promise.all([
          fetchAPI("/micropublications", {
         filters: {
           slug: slug,
         },
         populate: ["files", "keyword", "writer.picture", "writer", "ratings"],
       }),
-         fetchAPI("/reviews", {
-             filters: {
-                 micropublication: {
-                     slug: slug,
-                 }
-             },
-             populate: [ "ratings"],
-         }),
+         // fetchAPI("/reviews", {
+         //     filters: {
+         //         micropublication: {
+         //             slug: slug,
+         //         }
+         //     },
+         //     populate: [ "ratings"],
+         // }),
       ]);
       const micros  = await micropubRes;
-      const reviews = await reviewsRes;
+     // const reviews = await reviewsRes;
       setMicropub(micros.data[0]);
-        setReviews(reviews.data);
+       // setReviews(reviews.data);
     };
     fetchData()
         // make sure to catch any error
