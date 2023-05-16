@@ -13,20 +13,19 @@ import {
 } from "react-router-dom";
 import {ReviewsConfigContext, Reviews, ReviewForm, ErrorBox, ReviewStats} from "strapi-ratings-client"
 
-
 import { useAuthContext } from "../context/AuthContext";
 import { fetchAPI, getStrapiURL } from "../lib/api";
 
 import MicropubCardAnswer from "../components/MicropubCardAnswer";
 import AddQuestion from "../components/AddQuestion";
+import {getToken} from "../lib/helpers";
 
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
 
     //const { user, setUser } = useAuthContext();
     const { user } = useAuthContext();
-    const { setUser } = useContext(ReviewsConfigContext);
-    const [micropubs, setMicropubs] = useState();
+     const [micropubs, setMicropubs] = useState();
     const [question, setQuestion] = useState();
 
     let endpoint = '/question';
@@ -42,14 +41,24 @@ export default function Question(props) {
         }
     };
     const [postsData, setPostsData] = useState([]);// ;
-    const { setContentID, setCanPostReview } = useContext(ReviewsConfigContext);
-  //  const { contentID } = useParams();
+    const { setUser, setContentID, setCanPostReview  } = useContext(ReviewsConfigContext);
     useEffect(() => {
+        const newUser = user;
+        if (user) {
+            newUser.token = getToken();
+        }
+
+        setUser(newUser);
+    }, [user]);
+    //  const { contentID } = useParams();
+    useEffect(() => {
+
         if (slug) {
             setContentID(slug);
             setCanPostReview(true);
         }
     }, [slug]);
+
     useEffect(() => {
         const fetchReviewsCount = async (slug) => {
             const url = getStrapiURL(`/api/ratings/reviews/${slug}/count`);
@@ -69,21 +78,7 @@ export default function Question(props) {
         fetchReviewsCount(slug);
     }, []);
 
-    const renderList = () => {
-        const postsJSX = postsData.map(p => {
-            return (
-                <div className="p-4 my-3 border rounded" key={p.contentID}>
-                    <h5><Link to={"/"+slug}>{p.contentID}</Link></h5>
-                    <ReviewStats apiURL={getStrapiURL()} slug={p.contentID} />
-                </div>
-            )
-        })
-        return postsJSX
-    }
-    const [postsList, setPostsList] = useState(renderList())
-    useEffect(() => {
-        setPostsList(renderList())
-    }, [postsData])
+
     useEffect(() => {
         //const slug ="culture-and-identification-of-a-deltamicron-sars-co-v-2-in-a-three-cases-cluster-in-southern-france"
 
@@ -189,9 +184,7 @@ export default function Question(props) {
                 <ReviewForm />
                 <ErrorBox />
                 <Reviews />
-                {
-                    postsList
-                }
+
             </Container>
         </div>
     )

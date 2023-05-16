@@ -11146,6 +11146,13 @@ stealthy-require@^1.1.1:
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha512-ZnWpYnYugiOVEY5GkcuJK1io5V8QmNYChG62gSit9pQVGErXtrKuPC55ITaVSukmMta5qpMU7vqLt2Lnni4f/g==
 
+strapi-comments-client@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/strapi-comments-client/-/strapi-comments-client-2.0.8.tgz#f64163f16cd26139e5dd9d6472486e1e9f8d6a82"
+  integrity sha512-Aar+abZ43Dq15ER5mgd5MtnG3WICJ26nwdjT+hKnYrxSrv+yRmLFIZEstk22Zfnn8BOQvLWz4XnRUFQ/xS3uyQ==
+  dependencies:
+    date-fns "^2.28.0"
+
 strapi-plugin-ratings@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/strapi-plugin-ratings/-/strapi-plugin-ratings-1.1.9.tgz#fa87385a212bda610a2cb2b1b8eeb7a4823ea1f8"
