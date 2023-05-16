@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import {
     BrowserRouter as Router,
@@ -7,6 +7,8 @@ import {
     Link,
     useParams, Redirect, useHistory
 } from "react-router-dom";
+import { ReviewsConfigContext,  ErrorBox, ReviewStats } from "strapi-ratings-client";
+
 
 import { Button, Modal, Form } from "react-bootstrap";
 import { MdQuestionAnswer, MdRateReview } from "react-icons/md";
@@ -25,11 +27,16 @@ import {createAPI, fetchAPI, getStrapiURL} from "../lib/api";
 import {useAuthContext} from "../context/AuthContext";
 import { format } from 'date-fns'
 import slugify from "slugify";
-import {getRefreshToken} from "../lib/helpers";
-
+import {getRefreshToken, getToken} from "../lib/helpers";
+import {
+    ReviewsProvider,
+    Reviews,
+    ReviewForm
+} from "strapi-ratings-client";
 export default function Read() {
     const { user } = useAuthContext();
-  const { slug } = useParams(); // router.query;
+  const { slug } = useParams(); // router.query
+    const [postsData, setPostsData] = useState([]);// ;
  // const example = text.micropub;
  // const post = a_question;
   const time = (mp) =>  moment.unix(mp.attributes.createdAt).format("MM/DD/YYYY");
@@ -64,6 +71,42 @@ export default function Read() {
 
         }
     };
+    const { setUser, setContentID, setCanPostReview  } = useContext(ReviewsConfigContext);
+    useEffect(() => {
+        const newUser = user;
+        if (user) {
+            newUser.token = getToken();
+        }
+
+        setUser(newUser);
+    }, [user]);
+
+    useEffect(() => {
+
+        if (slug) {
+            setContentID(slug);
+            setCanPostReview(true);
+        }
+    }, [slug]);
+
+    useEffect(() => {
+        const fetchReviewsCount = async (slug) => {
+            const url = getStrapiURL(`/api/ratings/reviews/${slug}/count`);
+            const res = await fetch(url);
+            const { count } = await res.json();
+            const updatedPostsData = postsData.map(p => {
+                if (p.contentID === slug) {
+                    p.reviewsCount = count;
+                }
+                return p;
+            });
+            setPostsData(updatedPostsData);
+        };
+        // postsData.map(p => {
+        //     fetchReviewsCount(p.contentID);
+        // });
+        fetchReviewsCount(slug);
+    }, []);
 
   useEffect( () =>  {
     //const slug ="culture-and-identification-of-a-deltamicron-sars-co-v-2-in-a-three-cases-cluster-in-southern-france"
@@ -266,21 +309,31 @@ export default function Read() {
         }
 
         {writeReview}
-        <div className="review__wrapper">
-          {reviews
-            ? reviews.map((item, i) => (
-                <div id={i} key={i} className="review__item">
-                  <div className="header">
-                    {item.attributes?.user}{" "}
-                    <StarRating readonly={true} rating={item.attributes?.ratings.data[0]?.attributes?.rating} />{" "}
-                  </div>
-                  {item.attributes?.review}
-                </div>
-              ))
-            : ""}
-        </div>
+          {  postsData.map(p => {
+          return (
+          <div className="p-4 my-3 border rounded" key={p.contentID}>
+          <h5><Link to={"/"+p.contentID}>{p.contentID}</Link></h5>
+          <ReviewStats apiURL={getStrapiURL()} slug={p.contentID} />
+          </div>
+          )
+      }) }
+      {/*  <div className="review__wrapper">*/}
+      {/*    {reviews*/}
+      {/*      ? reviews.map((item, i) => (*/}
+      {/*          <div id={i} key={i} className="review__item">*/}
+      {/*            <div className="header">*/}
+      {/*              {item.attributes?.user}{" "}*/}
+      {/*              <StarRating readonly={true} rating={item.attributes?.ratings.data[0]?.attributes?.rating} />{" "}*/}
+      {/*            </div>*/}
+      {/*            {item.attributes?.review}*/}
+      {/*          </div>*/}
+      {/*        ))*/}
+      {/*      : ""}*/}
+      {/*  </div>*/}
       </div>
-
+        <ReviewForm />
+        <ErrorBox />
+        <Reviews />
       <div className="sidebar">
         <div className="info">
           <div className="publish-time">
@@ -342,13 +395,17 @@ export default function Read() {
             <MdQuestionAnswer />
             Ask a Question
           </Button>
-          <Button
-            className="btn--blue btn--md"
-            onClick={() => setShowReview(true)}
-          >
-            <MdRateReview />
-            Write a Review
-          </Button>
+
+
+
+          {/*<Button*/}
+          {/*  className="btn--blue btn--md"*/}
+          {/*  onClick={() => setShowReview(true)}*/}
+          {/*>*/}
+          {/*  <MdRateReview />*/}
+          {/*  Write a Review*/}
+          {/*</Button>*/}
+
         </div>
       </div>
     </div>
