@@ -8,7 +8,7 @@ const paths = {
   test: "/test",
   about: "/about",
   question: "/question/:slug",
-
+  postreview: "/review/:contentID",
 };
 
 export default paths;

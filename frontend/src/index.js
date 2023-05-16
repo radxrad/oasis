@@ -1,5 +1,5 @@
 import "./css/index.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import { Route, Router, Switch } from "react-router-dom";
 import Home from "routes/Home";
@@ -20,9 +20,17 @@ import axios from "axios";
 //import UserProvider from './context/user';
 import AuthProvider from "./components/AuthProvider/AuthProvider";
 import { useAuthContext } from "./context/AuthContext";
+import {getStrapiURL} from "./lib/api";
+import {
+    ReviewsConfigContext, ReviewsProvider,
+    Reviews,
+    ReviewForm
+} from "strapi-ratings-client";
 
 function App() {
-  const { user, isLoading, setUser } = useAuthContext();
+ // const { user, isLoading, setUser } = useAuthContext();
+    const { user, isLoading } = useAuthContext();
+    const { setUser } = useContext(ReviewsConfigContext);
   const auth = JSON.parse(localStorage.getItem("user"));
   // useEffect(() => {
   //   if (auth) {
@@ -48,18 +56,21 @@ function App() {
   return (
     <Router history={history}>
        <AuthProvider >
-        <CustomNavbar user={user} auth={auth} />
-        <Switch>
-          <Route exact path={paths.home} component={Home} />
-          <Route path={paths.signIn} component={SignIn} />
-          <Route path={paths.signUp} component={SignUp} />
-          <Route path={paths.user} component={User} />
-          <Route path={paths.read} component={Read} />
-          <Route path={paths.publish} component={Publish} />
-          <Route path={paths.test} component={Test} />
-          <Route path={paths.about} component={About} />
-          <Route path={paths.question} component={Question} />
-        </Switch>
+           <ReviewsProvider apiURL={getStrapiURL()}>
+                <CustomNavbar user={user} auth={auth} />
+                <Switch>
+                  <Route exact path={paths.home} component={Home} />
+                  <Route path={paths.signIn} component={SignIn} />
+                  <Route path={paths.signUp} component={SignUp} />
+                  <Route path={paths.user} component={User} />
+                  <Route path={paths.read} component={Read} />
+                  <Route path={paths.publish} component={Publish} />
+                  <Route path={paths.test} component={Test} />
+                  <Route path={paths.about} component={About} />
+                  <Route path={paths.question} component={Question} />
+                    <Route path={paths.postreview} component={Question} />
+                </Switch>
+           </ReviewsProvider>
        </AuthProvider>
     </Router>
   );

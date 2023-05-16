@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {Button, Form, Container, Row, Modal} from "react-bootstrap";
 import { MdQuestionAnswer } from "react-icons/md";
 import { BsFillPlusSquareFill } from "react-icons/bs";
@@ -11,6 +11,7 @@ import {
     useParams,
     useHistory
 } from "react-router-dom";
+import {ReviewsConfigContext, Reviews, ReviewForm, ErrorBox, ReviewStats} from "strapi-ratings-client"
 
 
 import { useAuthContext } from "../context/AuthContext";
@@ -22,7 +23,9 @@ import AddQuestion from "../components/AddQuestion";
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
 
-    const { setUser } = useAuthContext();
+    //const { user, setUser } = useAuthContext();
+    const { user } = useAuthContext();
+    const { setUser } = useContext(ReviewsConfigContext);
     const [micropubs, setMicropubs] = useState();
     const [question, setQuestion] = useState();
 
@@ -38,6 +41,49 @@ export default function Question(props) {
 
         }
     };
+    const [postsData, setPostsData] = useState([]);// ;
+    const { setContentID, setCanPostReview } = useContext(ReviewsConfigContext);
+  //  const { contentID } = useParams();
+    useEffect(() => {
+        if (slug) {
+            setContentID(slug);
+            setCanPostReview(true);
+        }
+    }, [slug]);
+    useEffect(() => {
+        const fetchReviewsCount = async (slug) => {
+            const url = getStrapiURL(`/api/ratings/reviews/${slug}/count`);
+            const res = await fetch(url);
+            const { count } = await res.json();
+            const updatedPostsData = postsData.map(p => {
+                if (p.contentID === slug) {
+                    p.reviewsCount = count;
+                }
+                return p;
+            });
+            setPostsData(updatedPostsData);
+        };
+        // postsData.map(p => {
+        //     fetchReviewsCount(p.contentID);
+        // });
+        fetchReviewsCount(slug);
+    }, []);
+
+    const renderList = () => {
+        const postsJSX = postsData.map(p => {
+            return (
+                <div className="p-4 my-3 border rounded" key={p.contentID}>
+                    <h5><Link to={"/"+slug}>{p.contentID}</Link></h5>
+                    <ReviewStats apiURL={getStrapiURL()} slug={p.contentID} />
+                </div>
+            )
+        })
+        return postsJSX
+    }
+    const [postsList, setPostsList] = useState(renderList())
+    useEffect(() => {
+        setPostsList(renderList())
+    }, [postsData])
     useEffect(() => {
         //const slug ="culture-and-identification-of-a-deltamicron-sars-co-v-2-in-a-three-cases-cluster-in-southern-france"
 
@@ -103,8 +149,8 @@ export default function Question(props) {
                             <BsFillPlusSquareFill />
                             Write New Answer
                         </Button>
-                        <Button className="btn--blue btn--lg" onClick={handleShow}>
-                            <MdQuestionAnswer close={handleQClose} />
+                        <Button className="btn--blue btn--lg" onClick={handleShow} close={handleQClose} >
+                            <MdQuestionAnswer />
                             <span>Ask Another Question</span>
                         </Button>
                     </div>
@@ -140,6 +186,12 @@ export default function Question(props) {
                             : "Loading"}
                     </div>
                 </Row>
+                <ReviewForm />
+                <ErrorBox />
+                <Reviews />
+                {
+                    postsList
+                }
             </Container>
         </div>
     )
