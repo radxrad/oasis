@@ -7,7 +7,13 @@ import {
     Link,
     useParams, Redirect, useHistory
 } from "react-router-dom";
-import { ReviewsConfigContext,  ErrorBox, ReviewStats } from "strapi-ratings-client";
+import { ReviewsConfigContext,
+    ErrorBox,
+    ReviewStats,
+    ReviewsProvider,
+    Reviews,
+    ReviewForm
+} from "strapi-ratings-client";
 
 
 import { Button, Modal, Form } from "react-bootstrap";
@@ -28,11 +34,7 @@ import {useAuthContext} from "../context/AuthContext";
 import { format } from 'date-fns'
 import slugify from "slugify";
 import {getRefreshToken, getToken} from "../lib/helpers";
-import {
-    ReviewsProvider,
-    Reviews,
-    ReviewForm
-} from "strapi-ratings-client";
+
 export default function Read() {
     const { user } = useAuthContext();
   const { slug } = useParams(); // router.query
@@ -229,37 +231,42 @@ export default function Read() {
     };
 
   const writeReview = (
-    <Form className="write-review">
-      <Form.Group style={{ flex: "1 0" }}>
-        <Form.Control
-          as="textarea"
-          placeholder="Write a review..."
-          className="review"
-          id="write_review"
-          onChange={handleUpdateReview}
-        />
-      </Form.Group>
-      <Form.Group className="controls">
-        <div className="selectors">
-          <StarRating
-            rating={reviewRating}
-            setRating={setReviewRating}
-            hover={reviewRatingHover}
-            setHover={setReviewRatingHover}
-            readonly={false}
-          />
-          <VisibilitySelector
-            visibility={visibility}
-            handleSelect={handleSelect}
-          />
-        </div>
+    // <Form className="write-review">
+    //   <Form.Group style={{ flex: "1 0" }}>
+    //     <Form.Control
+    //       as="textarea"
+    //       placeholder="Write a review..."
+    //       className="review"
+    //       id="write_review"
+    //       onChange={handleUpdateReview}
+    //     />
+    //   </Form.Group>
+    //   <Form.Group className="controls">
+    //     <div className="selectors">
+    //       <StarRating
+    //         rating={reviewRating}
+    //         setRating={setReviewRating}
+    //         hover={reviewRatingHover}
+    //         setHover={setReviewRatingHover}
+    //         readonly={false}
+    //       />
+    //       <VisibilitySelector
+    //         visibility={visibility}
+    //         handleSelect={handleSelect}
+    //       />
+    //     </div>
+    //
+    //     <Button className="btn--md" onClick={handleAddReview}>
+    //       <MdRateReview />
+    //       Post Review
+    //     </Button>
+    //   </Form.Group>
+    // </Form>
+      <div>
 
-        <Button className="btn--md" onClick={handleAddReview}>
-          <MdRateReview />
-          Post Review
-        </Button>
-      </Form.Group>
-    </Form>
+          <ReviewForm />
+          <ErrorBox />
+      </div>
   );
  const renderMpBody = (micropub)=> {
 
@@ -307,16 +314,18 @@ export default function Read() {
         { micropub ? renderMpBody(micropub) : ""
 
         }
-
+          <ReviewForm />
+          <ErrorBox />
+          <Reviews />
         {writeReview}
-          {  postsData.map(p => {
-          return (
-          <div className="p-4 my-3 border rounded" key={p.contentID}>
-          <h5><Link to={"/"+p.contentID}>{p.contentID}</Link></h5>
-          <ReviewStats apiURL={getStrapiURL()} slug={p.contentID} />
-          </div>
-          )
-      }) }
+      {/*    {  postsData.map(p => {*/}
+      {/*    return (*/}
+      {/*    <div className="p-4 my-3 border rounded" key={slug}>*/}
+      {/*    <h5><Link to={"/"+p.contentID}>{slug}</Link></h5>*/}
+      {/*        <ReviewStats />*/}
+      {/*    </div>*/}
+      {/*    )*/}
+      {/*}) }*/}
       {/*  <div className="review__wrapper">*/}
       {/*    {reviews*/}
       {/*      ? reviews.map((item, i) => (*/}
@@ -331,9 +340,8 @@ export default function Read() {
       {/*      : ""}*/}
       {/*  </div>*/}
       </div>
-        <ReviewForm />
-        <ErrorBox />
-        <Reviews />
+
+
       <div className="sidebar">
         <div className="info">
           <div className="publish-time">
@@ -367,6 +375,7 @@ export default function Read() {
 
         </div>
         <div className="controls">
+            <ReviewStats/>
           <div className="icon-group">
             <div id="vote-btn" className={"vote--" + voteType}>
               <GoArrowUp
@@ -380,13 +389,7 @@ export default function Read() {
               />
             </div>
 
-            <Button className="icon-btn" id="star-btn" onClick={handleStar}>
-              {isStarred ? (
-                <BsStarFill className="star-btn--filled" />
-              ) : (
-                <BsStar />
-              )}
-            </Button>
+
           </div>
           <Button
             className="btn--blue btn--md"

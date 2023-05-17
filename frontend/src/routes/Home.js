@@ -11,7 +11,11 @@ import axios from "axios";
 import {fetchAPI, getStrapiURL} from '../lib/api';
 import {useAuthContext} from "../context/AuthContext";
 import Question from "../components/Question";
-
+import {
+  ReviewsProvider,
+  Reviews,
+  ReviewForm
+} from "strapi-ratings-client";
 
 export default function Home(apikey, apiusername) {
   //const example = text.micropub;
