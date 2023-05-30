@@ -276,6 +276,7 @@ export default function Read() {
          title={micropub.attributes.title}
          figure={file}
          body={micropub.attributes.body}
+         abstract={micropub.attributes.abstract}
          refList={micropub.attributes?.citations}
      />
   }
