@@ -314,7 +314,7 @@ export default function Read() {
         { micropub ? renderMpBody(micropub) : ""
 
         }
-          <ReviewForm />
+          {/*<ReviewForm />*/}
           <ErrorBox />
           <Reviews />
         {writeReview}

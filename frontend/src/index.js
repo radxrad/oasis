@@ -57,7 +57,7 @@ function App() {
     <Router history={history}>
        <AuthProvider >
            <ReviewsProvider apiURL={getStrapiURL()}>
-
+               <CommentsProvider apiURL={getStrapiURL()}>
                 <CustomNavbar user={user} auth={auth} />
                 <Switch>
                   <Route exact path={paths.home} component={Home} />
@@ -71,7 +71,7 @@ function App() {
                   <Route path={paths.question} component={Question} />
                     <Route path={paths.postreview} component={Question} />
                 </Switch>
-
+               </CommentsProvider>
            </ReviewsProvider>
        </AuthProvider>
     </Router>

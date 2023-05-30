@@ -12,7 +12,12 @@ import {
     useHistory
 } from "react-router-dom";
 import {ReviewsConfigContext, Reviews, ReviewForm, ErrorBox, ReviewStats} from "strapi-ratings-client"
-
+import {
+    CommentsConfigContext,
+    CommentsProvider,
+    Comments,
+    CommentForm
+} from "strapi-comments-client"
 import { useAuthContext } from "../context/AuthContext";
 import { fetchAPI, getStrapiURL } from "../lib/api";
 
@@ -41,7 +46,8 @@ export default function Question(props) {
         }
     };
     const [postsData, setPostsData] = useState([]);// ;
-    const { setUser, setContentID, setCanPostReview  } = useContext(ReviewsConfigContext);
+   //const { setUser, setContentID, setCanPostReview  } = useContext(ReviewsConfigContext);
+    const { setUser, setContentID } = useContext(CommentsConfigContext);
     useEffect(() => {
         const newUser = user;
         if (user) {
@@ -55,7 +61,7 @@ export default function Question(props) {
 
         if (slug) {
             setContentID(slug);
-            setCanPostReview(true);
+        //    setCanPostReview(true);
         }
     }, [slug]);
 
@@ -199,10 +205,10 @@ export default function Question(props) {
                             : "Loading"}
                     </div>
                 </Row>
-                <ReviewForm />
-                <ErrorBox />
-                <Reviews />
 
+                <ErrorBox />
+                <Comments />
+                <CommentForm />
             </Container>
         </div>
     )
