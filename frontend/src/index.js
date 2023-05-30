@@ -26,7 +26,7 @@ import {
     Reviews,
     ReviewForm
 } from "strapi-ratings-client";
-
+import { CommentsProvider } from "strapi-comments-client"
 function App() {
  // const { user, isLoading, setUser } = useAuthContext();
     const { user, isLoading } = useAuthContext();
@@ -57,6 +57,7 @@ function App() {
     <Router history={history}>
        <AuthProvider >
            <ReviewsProvider apiURL={getStrapiURL()}>
+
                 <CustomNavbar user={user} auth={auth} />
                 <Switch>
                   <Route exact path={paths.home} component={Home} />
@@ -70,6 +71,7 @@ function App() {
                   <Route path={paths.question} component={Question} />
                     <Route path={paths.postreview} component={Question} />
                 </Switch>
+
            </ReviewsProvider>
        </AuthProvider>
     </Router>

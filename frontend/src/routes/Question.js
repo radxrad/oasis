@@ -77,7 +77,25 @@ export default function Question(props) {
         // });
         fetchReviewsCount(slug);
     }, []);
-
+    const [commentsData, setCommentsData] = useState([]);// ;
+    useEffect(() => {
+        const fetchCommentCount = async (slug) => {
+            const url = getStrapiURL(`/api/comment-manager/comments/${slug}/count`);
+            const res = await fetch(url);
+            const { count } = await res.json();
+            const updatedPostsData = postsData.map(p => {
+                if (p.contentID === slug) {
+                    p.commentsCount = count;
+                }
+                return p;
+            });
+            setCommentsData(updatedPostsData);
+        };
+        fetchCommentCount(slug);
+        // posts.map(p => {
+        //     fetchCommentCount(p.contentID);
+        // });
+    }, []);
 
     useEffect(() => {
         //const slug ="culture-and-identification-of-a-deltamicron-sars-co-v-2-in-a-three-cases-cluster-in-southern-france"
