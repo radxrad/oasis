@@ -144,6 +144,15 @@ export default function Question(props) {
     const [show, setShow] = useState(false);
     const handleQClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleShowNewPublication = (e) =>{
+        navigate.push({
+            pathname: `/Publish/`,
+            state: {
+                question: question.attributes.question,
+                questionid: question.id
+            },
+        });
+    }
     return (
         <div id="question" className="qpage max-window">
             <Container >
@@ -164,10 +173,11 @@ export default function Question(props) {
                         <Button className="btn--white">
                             Answer With Existing Micropub
                         </Button>
-                        <Button className="btn--lg">
+                        <Button className="btn--blue btn--lg" onClick={handleShowNewPublication}>
                             <BsFillPlusSquareFill />
-                            Write New Answer
+                            <span>Write New Answer</span>
                         </Button>
+
                         <Button className="btn--blue btn--lg" onClick={handleShow} close={handleQClose} >
                             <MdQuestionAnswer />
                             <span>Ask Another Question</span>
