@@ -4,6 +4,9 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@strapi/ui-primitives": "^1.8.0",
     "axios": "0.21.1",
     "citation-js": "0.5.1",
     "date-fns": "^2.29.3",
@@ -15,6 +18,7 @@
     "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.6.1",
+    "react-bootstrap-typeahead": "^6.2.2",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "1.14.7",
     "react-dropzone": "^11.3.4",

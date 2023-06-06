@@ -75,7 +75,37 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     const data = await response.json();
     return data;
 }
+export async function searchAPI(path, urlParamsObject = {}, options = {}) {
+    // Merge default and user options
+    const mergedOptions = {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        ...options,
+    };
 
+    // Build request URL
+    const queryString = qs.stringify(urlParamsObject);
+    const requestUrl = `${getStrapiURL(
+        `/api${path}${queryString ? `?${queryString}` : ""}`
+    )}`;
+
+    // Trigger API call
+    const response = await fetch(requestUrl, mergedOptions);
+
+    // Handle response
+    if (!response.ok) {
+        console.error(response.statusText);
+        try {
+            const data = await response.json();
+        } catch (e){
+            console.log ('no data returned');
+        };
+        throw new Error(`An error occured please try again`);
+    }
+    const data = await response.json();
+    return data;
+}
 
 /**
 * Helper to make POST requests to Strapi API endpoints

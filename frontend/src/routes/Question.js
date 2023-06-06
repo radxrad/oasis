@@ -24,6 +24,9 @@ import { fetchAPI, getStrapiURL } from "../lib/api";
 import MicropubCardAnswer from "../components/MicropubCardAnswer";
 import AddQuestion from "../components/AddQuestion";
 import {getToken} from "../lib/helpers";
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import MicropubTypeahead from "../components/TypeAhead";
 
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
@@ -152,7 +155,12 @@ export default function Question(props) {
                 questionid: question.id
             },
         });
-    }
+    };
+
+    const handleAddMicroPub= (e) => {
+            console.log("test" + e);
+    } ;
+
     return (
         <div id="question" className="qpage max-window">
             <Container >
@@ -170,9 +178,12 @@ export default function Question(props) {
                     </div>
 
                     <div className="control">
-                        <Button className="btn--white">
-                            Answer With Existing Micropub
-                        </Button>
+
+
+                            <MicropubTypeahead variant="success" id="dropdown-basic" onBlur={handleAddMicroPub}>
+                                Answer With Existing Micropub
+                            </MicropubTypeahead>
+
                         <Button className="btn--blue btn--lg" onClick={handleShowNewPublication}>
                             <BsFillPlusSquareFill />
                             <span>Write New Answer</span>
