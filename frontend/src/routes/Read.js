@@ -155,7 +155,7 @@ export default function Read() {
         filters: {
           slug: slug,
         },
-        populate: ["files", "keyword", "writer.picture", "writer", "ratings"],
+        populate: ["files", "keyword", "writer.picture", "writer", "ratings", "refList"],
       }),
          // fetchAPI("/reviews", {
          //     filters: {

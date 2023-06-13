@@ -19,14 +19,14 @@ import {
     CommentForm
 } from "strapi-comments-client"
 import { useAuthContext } from "../context/AuthContext";
-import { fetchAPI, getStrapiURL } from "../lib/api";
+import {fetchAPI, getStrapiURL, updateAPI} from "../lib/api";
 
 import MicropubCardAnswer from "../components/MicropubCardAnswer";
 import AddQuestion from "../components/AddQuestion";
 import {getToken} from "../lib/helpers";
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import MicropubTypeahead from "../components/TypeAhead";
+import MicropubTypeahead from "../components/MicropubTypeAhead";
 
 export default function Question(props) {
     const { slug } = useParams(); // router.query;
@@ -157,8 +157,30 @@ export default function Question(props) {
         });
     };
 
-    const handleAddMicroPub= (e) => {
-            console.log("test" + e);
+    const handleAddMicroPub= (selected) => {
+
+            if (selected && selected.length >0 )
+            {  console.log("add from typeahead " + selected);
+                let mpid = selected[0].value;
+                let updatepath = "/questions";
+
+                let addedQuestion = {
+
+                        "micropublications": {
+                            "connect": [mpid],
+                        }
+
+                };
+                updateAPI(updatepath,question.id,  addedQuestion );
+                fetchAPI("/questions", {
+                    filters: {
+                        id: question.id,
+                    },
+                    populate: ["micropublications", "writer", "micropublications.writer", "micropublications.files"],
+                    // populate: ["*"],
+                }).then(response => setQuestion(response.data[0]));
+            }
+
     } ;
 
     return (
@@ -180,7 +202,8 @@ export default function Question(props) {
                     <div className="control">
 
 
-                            <MicropubTypeahead variant="success" id="dropdown-basic" onBlur={handleAddMicroPub}>
+                            <MicropubTypeahead variant="success" id="dropdown-basic"
+                                   addMicropub={handleAddMicroPub}         onBlur={handleAddMicroPub}>
                                 Answer With Existing Micropub
                             </MicropubTypeahead>
 
@@ -189,9 +212,9 @@ export default function Question(props) {
                             <span>Write New Answer</span>
                         </Button>
 
-                        <Button className="btn--blue btn--lg" onClick={handleShow} close={handleQClose} >
-                            <MdQuestionAnswer />
-                            <span>Ask Another Question</span>
+                        <Button className="btn--blue btn--lg" onClick={handleShow}  >
+                            <MdQuestionAnswer   />
+                            <span close={handleQClose}>Ask Another Question</span>
                         </Button>
                     </div>
                 </Row>

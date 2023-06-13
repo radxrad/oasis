@@ -65,6 +65,9 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     // Handle response
     if (!response.ok) {
         console.error(response.statusText);
+        if (response.status===401){
+            throw new Error(`Refresh Token`);
+        }
         try {
             const data = await response.json();
         } catch (e){

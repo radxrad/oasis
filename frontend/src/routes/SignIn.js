@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { setToken } from "../lib/helpers";
 
-export default function SignIn() {
+export default function SignIn(props) {
     const history = useHistory();
     const { setUser } = useAuthContext();
     let location = useLocation();

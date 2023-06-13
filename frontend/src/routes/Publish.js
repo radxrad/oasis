@@ -19,6 +19,7 @@ import {forEach} from "react-bootstrap/ElementChildren";
 //import Micropub from "../context/Micropub";
 import { getToken } from "../lib/helpers";
 import {useAuthContext} from "../context/AuthContext";
+import {AsyncTypeahead} from "react-bootstrap-typeahead";
 
 export default function Publish(props) {
 
@@ -32,7 +33,7 @@ export default function Publish(props) {
   const [strapiDocId, setStrapiDocId] = useState()
   const [abstractValue, setAbstractValue] = useState(EditorState.createEmpty());
   const [bodyValue, setBodyValue] = useState(EditorState.createEmpty());
-
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [titleValue, setTitleValue] = useState("");
   const [refList, setRefList] = useState([]);
   const [writerValue, setWriterVal]= useState([]);
@@ -70,12 +71,39 @@ export default function Publish(props) {
   const handleTitleChange=  (event) =>{
     stopEventPropagationTry(event);
     setTitleValue( event.target.value);
-  }
+  };
+  const filterBy = () => true;
+  const handleKeywordSearch = (query) => {
+    setIsSearchLoading(true);
+    fetchAPI("/keywords", {
+      filters:
+          { name:{'$startsWith':
+              query
+            }
+          }
+
+    }).then((items ) => {
+      let kwlist = items.data.map(i =>  ( {"id":i.id, "slug": i.attributes.slug, "name": i.attributes.name}) );
+      setKeywords(kwlist);
+      setIsSearchLoading(false);
+    });
+
+    // fetch(`${SEARCH_URI}?q=${query}+in:login&page=1&per_page=50`)
+    //     .then((resp) => resp.json())
+    //     .then(({ items }) => {
+    //         setOptions(items);
+    //         setIsLoading(false);
+    //     });
+  };
+  const handleAddKeywords = (e) => {
+    console.log("test" + e.target.value);
+  } ;
   //const micropub = text.micropub;
   const [micropub, setMicropub] = useState([]);
   const [resources,SetResources] = useState([]);
   const [categories, setCategories ]= useState([]);
   const [keywords, setKeywords ]= useState([]);
+  const [options, setOptions] = useState([]);
   const [questions, setQuestions]= useState([]);
   // const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("user"));
   const [isSignedIn,setIsSignedIn] = useState(localStorage.getItem("user"));
@@ -478,7 +506,24 @@ export default function Publish(props) {
       <div>
         <div className="label">Keywords</div>
         <div className="search">
-          Add Keyword: <input type="text" placeholder="Search"></input>
+          Add Keyword:
+          <AsyncTypeahead
+              onBlur={handleAddKeywords}
+              filterBy={filterBy}
+              id="async-example"
+              isLoading={isLoading}
+              labelKey="name"
+              minLength={3}
+              onSearch={handleKeywordSearch}
+              options={keywords}
+              placeholder="Select Keywords..."
+              renderMenuItemChildren={(option) => (
+                  <>
+
+                    <span>{option.name}</span>
+                  </>
+              )}
+          />
         </div>
       </div>
       <div>

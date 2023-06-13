@@ -4,9 +4,10 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import {useAuthContext} from "../context/AuthContext";
 import {fetchAPI} from "../lib/api";
 
-export default function MicropubTypeahead() {
+export default function MicropubTypeahead({addMicropub}) {
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
+    const [selected, setSelected] = useState([]);
     let endpoint = '/micropublications';
     // const handleSearch = (query) => {
     //     setIsLoading(true);
@@ -45,6 +46,7 @@ export default function MicropubTypeahead() {
     const filterBy = () => true;
     const handleAddMicroPub= (e) => {
         console.log("test" + e);
+        addMicropub(selected);
     } ;
     return (
         <AsyncTypeahead
@@ -56,6 +58,8 @@ export default function MicropubTypeahead() {
             minLength={3}
             onSearch={handleSearch}
             options={options}
+            selected={selected}
+            onChange={setSelected}
             placeholder="Answer With Existing Micropub..."
             renderMenuItemChildren={(option) => (
                 <>
