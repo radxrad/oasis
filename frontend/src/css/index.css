@@ -484,7 +484,6 @@ a:active {
 
 .micropub .card-text {
   width: 100%;
-  height: 140px;
   font-weight: 500;
   font-size: 12px;
   line-height: 24px;
@@ -986,6 +985,10 @@ a:active {
   justify-content: space-between;
   flex-direction: row;
   height: 190px;
+}
+
+.micropub .content>div {
+  overflow: auto;
 }
 
 #publish .abstract>input {
