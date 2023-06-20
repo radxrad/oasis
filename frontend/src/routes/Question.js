@@ -223,7 +223,7 @@ export default function Question(props) {
                     <div className={"heading"}>
                         Micropubs
                     </div>
-                </Row>
+
                 <Row >
 
 
@@ -249,10 +249,12 @@ export default function Question(props) {
                             : "Loading"}
                     </div>
                 </Row>
-
-                <ErrorBox />
-                <Comments />
-                <CommentForm />
+                </Row>
+               <Row>
+                   <ErrorBox />
+                   <Comments />
+                   <CommentForm />
+               </Row>
             </Container>
         </div>
     )

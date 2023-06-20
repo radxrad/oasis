@@ -20,7 +20,8 @@ import {forEach} from "react-bootstrap/ElementChildren";
 import { getToken } from "../lib/helpers";
 import {useAuthContext} from "../context/AuthContext";
 import {AsyncTypeahead} from "react-bootstrap-typeahead";
-
+import PubKeywordTypeahead from "../components/PubKeywordTypeAhead";
+import PubAuthorTypeahead from "../components/PubAuthorTypeAhead";
 export default function Publish(props) {
 
 
@@ -394,7 +395,21 @@ export default function Publish(props) {
 
 
     }
-  }
+  };
+  const handleAddKeyword = (selected) =>{
+    if (selected && selected.length >0 )
+    {  console.log("add from typeahead " + selected);
+      let mpid = selected[0].value;
+      setKeywords(keywords.push(mpid));
+    }
+  };
+  const handleAddAuthor = (selected) =>{
+    if (selected && selected.length >0 )
+    {  console.log("add from typeahead " + selected);
+      let mpid = selected[0].value;
+      setAuthors(authors.push(mpid));
+    }
+  };
   const tabNav = (
     <div className="tab__nav">
       <h2 className="heading">Create a Micropub</h2>
@@ -490,7 +505,9 @@ export default function Publish(props) {
       <div className="list">
         <div className="label">Authors</div>
         <div className="search">
-          Add Author: <input type="text" placeholder="Search"></input>
+          <PubAuthorTypeahead addAuthor={handleAddAuthor}>
+
+          </PubAuthorTypeahead>
         </div>
         { authors ? authors.map((a, i) => (
             <div>{a.name}</div>
@@ -507,23 +524,8 @@ export default function Publish(props) {
         <div className="label">Keywords</div>
         <div className="search">
           Add Keyword:
-          <AsyncTypeahead
-              onBlur={handleAddKeywords}
-              filterBy={filterBy}
-              id="async-example"
-              isLoading={isLoading}
-              labelKey="name"
-              minLength={3}
-              onSearch={handleKeywordSearch}
-              options={keywords}
-              placeholder="Select Keywords..."
-              renderMenuItemChildren={(option) => (
-                  <>
-
-                    <span>{option.name}</span>
-                  </>
-              )}
-          />
+          <PubKeywordTypeahead addKeyword={handleAddKeyword} >
+          </PubKeywordTypeahead>
         </div>
       </div>
       <div>

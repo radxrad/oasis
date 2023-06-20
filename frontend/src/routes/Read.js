@@ -115,40 +115,7 @@ export default function Read() {
 
     console.log("query");
     console.log("passed slug: " + slug );
-    // const options = {
-    //   method: "GET",
-    //   url: "https://stoplight.io/mocks/oasis/oasis/19253909/fetch/micropubs/2",
-    //   headers: { "Content-Type": "application/json", Prefer: "" },
-    // };
-    //
-    // axios
-    //   .request(options)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     setMicropubs(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //   });
-    // const fetchData = async () => {
-    //   const [ categoriesRes, micropubRes, keywordRes, homepageRes] = await Promise.all([
-    //     fetchAPI("/categories", { populate: "*" }),
-    //     fetchAPI("/micropublications/", { populate: ["files", "keyword", "writer"] }),
-    //     fetchAPI("/keywords", { populate: "*" }),
-    //     fetchAPI("/homepage", {
-    //       populate: {
-    //         hero: "*",
-    //         seo: { populate: "*" },
-    //       },
-    //     }),
-    //   ]);
-    //   const cats = await categoriesRes;
-    //   const micros  = await micropubRes;
-    //   const kws  = await keywordRes;
-    //   setCategories(cats.data);
-    //   setMicropubs(micros.data);
-    //   setKeywords(kws.data);
-    // }
+
     const fetchData = async () => {
      const [ micropubRes] = await Promise.all([
          fetchAPI("/micropublications", {
@@ -157,14 +124,7 @@ export default function Read() {
         },
         populate: ["files", "keyword", "writer.picture", "writer", "ratings", "refList"],
       }),
-         // fetchAPI("/reviews", {
-         //     filters: {
-         //         micropublication: {
-         //             slug: slug,
-         //         }
-         //     },
-         //     populate: [ "ratings"],
-         // }),
+
       ]);
       const micros  = await micropubRes;
      // const reviews = await reviewsRes;
@@ -231,41 +191,13 @@ export default function Read() {
     };
 
   const writeReview = (
-    // <Form className="write-review">
-    //   <Form.Group style={{ flex: "1 0" }}>
-    //     <Form.Control
-    //       as="textarea"
-    //       placeholder="Write a review..."
-    //       className="review"
-    //       id="write_review"
-    //       onChange={handleUpdateReview}
-    //     />
-    //   </Form.Group>
-    //   <Form.Group className="controls">
-    //     <div className="selectors">
-    //       <StarRating
-    //         rating={reviewRating}
-    //         setRating={setReviewRating}
-    //         hover={reviewRatingHover}
-    //         setHover={setReviewRatingHover}
-    //         readonly={false}
-    //       />
-    //       <VisibilitySelector
-    //         visibility={visibility}
-    //         handleSelect={handleSelect}
-    //       />
-    //     </div>
-    //
-    //     <Button className="btn--md" onClick={handleAddReview}>
-    //       <MdRateReview />
-    //       Post Review
-    //     </Button>
-    //   </Form.Group>
-    // </Form>
-      <div>
 
+      <div className="micropub-body">
+      <div className="content">
+          <Reviews />
           <ReviewForm />
           <ErrorBox />
+      </div>
       </div>
   );
  const renderMpBody = (micropub)=> {
@@ -277,7 +209,7 @@ export default function Read() {
          figure={file}
          body={micropub.attributes.body}
          abstract={micropub.attributes.abstract}
-         refList={micropub.attributes?.citations}
+         refList={micropub.attributes?.refList}
      />
   }
   const renderWriter= (micropub) => {
@@ -316,30 +248,10 @@ export default function Read() {
 
         }
           {/*<ReviewForm />*/}
-          <ErrorBox />
-          <Reviews />
+
+
         {writeReview}
-      {/*    {  postsData.map(p => {*/}
-      {/*    return (*/}
-      {/*    <div className="p-4 my-3 border rounded" key={slug}>*/}
-      {/*    <h5><Link to={"/"+p.contentID}>{slug}</Link></h5>*/}
-      {/*        <ReviewStats />*/}
-      {/*    </div>*/}
-      {/*    )*/}
-      {/*}) }*/}
-      {/*  <div className="review__wrapper">*/}
-      {/*    {reviews*/}
-      {/*      ? reviews.map((item, i) => (*/}
-      {/*          <div id={i} key={i} className="review__item">*/}
-      {/*            <div className="header">*/}
-      {/*              {item.attributes?.user}{" "}*/}
-      {/*              <StarRating readonly={true} rating={item.attributes?.ratings.data[0]?.attributes?.rating} />{" "}*/}
-      {/*            </div>*/}
-      {/*            {item.attributes?.review}*/}
-      {/*          </div>*/}
-      {/*        ))*/}
-      {/*      : ""}*/}
-      {/*  </div>*/}
+
       </div>
 
 
@@ -376,7 +288,8 @@ export default function Read() {
 
         </div>
         <div className="controls">
-            <ReviewStats/>
+            <ReviewStats slug={slug}
+            apiURL={getStrapiURL()} />
           <div className="icon-group">
             <div id="vote-btn" className={"vote--" + voteType}>
               <GoArrowUp

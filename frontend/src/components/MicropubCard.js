@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import history from "history.js";
+import {getStrapiURL} from "../lib/api";
+import {ReviewStats} from "strapi-ratings-client";
 export default function MicropubCard(props) {
   return (
     <Card className="micropub" onClick={() => history.push(`/read/${props.id}`)}>
@@ -36,14 +38,8 @@ export default function MicropubCard(props) {
              )
            : ""}
       </div>
-        <div className="rating">
-
-            {props.rating?
-                (
-                    <div>*</div>
-                )
-                : ""}
-        </div>
+        <ReviewStats slug={props.id}
+                     apiURL={getStrapiURL()} />
     </Card>
   );
 }
