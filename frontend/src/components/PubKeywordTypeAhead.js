@@ -60,7 +60,7 @@ export default function PubKeywordTypeahead({addKeyword}) {
             options={options}
             selected={selected}
             onChange={setSelected}
-            placeholder="Answer With Existing Micropub..."
+            placeholder="Add a Keyword..."
             renderMenuItemChildren={(option) => (
                 <>
 

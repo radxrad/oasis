@@ -45,6 +45,7 @@ export default function Publish(props) {
   const [showError, setShowError] = useState(false);
   const [activeTab, setActiveTab] = useState("#abstract");
   const [authors,setAuthors] = useState([]);
+  const [pubKeywords, setPubKeywords] = useState([]);
   const handleErrorClose = () => setShowError(false);
   const handleErrorShow = () => setShowError(true);
   const stopEventPropagationTry = (event) => {
@@ -265,18 +266,20 @@ export default function Publish(props) {
 
     const abstractHtml =draftToHtml(convertToRaw(abstractValue.getCurrentContent()));
     const bodyHtml = draftToHtml(convertToRaw(bodyValue.getCurrentContent()));
-
+    const kwIdList = pubKeywords.map(kw => kw.value);
+    const authorIdList = authors.map(a => a.value);
     //let mpFiles = fileRefs(filesValue);
    // let mpFiles =fileUploadList();
     const mpObj = {
       "title": titleValue,
       "abstract": abstractHtml,
       "body": bodyHtml,
-     // "keywords": keywords,
+     "keywords": kwIdList,
       "refList": refList,
       "slug":slug,
      // "files": mpFiles,
-      "writer": 1 // for now
+      "writer":1, // for now
+      authors: authorIdList,
 
     };
     return mpObj;
@@ -400,14 +403,27 @@ export default function Publish(props) {
     if (selected && selected.length >0 )
     {  console.log("add from typeahead " + selected);
       let mpid = selected[0].value;
-      setKeywords(keywords.push(mpid));
+      let addKw = selected[0];
+      setPubKeywords(kws =>
+    [...kws, selected[0]]);
+    //  pubKeywords.push(addKw);
+     // setPubKeywords(pubKeywords); // trigger update
     }
   };
+  const [keywordsJSX, setKeywordsJSX] = useState(null);
+  useEffect(() =>{
+    setKeywordsJSX(pubKeywords.map( (a, i) => {
+          return  ( <div>{a.label}</div> );
+        }
+    ) ) }
+  , [pubKeywords.length] );
   const handleAddAuthor = (selected) =>{
     if (selected && selected.length >0 )
     {  console.log("add from typeahead " + selected);
       let mpid = selected[0].value;
-      setAuthors(authors.push(mpid));
+      let addAuthor = selected[0];
+      authors.push(addAuthor);
+      setAuthors(authors); // trigger update
     }
   };
   const tabNav = (
@@ -527,6 +543,7 @@ export default function Publish(props) {
           <PubKeywordTypeahead addKeyword={handleAddKeyword} >
           </PubKeywordTypeahead>
         </div>
+        { keywordsJSX }
       </div>
       <div>
         <div className="label">Uploaded Resources</div>
